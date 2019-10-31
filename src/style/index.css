@@ -1,0 +1,13 @@
+@import url('~@phosphor/widgets/style/commandpalette.css');
+@import url('~@phosphor/widgets/style/dockpanel.css');
+@import url('~@phosphor/widgets/style/menu.css');
+@import url('~@phosphor/widgets/style/menubar.css');
+@import url('~@phosphor/widgets/style/scrollbar.css');
+@import url('~@phosphor/widgets/style/splitpanel.css');
+@import url('~@phosphor/widgets/style/tabbar.css');
+@import url('~@phosphor/widgets/style/tabpanel.css');
+@import url('~@phosphor/widgets/style/tabpanel.css');
+@import url('~@phosphor/widgets/style/widget.css');
+
+@import './theme/variables.css';
+@import './base.css';

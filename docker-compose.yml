@@ -1,0 +1,35 @@
+version: '3.2'
+
+services:
+  postgres:
+    image: postgres:11
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpass
+      POSTGRES_DB: testdb
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  mysql:
+    image: intland/mysql:5.7.21
+    environment:
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testpass
+      - MYSQL_DATABASE=testdb
+      - MYSQL_MAX_ALLOWED_PACKET=1024M
+      - MYSQL_INNODB_BUFFER_POOL_SIZE=1G
+      - MYSQL_INNODB_LOG_FILE_SIZE=256M
+      - MYSQL_INNODB_LOG_BUFFER_SIZE=256M
+    volumes:
+      - mysql:/var/lib/mysql/data
+    ports:
+      - '3306:3306'
+
+volumes:
+  postgres:
+    driver: local
+  mysql:
+    driver: local
