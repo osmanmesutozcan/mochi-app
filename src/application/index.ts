@@ -1,8 +1,3 @@
-import { MochiFrontEnd } from './frontend';
-import { IMochiShell, MochiShell } from './shell';
-
-export class Mochi extends MochiFrontEnd<IMochiShell> {
-  constructor() {
-    super({ shell: new MochiShell() });
-  }
-}
+export { MochiFrontEnd, MochiFrontEndPlugin } from './frontend';
+export { IMochiShell } from './shell';
+export { Mochi } from './mochi';
