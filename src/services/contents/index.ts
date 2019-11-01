@@ -8,7 +8,7 @@ export namespace Contents {
 }
 
 export class ContentsManager implements Contents.IManager {
-  constructor(options: ContentsManager.IOptions) {
+  constructor(options: ContentsManager.IOptions = {}) {
     //
   }
 

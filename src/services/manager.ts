@@ -1,15 +1,18 @@
-import { Contents, ContentsManager } from './contents';
-import { Settings, SettingManager } from './setting';
 import { IDisposable } from '@phosphor/disposable';
 import { Signal } from '@phosphor/signaling';
+
+import { Databases, DatabaseManager } from './database';
+import { Contents, ContentsManager } from './contents';
+import { Settings, SettingManager } from './setting';
 
 export class ServiceManager implements ServiceManager.IManager {
   constructor(options: ServiceManager.IOptions = {}) {
     let resolveReadyPromise: () => void;
     this._readyPromise = new Promise<void>(res => resolveReadyPromise = res);
 
-    this.settings = new SettingManager(options);
-    this.contents = new ContentsManager(options);
+    this.settings = new SettingManager();
+    this.contents = new ContentsManager();
+    this.databases = new DatabaseManager();
 
     resolveReadyPromise();
   }
@@ -51,9 +54,14 @@ export class ServiceManager implements ServiceManager.IManager {
    */
   readonly settings: SettingManager;
 
+  /**
+   * Get the databases manager instance.
+   */
+  readonly databases: DatabaseManager;
+
   private _isDisposed = false;
   private _isReady = false;
-  private _readyPromise: Promise<void>;
+  private readonly _readyPromise: Promise<void>;
 }
 
 export namespace ServiceManager {
@@ -71,6 +79,7 @@ export namespace ServiceManager {
     // List of managers managed by the service manager.
     readonly contents: Contents.IManager;
     readonly settings: Settings.IManager;
+    readonly databases: Databases.IManager;
   }
 
   export interface IOptions {
