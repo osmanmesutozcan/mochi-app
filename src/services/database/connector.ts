@@ -1,21 +1,31 @@
+import { Token } from '@phosphor/coreutils';
+
+import { IDatabaseConnector, IDatabaseIntrospection, IQueryParams, IQueryResult } from './interfaces';
+
 /**
  * An abstract client definition to
  * communicate with different types of underlying
  * database connections.
+ *
+ * @typeparam T - Type of the query.
+ * @typeparam U - Type of the params.
  */
-import { IDatabaseConnector, IQueryResult } from './interfaces';
-
-export abstract class DatabaseConnector<T = string, U = T> implements IDatabaseConnector<T, U> {
+export abstract class DatabaseConnector implements IDatabaseConnector {
   protected constructor(options: DatabaseConnector.IOptions) {
     //
   }
+
+  /**
+   * A token which contains type information of the concrete database connector.
+   */
+  abstract get type(): Token<IDatabaseConnector>;
 
   /**
    * Runs a query on database and return `IQueryResult`.
    * @param query Query to run.
    * @param params Params to pass into the query.
    */
-  abstract async query(query: T, params?: U): Promise<IQueryResult>;
+  abstract async query(query: string, params?: IQueryParams): Promise<IQueryResult>;
 
   /**
    * Initializes database connection.
@@ -28,6 +38,11 @@ export abstract class DatabaseConnector<T = string, U = T> implements IDatabaseC
   abstract async logout(): Promise<void>;
 
   /**
+   * Introspect the database to get overall database shape.
+   */
+  abstract async introspect(): Promise<IDatabaseIntrospection>;
+
+  /**
    * Runs a query on database and return an observable
    *  which subscribes to query changes.
    *
@@ -38,8 +53,8 @@ export abstract class DatabaseConnector<T = string, U = T> implements IDatabaseC
    * @param query Query to run.
    * @param params Params to pass into the query.
    */
-  watchQuery(query: T, params?: U): void {
-    throw  new Error('Not implemented');
+  watchQuery(query: string, params?: IQueryParams): void {
+    throw new Error('Not implemented');
   }
 
   get isDisposed(): boolean {
@@ -47,9 +62,7 @@ export abstract class DatabaseConnector<T = string, U = T> implements IDatabaseC
   }
 
   dispose(): void {
-    this
-      .logout()
-      .then(() => (this._isDisposed = true));
+    this.logout().then(() => (this._isDisposed = true));
   }
 
   private _isDisposed = false;
@@ -60,6 +73,16 @@ export namespace DatabaseConnector {
    * Database connector options.
    */
   export interface IOptions {
+    /**
+     * Connection options for underlying database driver.
+     */
+    connectionOptions: IConnectionOptions;
+  }
+
+  /**
+   * Database connection options.
+   */
+  export interface IConnectionOptions {
     user?: string;
     password?: string;
     hostname?: string;
