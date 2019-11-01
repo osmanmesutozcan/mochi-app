@@ -1,8 +1,8 @@
 import './index.css';
 
-import { IStateDB } from '../coreutils';
-import { IMochiShell, MochiFrontEnd, MochiFrontEndPlugin } from '../application';
-import { DatabaseBrowser, IDatabaseBrowserFactory, DatabaseBrowserModel } from '../databasebrowser';
+import { IStateDB } from '@mochi/coreutils';
+import { IMochiShell, MochiFrontEnd, MochiFrontEndPlugin } from '@mochi/application';
+import { DatabaseBrowser, IDatabaseBrowserFactory, DatabaseBrowserModel } from '@mochi/databasebrowser';
 
 namespace CommandIDs {
   export const SHOW_BROWSER = 'databasebrowser:show';

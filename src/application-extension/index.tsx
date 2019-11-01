@@ -1,7 +1,6 @@
 import './index.css';
 
-import { IMochiShell, MochiFrontEndPlugin, MochiFrontEnd } from '../application';
-import { MochiShell } from '../application/shell';
+import { MochiShell, IMochiShell, MochiFrontEndPlugin, MochiFrontEnd } from '@mochi/application';
 
 /**
  * The default JupyterLab application shell.

@@ -1,3 +1,3 @@
 export { MochiFrontEnd, MochiFrontEndPlugin } from './frontend';
-export { IMochiShell } from './shell';
+export { MochiShell, IMochiShell } from './shell';
 export { Mochi } from './mochi';
