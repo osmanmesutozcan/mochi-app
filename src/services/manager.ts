@@ -3,7 +3,7 @@ import { Settings, SettingManager } from './setting';
 import { IDisposable } from '@phosphor/disposable';
 import { Signal } from '@phosphor/signaling';
 
-export class ServiceManager implements ServiceManager.IServiceManager {
+export class ServiceManager implements ServiceManager.IManager {
   constructor(options: ServiceManager.IOptions = {}) {
     let resolveReadyPromise: () => void;
     this._readyPromise = new Promise<void>(res => resolveReadyPromise = res);
@@ -57,7 +57,7 @@ export class ServiceManager implements ServiceManager.IServiceManager {
 }
 
 export namespace ServiceManager {
-  export interface IServiceManager extends IDisposable {
+  export interface IManager extends IDisposable {
     /**
      * Test whether the manager is ready.
      */
