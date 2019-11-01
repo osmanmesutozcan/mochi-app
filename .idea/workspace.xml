@@ -2,88 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2ef9d0b-6fd0-4485-951c-13da7431c5a2" name="Default Changelist" comment="kjkj">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/apputils-extension/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/apputils-extension/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/apputils/style/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/apputils/style/materialcolors.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/databasebrowser-extension/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/databasebrowser-extension/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/databasebrowser/style/base.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/databasebrowser/style/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/databasebrowser/tokens.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/chrome-extension.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/chrome-extension.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/coreutils/dataconnector.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/coreutils/plugin-schema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/coreutils/settingregistry.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/coreutils/statedb.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/coreutils/tokens.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/databasebrowser/model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/contents/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/manager.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/setting/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/osman.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/osman.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/application-extension/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/application-extension/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/application/shell.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/shell.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/client.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/base.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/dockpanel.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/menus.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/sidepanel.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/tabs.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/console.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/console_selected.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/jupyter.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/search_arrow_down.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/search_arrow_up.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/search_case_sensitive.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/search_regex.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/texteditor.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/vega.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/vega_selected.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/baseline-web-24px.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/bug.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/caretdown.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/caretleft.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/caretright.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/caretup.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/checkmark-disabled.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/checkmark.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/circle-inverse.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/circle.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/close-circle-inverse.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/close-circle.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/close-inverse.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/close.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/down_caret.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/download.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/edit.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ellipses.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_create_new_folder_24px.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_file_upload_24px.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_filter_list_24px.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_format_align_left_24px.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_format_align_left_24px_selected.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_home_24px.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_keyboard_24px.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_keyboard_24px_selected.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_launch_24px.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_launch_24px_selected.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_settings_24px.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_settings_24px_selected.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/link.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/more-horiz.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/panorama_fish_eye.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/search-white.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/search.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/stop-circle.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/undo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/images/caretdown.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/images/caretleft.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/images/caretright.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/images/caretup.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/images/jupyter-white-moons.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/images/jupyter.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/images/jupyterlab-wordmark-inverse.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/images/jupyterlab-wordmark.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/images/jupyterlab.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/urls.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/theme/variables.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/frontend.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/frontend.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apputils-extension/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/apputils-extension/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/coreutils/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/coreutils/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/databasebrowser-extension/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/databasebrowser-extension/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/databasebrowser/browser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/databasebrowser/browser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/databasebrowser/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/databasebrowser/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tslint.json" beforeDir="false" afterPath="$PROJECT_DIR$/tslint.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack/webpack.common.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack/webpack.common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack/webpack.dev.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack/webpack.dev.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,13 +43,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/client.ts">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tsconfig.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+            <state relative-caret-position="357">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/manager.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
               <folding>
-                <element signature="e#0#38#0" expanded="true" />
+                <element signature="e#0#55#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/apputils-extension/index.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="504">
+              <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -118,15 +83,16 @@
       <list>
         <option value="HTML File" />
         <option value="TypeScript JSX File" />
-        <option value="TypeScript File" />
         <option value="Go File" />
         <option value="CSS File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>j</find>
+      <find>DockPanel-ov</find>
     </findStrings>
   </component>
   <component name="GOROOT" path="$USER_HOME$/.gvm/gos/go1.12" />
@@ -136,27 +102,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/client-src/ui-elements/buttons.css" />
-        <option value="$PROJECT_DIR$/src/client-src/global.css" />
-        <option value="$PROJECT_DIR$/src/client-src/ui-elements/buttons.tsx" />
-        <option value="$PROJECT_DIR$/src/services-src/intellisense.ts" />
-        <option value="$PROJECT_DIR$/src/services-src/connection/index.ts" />
-        <option value="$PROJECT_DIR$/src/services-src/connection/connection.worker.ts" />
-        <option value="$PROJECT_DIR$/src/services-src/intellisense/intellisense.worker.ts" />
-        <option value="$PROJECT_DIR$/src/services-src/intellisense/index.ts" />
-        <option value="$PROJECT_DIR$/src/client-src/editor/index.ts" />
-        <option value="$PROJECT_DIR$/src/client-src/data-table/example-data.ts" />
-        <option value="$PROJECT_DIR$/src/client-src/data-table/nested-cell-renderer.ts" />
-        <option value="$PROJECT_DIR$/src/client-src/data-table/cell-renderer-nested.ts" />
-        <option value="$PROJECT_DIR$/src/client-src/data-table/index.ts" />
-        <option value="$PROJECT_DIR$/src/client-src/index.ts" />
-        <option value="$PROJECT_DIR$/page.html" />
-        <option value="$PROJECT_DIR$/src/base-src/database-adapter/index.ts" />
-        <option value="$PROJECT_DIR$/src/client-src/database-list/index.css" />
-        <option value="$PROJECT_DIR$/src/client-src/database-list/index.tsx" />
-        <option value="$PROJECT_DIR$/src/client-src/index.tsx" />
         <option value="$PROJECT_DIR$/src/client-src/side-menu/index.tsx" />
-        <option value="$PROJECT_DIR$/webpack/webpack.common.js" />
         <option value="$PROJECT_DIR$/src/client-src/editor/ui.tsx" />
         <option value="$PROJECT_DIR$/src/client-src/ui-state/database-reducers.ts" />
         <option value="$PROJECT_DIR$/src/client-src/ui-state/store.ts" />
@@ -166,27 +112,47 @@
         <option value="$PROJECT_DIR$/src/client-src/ui-state/editor.ts" />
         <option value="$PROJECT_DIR$/src/client-src/ui-state/workspace.ts" />
         <option value="$PROJECT_DIR$/src/background.ts" />
-        <option value="$PROJECT_DIR$/public/manifest.json" />
         <option value="$PROJECT_DIR$/src/services-src/database/index.ts" />
         <option value="$PROJECT_DIR$/src/base-src/database-adapter/database.ts" />
         <option value="$PROJECT_DIR$/src/client-src/side-menu/databases-menu/index.tsx" />
         <option value="$PROJECT_DIR$/docker-compose.yml" />
         <option value="$PROJECT_DIR$/public/page.html" />
         <option value="$PROJECT_DIR$/src/application/shell.ts" />
-        <option value="$PROJECT_DIR$/src/databasebrowser/index.ts" />
         <option value="$PROJECT_DIR$/src/databasebrowser/tokens.ts" />
-        <option value="$PROJECT_DIR$/tslint.json" />
         <option value="$PROJECT_DIR$/src/databasebrowser/style/base.css" />
         <option value="$PROJECT_DIR$/src/databasebrowser/style/index.css.go" />
         <option value="$PROJECT_DIR$/src/databasebrowser/style/index.css" />
         <option value="$PROJECT_DIR$/src/databasebrowser-extension/index.css" />
-        <option value="$PROJECT_DIR$/src/databasebrowser-extension/index.ts" />
-        <option value="$PROJECT_DIR$/src/application-extension/index.tsx" />
         <option value="$PROJECT_DIR$/src/apputils/style/materialcolors.css" />
         <option value="$PROJECT_DIR$/src/apputils/style/index.css" />
         <option value="$PROJECT_DIR$/src/apputils-extension/index.css" />
-        <option value="$PROJECT_DIR$/src/apputils-extension/index.ts" />
         <option value="$PROJECT_DIR$/src/client.ts" />
+        <option value="$PROJECT_DIR$/src/application/style/dockpanel.css" />
+        <option value="$PROJECT_DIR$/src/coreutils/statedb.ts" />
+        <option value="$PROJECT_DIR$/src/coreutils/tokens.ts" />
+        <option value="$PROJECT_DIR$/src/coreutils/plugin-schema.json" />
+        <option value="$PROJECT_DIR$/tslint.json" />
+        <option value="$PROJECT_DIR$/src/application-extension/index.tsx" />
+        <option value="$PROJECT_DIR$/src/databasebrowser/index.ts" />
+        <option value="$PROJECT_DIR$/src/databasebrowser-extension/index.ts" />
+        <option value="$PROJECT_DIR$/src/databasebrowser/browser.ts" />
+        <option value="$PROJECT_DIR$/src/databasebrowser/model.ts" />
+        <option value="$PROJECT_DIR$/src/services/contents/index.ts" />
+        <option value="$PROJECT_DIR$/src/services/builder/index.ts" />
+        <option value="$PROJECT_DIR$/src/services/index.ts" />
+        <option value="$PROJECT_DIR$/src/services/settings/index.ts" />
+        <option value="$PROJECT_DIR$/src/coreutils/dataconnector.ts" />
+        <option value="$PROJECT_DIR$/src/coreutils/index.ts" />
+        <option value="$PROJECT_DIR$/tsconfig.json" />
+        <option value="$PROJECT_DIR$/src/services/setting/index.ts" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/services/manager.ts" />
+        <option value="$PROJECT_DIR$/src/application/frontend.ts" />
+        <option value="$PROJECT_DIR$/webpack/webpack.common.js" />
+        <option value="$PROJECT_DIR$/webpack/webpack.dev.js" />
+        <option value="$PROJECT_DIR$/src/apputils-extension/index.ts" />
+        <option value="$PROJECT_DIR$/public/manifest.json" />
+        <option value="$PROJECT_DIR$/src/coreutils/settingregistry.ts" />
       </list>
     </option>
   </component>
@@ -213,19 +179,17 @@
             <path>
               <item name="mochi-app" type="b2602c69:ProjectViewProjectNode" />
               <item name="mochi-app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mochi-app" type="b2602c69:ProjectViewProjectNode" />
               <item name="mochi-app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="apputils" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mochi-app" type="b2602c69:ProjectViewProjectNode" />
               <item name="mochi-app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="apputils-extension" type="462c0819:PsiDirectoryNode" />
+              <item name="webpack" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -248,7 +212,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.0" />
     <property name="jdk.selected.JAVA_MODULE" value="12" />
     <property name="js.linters.configure.manually.selectedtslint" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/services" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="$USER_HOME$/.nvm/versions/node/v10.16.0/bin/node" />
@@ -267,17 +231,17 @@
     <property name="tslint.code.style.apply.dismiss" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/client-src/ui-state" />
-      <recent name="$PROJECT_DIR$/src/services-src/intellisense" />
-      <recent name="$PROJECT_DIR$/dist" />
-      <recent name="$PROJECT_DIR$/src/client-src/editor" />
-      <recent name="$PROJECT_DIR$" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/client-src/side-menu" />
       <recent name="$PROJECT_DIR$/dist" />
       <recent name="$PROJECT_DIR$/src/client-src" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/services" />
+      <recent name="$PROJECT_DIR$/src/client-src/ui-state" />
+      <recent name="$PROJECT_DIR$/src/services-src/intellisense" />
+      <recent name="$PROJECT_DIR$/dist" />
+      <recent name="$PROJECT_DIR$/src/client-src/editor" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -328,16 +292,15 @@
       <workItem from="1563534600494" duration="17055000" />
       <workItem from="1572420537421" duration="7231000" />
       <workItem from="1572429483815" duration="2800000" />
-      <workItem from="1572572708787" duration="4192000" />
+      <workItem from="1572572708787" duration="13615000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64457000" />
+    <option name="totallyTimeSpent" value="73880000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-37" width="1920" height="1117" extended-state="7" />
-    <editor active="true" />
+    <frame x="0" y="-37" width="1920" height="1117" extended-state="6" />
     <layout>
       <window_info id="Designer" order="0" />
       <window_info id="Image Layers" order="1" />
@@ -371,131 +334,16 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="7" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="8" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
-      <window_info active="true" anchor="right" content_ui="combo" id="Project" order="10" visible="true" weight="0.18072917" />
+      <window_info anchor="right" content_ui="combo" id="Project" order="10" weight="0.20520833" />
       <window_info anchor="right" id="Cargo" order="11" />
       <window_info anchor="right" id="Leiningen" order="12" />
       <window_info anchor="right" id="REPL" order="13" side_tool="true" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Designer" order="0" />
-      <window_info id="Image Layers" order="1" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="UI Designer" order="3" />
-      <window_info id="Favorites" order="4" side_tool="true" weight="0.3296875" />
-      <window_info id="Learn" order="5" />
-      <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32937366" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.9676026" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="GraphQL" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.96666664" />
-      <window_info anchor="bottom" id="Docker" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" order="11" />
-      <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info anchor="bottom" id="TypeScript" order="13" weight="0.32929292" />
-      <window_info anchor="right" id="Maven" order="0" />
-      <window_info anchor="right" id="Palette" order="1" />
-      <window_info anchor="right" id="Capture Analysis" order="2" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="Palette&#9;" order="5" />
-      <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="7" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="8" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
-      <window_info active="true" anchor="right" content_ui="combo" id="Project" order="10" visible="true" weight="0.25" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/page.html" />
-    <entry file="file://$PROJECT_DIR$/src/client-src/data-table/index.ts" />
-    <entry file="file://$PROJECT_DIR$/src/client-src/index.ts" />
-    <entry file="file://$PROJECT_DIR$/src/client-src/index.tsx" />
-    <entry file="file://$PROJECT_DIR$/node_modules/redux-persist/types/types.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="103" column="12" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/lodash/fp.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/ui-state/database-reducers.ts" />
-    <entry file="file://$PROJECT_DIR$/src/client-src/editor/index.tsx" />
-    <entry file="file://$PROJECT_DIR$/src/client-src/editor/ui.tsx" />
-    <entry file="file://$PROJECT_DIR$/webpack/webpack.common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="8" column="42" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/index.css" />
-    <entry file="file://$PROJECT_DIR$/src/base-src/database-adapter/index.ts" />
-    <entry file="file://$PROJECT_DIR$/src/services-src/index.ts" />
-    <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/databases-menu/index.css" />
-    <entry file="file://$PROJECT_DIR$/src/client-src/ui-state/database.ts" />
-    <entry file="file://$PROJECT_DIR$/src/client-src/ui-state/editor.ts" />
-    <entry file="file://$PROJECT_DIR$/src/client-src/ui-state/store.ts" />
-    <entry file="file://$PROJECT_DIR$/src/client-src/ui-state/workspace.ts" />
-    <entry file="file://$PROJECT_DIR$/dist/manifest.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/untitled.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/js/background.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="653">
-          <caret line="96" column="22" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="22" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/background.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/manifest.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.es2015.promise.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/base-src/database-adapter/database.ts" />
     <entry file="file://$PROJECT_DIR$/src/services-src/database/index.ts" />
     <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/index.tsx" />
     <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/databases-menu/index.tsx" />
@@ -513,20 +361,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/shell.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/databasebrowser/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/databasebrowser/tokens.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
@@ -537,24 +371,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tslint.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/@phosphor/application/lib/index.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1714">
           <caret line="169" column="4" selection-start-line="169" selection-start-column="4" selection-end-line="169" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/databasebrowser/style/base.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>
     </entry>
@@ -569,27 +389,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="20" selection-start-column="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/databasebrowser-extension/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="44" selection-start-column="44" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/databasebrowser-extension/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/application-extension/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
@@ -621,13 +420,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/apputils-extension/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/apputils/style/materialcolors.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
@@ -642,26 +434,293 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/databasebrowser/browser.ts">
+    <entry file="file://$PROJECT_DIR$/src/application/shell.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="84">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databasebrowser-extension/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/style/dockpanel.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/style/base.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/style/menus.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1706">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/application/style/theme/variables.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1426">
-          <caret line="62" column="52" selection-start-line="62" selection-start-column="52" selection-end-line="62" selection-end-column="52" />
+        <state relative-caret-position="307">
+          <caret line="211" column="37" selection-start-line="211" selection-start-column="37" selection-end-line="211" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databasebrowser/style/base.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coreutils/interfaces.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="105" lean-forward="true" selection-start-line="105" selection-end-line="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coreutils/tokens.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2898">
+          <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#106#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tslint.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coreutils/statedb.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="137" lean-forward="true" selection-start-line="137" selection-end-line="137" />
+          <folding>
+            <element signature="e#1#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databasebrowser/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databasebrowser/browser.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databasebrowser-extension/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databasebrowser/model.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application-extension/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coreutils/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coreutils/ratelimiter.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/contents/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="835">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coreutils/dataconnector.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/setting/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/frontend.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="e#0#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/manager.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+        <state relative-caret-position="126">
+          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coreutils/plugin-schema.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack/webpack.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack/webpack.common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="32" column="10" selection-start-line="32" selection-start-column="10" selection-end-line="32" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/ajv/lib/ajv.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="64" column="4" selection-start-line="64" selection-start-column="4" selection-end-line="64" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/manifest.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coreutils/settingregistry.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3313">
+          <caret line="98" selection-start-line="98" selection-end-line="98" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack/webpack.prod.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/apputils-extension/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>

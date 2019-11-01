@@ -1,11 +1,10 @@
 {
   "manifest_version": 2,
 
-  "name": "Chrome Extension TypeScript Starter",
-  "description": "Chrome Extension, TypeScript, Visual Studio Code",
+  "name": "Mochi",
+  "description": "Mochi SQL exploration interface",
   "version": "1.0",
 
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "app": {
     "background": {
       "scripts": ["js/background.js"]

@@ -1,4 +1,5 @@
 import { Widget } from '@phosphor/widgets';
+import { DatabaseBrowserModel } from './model';
 
 /**
  * The class name added to DatabaseBrowser instances.
@@ -25,5 +26,10 @@ export namespace DatabaseBrowser {
      * The widget/DOM id of the database browser.
      */
     id: string;
+
+    /**
+     * Underlying model of database browser.
+     */
+    model: DatabaseBrowserModel;
   }
 }

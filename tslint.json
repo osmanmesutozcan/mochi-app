@@ -5,6 +5,9 @@
     "no-unused-expression": true
   },
   "rules": {
+    "array-type": false,
+    "forin": false,
+    "no-string-literal": false,
     "no-shadowed-variable": false,
     "no-namespace": false,
     "quotemark": [true, "single"],

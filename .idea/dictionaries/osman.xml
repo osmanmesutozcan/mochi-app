@@ -2,6 +2,8 @@
   <dictionary name="osman">
     <words>
       <w>actionsbar</w>
+      <w>apputils</w>
+      <w>coreutils</w>
       <w>databasebrowser</w>
       <w>debouncer</w>
       <w>intellisense</w>

@@ -2,6 +2,8 @@ import { IPlugin, Application } from '@phosphor/application';
 import { IIterator } from '@phosphor/algorithm';
 import { Widget } from '@phosphor/widgets';
 
+import { ServiceManager } from '../services';
+
 /**
  * The type for all MochiFrontEnd application plugins.
  *
@@ -19,13 +21,26 @@ export type MochiFrontEndPlugin<T> = IPlugin<MochiFrontEnd, T>;
  * can be authored. It inherits from the phosphor `Application`.
  */
 export abstract class MochiFrontEnd<T extends MochiFrontEnd.IShell = MochiFrontEnd.IShell> extends Application<T> {
-  //
+  protected constructor(options: MochiFrontEnd.IOptions<T>) {
+    super(options);
+
+    this.serviceManager = options.serviceManager || new ServiceManager();
+  }
+
+  readonly serviceManager: ServiceManager;
 }
 
 /**
  * The namespace for `MochiFrontEnd` class statics.
  */
 export namespace MochiFrontEnd {
+  export interface IOptions<T extends IShell = IShell, U = any> extends Application.IOptions<T> {
+    /**
+     * The service manager used by the application.
+     */
+    serviceManager?: ServiceManager;
+  }
+
   export interface IShell extends Widget {
     /**
      * Activates a widget inside the application shell.

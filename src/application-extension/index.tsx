@@ -19,5 +19,4 @@ const shell: MochiFrontEndPlugin<IMochiShell> = {
 };
 
 const plugins: MochiFrontEndPlugin<any>[] = [shell];
-
 export default plugins;
