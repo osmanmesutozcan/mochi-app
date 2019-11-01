@@ -2,7 +2,10 @@
   <dictionary name="osman">
     <words>
       <w>actionsbar</w>
+      <w>databasebrowser</w>
+      <w>debouncer</w>
       <w>intellisense</w>
+      <w>mochi</w>
       <w>newbutton</w>
       <w>reconciler</w>
     </words>

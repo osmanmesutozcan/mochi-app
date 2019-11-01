@@ -41,6 +41,11 @@ const ACTIVE_CLASS = 'm-mod-active';
 const ACTIVITY_CLASS = 'm-Activity';
 
 /**
+ * Default rank for widget added to the shell.
+ */
+const DEFAULT_RANK = 400;
+
+/**
  * The Mochi application shell token.
  */
 export const IMochiShell = new Token<IMochiShell>('@mochi/application:IMochiShell');
@@ -176,7 +181,27 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
   }
 
   add(widget: Widget, area: IMochiShell.Area = 'main'): void {
-    throw new Error('Not Implemented');
+    switch (area || 'main') {
+      case 'main':
+        throw new Error('Not implemented');
+        // return this._addToMainArea(widget, options);
+      case 'left':
+        return this._addToLeftArea(widget);
+      case 'right':
+        throw new Error('Not implemented');
+        // return this._addToRightArea(widget, options);
+      case 'header':
+        throw new Error('Not implemented');
+        // return this._addToHeaderArea(widget, options);
+      case 'top':
+        throw new Error('Not implemented');
+        // return this._addToTopArea(widget, options);
+      case 'bottom':
+        throw new Error('Not implemented');
+        // return this._addToBottomArea(widget, options);
+      default:
+        throw new Error(`Invalid area: ${area}`);
+    }
   }
 
   /**
@@ -243,6 +268,15 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
     }
   }
 
+  private _addToLeftArea(widget: Widget): void {
+    if (!widget.id) {
+      console.error('Widgets added to app shell must have unique id property.');
+      return;
+    }
+    this._leftHandler.addWidget(widget, DEFAULT_RANK);
+    this._onLayoutModified();
+  }
+
   /**
    * Handle a change to the dock area active widget.
    */
@@ -293,7 +327,7 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
         break;
     }
     return true;
-  };
+  }
 
   private _activeChanged = new Signal<this, IMochiShell.IChangedArgs>(this);
   private _currentChanged = new Signal<this, IMochiShell.IChangedArgs>(this);

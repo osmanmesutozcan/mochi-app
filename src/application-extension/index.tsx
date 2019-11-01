@@ -1,3 +1,5 @@
+import './index.css';
+
 import { IMochiShell, MochiFrontEndPlugin, MochiFrontEnd } from '../application';
 import { MochiShell } from '../application/shell';
 

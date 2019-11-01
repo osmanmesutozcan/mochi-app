@@ -5,6 +5,8 @@
     "no-unused-expression": true
   },
   "rules": {
+    "no-shadowed-variable": false,
+    "no-namespace": false,
     "quotemark": [true, "single"],
     "member-access": [false],
     "ordered-imports": [false],

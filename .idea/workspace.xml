@@ -1,7 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c2ef9d0b-6fd0-4485-951c-13da7431c5a2" name="Default Changelist" comment="kjkj" />
+    <list default="true" id="c2ef9d0b-6fd0-4485-951c-13da7431c5a2" name="Default Changelist" comment="kjkj">
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/apputils-extension/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/apputils-extension/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/apputils/style/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/apputils/style/materialcolors.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/databasebrowser-extension/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/databasebrowser-extension/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/databasebrowser/style/base.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/databasebrowser/style/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/databasebrowser/tokens.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/chrome-extension.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/chrome-extension.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/osman.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/osman.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application-extension/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/application-extension/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/shell.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/shell.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/base.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/dockpanel.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/menus.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/sidepanel.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/tabs.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/console.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/console_selected.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/jupyter.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/search_arrow_down.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/search_arrow_up.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/search_case_sensitive.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/search_regex.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/texteditor.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/vega.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/jupyter/vega_selected.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/baseline-web-24px.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/bug.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/caretdown.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/caretleft.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/caretright.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/caretup.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/checkmark-disabled.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/checkmark.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/circle-inverse.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/circle.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/close-circle-inverse.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/close-circle.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/close-inverse.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/close.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/down_caret.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/download.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/edit.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ellipses.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_create_new_folder_24px.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_file_upload_24px.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_filter_list_24px.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_format_align_left_24px.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_format_align_left_24px_selected.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_home_24px.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_keyboard_24px.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_keyboard_24px_selected.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_launch_24px.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_launch_24px_selected.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_settings_24px.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/ic_settings_24px_selected.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/link.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/more-horiz.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/panorama_fish_eye.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/search-white.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/search.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/stop-circle.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/icons/md/undo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/images/caretdown.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/images/caretleft.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/images/caretright.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/images/caretup.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/images/jupyter-white-moons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/images/jupyter.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/images/jupyterlab-wordmark-inverse.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/images/jupyterlab-wordmark.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/images/jupyterlab.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/urls.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/theme/variables.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tslint.json" beforeDir="false" afterPath="$PROJECT_DIR$/tslint.json" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,76 +98,20 @@
     <favorites_list name="chrome-extension" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/base-src/database-adapter/database.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="730">
-                  <caret line="65" column="17" selection-start-line="65" selection-start-column="17" selection-end-line="65" selection-end-column="17" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/docker-compose.yml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="588">
-                  <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/public/page.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="147">
-                  <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/index.tsx">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="10" selection-start-line="10" selection-end-line="10" />
-                  <folding>
-                    <element signature="e#0#31#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/databases-menu/index.tsx">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="609">
-                  <caret line="44" column="22" selection-start-line="44" selection-start-column="22" selection-end-line="44" selection-end-column="22" />
-                  <folding>
-                    <element signature="e#0#31#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/services-src/database/index.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="462">
-                  <caret line="22" selection-start-line="22" selection-end-line="22" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/client.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -92,6 +119,8 @@
         <option value="HTML File" />
         <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="Go File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -100,25 +129,13 @@
       <find>j</find>
     </findStrings>
   </component>
+  <component name="GOROOT" path="$USER_HOME$/.gvm/gos/go1.12" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/public/pag.html" />
-        <option value="$PROJECT_DIR$/src/content_script.ts" />
-        <option value="$PROJECT_DIR$/src/client/index.ts" />
-        <option value="$PROJECT_DIR$/src/client-src/style/index.css" />
-        <option value="$PROJECT_DIR$/tslint.json" />
-        <option value="$PROJECT_DIR$/src/client-src/side-menu/index.ts" />
-        <option value="$PROJECT_DIR$/src/client-src/side-menu/index.css" />
-        <option value="$PROJECT_DIR$/dist/page.html" />
-        <option value="$PROJECT_DIR$/.prettierrc" />
-        <option value="$PROJECT_DIR$/tsconfig.json" />
-        <option value="$PROJECT_DIR$/src/client-src/editor/index.tsx" />
-        <option value="$PROJECT_DIR$/src/client-src/index.css" />
-        <option value="$PROJECT_DIR$/src/client-src/editor/index.css" />
         <option value="$PROJECT_DIR$/src/client-src/ui-elements/buttons.css" />
         <option value="$PROJECT_DIR$/src/client-src/global.css" />
         <option value="$PROJECT_DIR$/src/client-src/ui-elements/buttons.tsx" />
@@ -135,7 +152,6 @@
         <option value="$PROJECT_DIR$/src/client-src/index.ts" />
         <option value="$PROJECT_DIR$/page.html" />
         <option value="$PROJECT_DIR$/src/base-src/database-adapter/index.ts" />
-        <option value="$PROJECT_DIR$/src/client.ts" />
         <option value="$PROJECT_DIR$/src/client-src/database-list/index.css" />
         <option value="$PROJECT_DIR$/src/client-src/database-list/index.tsx" />
         <option value="$PROJECT_DIR$/src/client-src/index.tsx" />
@@ -156,13 +172,28 @@
         <option value="$PROJECT_DIR$/src/client-src/side-menu/databases-menu/index.tsx" />
         <option value="$PROJECT_DIR$/docker-compose.yml" />
         <option value="$PROJECT_DIR$/public/page.html" />
+        <option value="$PROJECT_DIR$/src/application/shell.ts" />
+        <option value="$PROJECT_DIR$/src/databasebrowser/index.ts" />
+        <option value="$PROJECT_DIR$/src/databasebrowser/tokens.ts" />
+        <option value="$PROJECT_DIR$/tslint.json" />
+        <option value="$PROJECT_DIR$/src/databasebrowser/style/base.css" />
+        <option value="$PROJECT_DIR$/src/databasebrowser/style/index.css.go" />
+        <option value="$PROJECT_DIR$/src/databasebrowser/style/index.css" />
+        <option value="$PROJECT_DIR$/src/databasebrowser-extension/index.css" />
+        <option value="$PROJECT_DIR$/src/databasebrowser-extension/index.ts" />
+        <option value="$PROJECT_DIR$/src/application-extension/index.tsx" />
+        <option value="$PROJECT_DIR$/src/apputils/style/materialcolors.css" />
+        <option value="$PROJECT_DIR$/src/apputils/style/index.css" />
+        <option value="$PROJECT_DIR$/src/apputils-extension/index.css" />
+        <option value="$PROJECT_DIR$/src/apputils-extension/index.ts" />
+        <option value="$PROJECT_DIR$/src/client.ts" />
       </list>
     </option>
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="lkaehJNC" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7" fullScreen="true">
     <option name="y" value="46" />
     <option name="width" value="950" />
     <option name="height" value="789" />
@@ -176,71 +207,25 @@
         <subPane>
           <expand>
             <path>
-              <item name="chrome-extension" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chrome-extension" type="462c0819:PsiDirectoryNode" />
+              <item name="mochi-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mochi-app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="chrome-extension" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chrome-extension" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chrome-extension" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chrome-extension" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="mysql-driver" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chrome-extension" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chrome-extension" type="462c0819:PsiDirectoryNode" />
+              <item name="mochi-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mochi-app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="chrome-extension" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chrome-extension" type="462c0819:PsiDirectoryNode" />
+              <item name="mochi-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mochi-app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="base-src" type="462c0819:PsiDirectoryNode" />
+              <item name="apputils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="chrome-extension" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chrome-extension" type="462c0819:PsiDirectoryNode" />
+              <item name="mochi-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mochi-app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="base-src" type="462c0819:PsiDirectoryNode" />
-              <item name="database-adapter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chrome-extension" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chrome-extension" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="client-src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chrome-extension" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chrome-extension" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="client-src" type="462c0819:PsiDirectoryNode" />
-              <item name="side-menu" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chrome-extension" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chrome-extension" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="client-src" type="462c0819:PsiDirectoryNode" />
-              <item name="side-menu" type="462c0819:PsiDirectoryNode" />
-              <item name="databases-menu" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chrome-extension" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chrome-extension" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="services-src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chrome-extension" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chrome-extension" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="services-src" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="apputils-extension" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -252,18 +237,23 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="javascript.nodejs.core.library.configured.version" value="10.16.0" />
     <property name="jdk.selected.JAVA_MODULE" value="12" />
     <property name="js.linters.configure.manually.selectedtslint" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/client-src/ui-state" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="$USER_HOME$/.nvm/versions/node/v10.16.0/bin/node" />
     <property name="node.js.selected.package.tslint" value="$PROJECT_DIR$/node_modules/ts-lint" />
+    <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v10.16.0/bin/node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
@@ -272,7 +262,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.2636034" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="tslint.code.style.apply.dismiss" value="true" />
   </component>
@@ -338,14 +328,16 @@
       <workItem from="1563534600494" duration="17055000" />
       <workItem from="1572420537421" duration="7231000" />
       <workItem from="1572429483815" duration="2800000" />
+      <workItem from="1572572708787" duration="4192000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60265000" />
+    <option name="totallyTimeSpent" value="64457000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
+    <frame x="0" y="-37" width="1920" height="1117" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Designer" order="0" />
       <window_info id="Image Layers" order="1" />
@@ -379,7 +371,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="7" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="8" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Project" order="10" visible="true" weight="0.18072917" />
+      <window_info active="true" anchor="right" content_ui="combo" id="Project" order="10" visible="true" weight="0.18072917" />
       <window_info anchor="right" id="Cargo" order="11" />
       <window_info anchor="right" id="Leiningen" order="12" />
       <window_info anchor="right" id="REPL" order="13" side_tool="true" />
@@ -423,138 +415,10 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/webpack/lib/WebpackOptionsValidationError.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="305" column="12" selection-start-line="305" selection-start-column="12" selection-end-line="305" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@phosphor/coreutils/lib/json.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/index.ts" />
-    <entry file="file://$PROJECT_DIR$/src/client-src/editor/index.ts" />
-    <entry file="file://$PROJECT_DIR$/node_modules/@phosphor/datagrid/lib/datamodel.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="102" column="9" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@phosphor/datagrid/lib/renderermap.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="53" column="80" lean-forward="true" selection-start-line="53" selection-start-column="80" selection-end-line="53" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@phosphor/datagrid/lib/textrenderer.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-382">
-          <caret line="88" column="14" selection-start-line="88" selection-start-column="14" selection-end-line="88" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/data-table/nested-cell-renderer.ts" />
-    <entry file="file://$PROJECT_DIR$/src/client-src/data-table/example-data.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9407">
-          <caret line="409" column="3" selection-start-line="409" selection-start-column="3" selection-end-line="409" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@phosphor/datagrid/lib/graphicscontext.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="897">
-          <caret line="88" selection-start-line="88" selection-end-line="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@phosphor/datagrid/lib/cellrenderer.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-340">
-          <caret line="83" column="14" selection-start-line="83" selection-start-column="14" selection-end-line="83" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@phosphor/widgets/lib/panel.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/data-table/cell-renderer-nested.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@phosphor/datagrid/lib/datagrid.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="233" column="4" selection-start-line="233" selection-start-column="4" selection-end-line="233" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@phosphor/datagrid/lib/jsonmodel.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="764">
-          <caret line="145" selection-start-line="145" selection-end-line="145" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@phosphor/widgets/lib/tabpanel.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="114" column="4" selection-start-line="114" selection-start-column="4" selection-end-line="114" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services-src/connection/connection.worker.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tslint.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/page.html" />
     <entry file="file://$PROJECT_DIR$/src/client-src/data-table/index.ts" />
     <entry file="file://$PROJECT_DIR$/src/client-src/index.ts" />
-    <entry file="file://$PROJECT_DIR$/src/client-src/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client-src/index.tsx" />
     <entry file="file://$PROJECT_DIR$/node_modules/redux-persist/types/types.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
@@ -570,23 +434,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client-src/ui-state/database-reducers.ts" />
-    <entry file="file://$PROJECT_DIR$/src/client-src/editor/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/editor/ui.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="97" column="28" selection-start-line="97" selection-start-column="28" selection-end-line="97" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client-src/editor/index.tsx" />
+    <entry file="file://$PROJECT_DIR$/src/client-src/editor/ui.tsx" />
     <entry file="file://$PROJECT_DIR$/webpack/webpack.common.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -594,80 +443,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/index.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/base-src/database-adapter/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services-src/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="13" lean-forward="true" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/databases-menu/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/ui-state/database.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/ui-state/editor.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/ui-state/store.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/ui-state/workspace.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="751">
-          <caret line="45" column="4" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/index.css" />
+    <entry file="file://$PROJECT_DIR$/src/base-src/database-adapter/index.ts" />
+    <entry file="file://$PROJECT_DIR$/src/services-src/index.ts" />
+    <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/databases-menu/index.css" />
+    <entry file="file://$PROJECT_DIR$/src/client-src/ui-state/database.ts" />
+    <entry file="file://$PROJECT_DIR$/src/client-src/ui-state/editor.ts" />
+    <entry file="file://$PROJECT_DIR$/src/client-src/ui-state/store.ts" />
+    <entry file="file://$PROJECT_DIR$/src/client-src/ui-state/workspace.ts" />
     <entry file="file://$PROJECT_DIR$/dist/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="546">
@@ -712,37 +495,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/base-src/database-adapter/database.ts">
+    <entry file="file://$PROJECT_DIR$/src/base-src/database-adapter/database.ts" />
+    <entry file="file://$PROJECT_DIR$/src/services-src/database/index.ts" />
+    <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/index.tsx" />
+    <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/databases-menu/index.tsx" />
+    <entry file="file://$PROJECT_DIR$/public/page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="730">
-          <caret line="65" column="17" selection-start-line="65" selection-start-column="17" selection-end-line="65" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services-src/database/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client-src/side-menu/databases-menu/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="44" column="22" selection-start-line="44" selection-start-column="22" selection-end-line="44" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="147">
+          <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -753,10 +513,156 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/page.html">
+    <entry file="file://$PROJECT_DIR$/src/application/shell.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databasebrowser/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databasebrowser/tokens.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tslint.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
-          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@phosphor/application/lib/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1714">
+          <caret line="169" column="4" selection-start-line="169" selection-start-column="4" selection-end-line="169" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databasebrowser/style/base.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databasebrowser/style/index.css.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databasebrowser/style/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="20" selection-start-column="20" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databasebrowser-extension/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="44" selection-start-column="44" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databasebrowser-extension/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application-extension/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application-extension/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/style/theme/urls.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/apputils/style/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="30" selection-start-column="30" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/apputils-extension/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="37" selection-start-column="37" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/apputils-extension/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/apputils/style/materialcolors.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/style/theme/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databasebrowser/browser.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/style/theme/variables.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1426">
+          <caret line="62" column="52" selection-start-line="62" selection-start-column="52" selection-end-line="62" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
