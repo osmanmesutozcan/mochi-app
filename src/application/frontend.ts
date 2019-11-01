@@ -2,7 +2,8 @@ import { IPlugin, Application } from '@phosphor/application';
 import { IIterator } from '@phosphor/algorithm';
 import { Widget } from '@phosphor/widgets';
 
-import { ServiceManager } from '../services';
+import { ServiceManager } from '@mochi/services';
+import { DatabaseRegistry } from '@mochi/databaseregistry';
 
 /**
  * The type for all MochiFrontEnd application plugins.
@@ -25,9 +26,11 @@ export abstract class MochiFrontEnd<T extends MochiFrontEnd.IShell = MochiFrontE
     super(options);
 
     this.serviceManager = options.serviceManager || new ServiceManager();
+    this.databaseRegistry = new DatabaseRegistry();
   }
 
   readonly serviceManager: ServiceManager;
+  readonly databaseRegistry: DatabaseRegistry;
 }
 
 /**
