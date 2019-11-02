@@ -3,7 +3,7 @@ import { IDisposable } from '@phosphor/disposable';
 /**
  * Definition of a general purpose database connector.
  */
-export interface IDatabaseConnector extends IDisposable {
+export interface IDataConnector extends IDisposable {
 
   query(query: string, params?: IQueryParams): Promise<IQueryResult>;
 
@@ -13,7 +13,7 @@ export interface IDatabaseConnector extends IDisposable {
 
   watchQuery(query: string, params?: IQueryParams): void;
 
-  introspect(): Promise<IDatabaseIntrospection>;
+  introspect(): Promise<IDataIntrospection>;
 }
 
 export interface IQueryParams {
@@ -30,6 +30,6 @@ export interface IQueryResult {
 /**
  * Shape of the connected database.
  */
-export interface IDatabaseIntrospection {
+export interface IDataIntrospection {
   //
 }

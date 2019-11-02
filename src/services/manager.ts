@@ -1,9 +1,9 @@
 import { IDisposable } from '@phosphor/disposable';
 import { Signal } from '@phosphor/signaling';
 
-import { DatabaseRegistry } from '@mochi/databaseregistry';
+import { ConnectorRegistry } from '@mochi/connectorregistry';
 
-import { Databases, DatabaseManager } from './database';
+import { Connectors, ConnectorManager } from './connector';
 import { Contents, ContentsManager } from './contents';
 import { Settings, SettingManager } from './setting';
 import { PromiseDelegate } from '@phosphor/coreutils';
@@ -15,7 +15,7 @@ export class ServiceManager implements ServiceManager.IManager {
 
     this.settings = new SettingManager();
     this.contents = new ContentsManager();
-    this.databases = new DatabaseManager({
+    this.databases = new ConnectorManager({
       registry: options.registry,
     });
 
@@ -62,7 +62,7 @@ export class ServiceManager implements ServiceManager.IManager {
   /**
    * Get the databases manager instance.
    */
-  readonly databases: DatabaseManager;
+  readonly databases: ConnectorManager;
 
   private _isDisposed = false;
   private _isReady = false;
@@ -84,13 +84,13 @@ export namespace ServiceManager {
     // List of managers managed by the service manager.
     readonly contents: Contents.IManager;
     readonly settings: Settings.IManager;
-    readonly databases: Databases.IManager;
+    readonly databases: Connectors.IManager;
   }
 
   export interface IOptions {
     /**
      * A database registry instance
      */
-    registry: DatabaseRegistry;
+    registry: ConnectorRegistry;
   }
 }

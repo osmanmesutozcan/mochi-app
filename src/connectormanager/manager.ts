@@ -1,6 +1,7 @@
-import { IDatabaseManager } from '@mochi/databasemanager/tokens';
 import { ServiceManager } from '@mochi/services';
-import { DatabaseRegistry } from '@mochi/databaseregistry';
+import { ConnectorRegistry } from '@mochi/connectorregistry';
+
+import { IConnectorManager } from './tokens';
 
 /**
  * The database manager
@@ -13,8 +14,8 @@ import { DatabaseRegistry } from '@mochi/databaseregistry';
  * database manager is in control of the proper closing of the widgets and
  * contexts.
  */
-export class DatabaseManager implements IDatabaseManager {
-  constructor(options: DatabaseManager.IOptions) {
+export class ConnectorManager implements IConnectorManager {
+  constructor(options: ConnectorManager.IOptions) {
     this.services = options.manager;
     this.registry = options.registry;
   }
@@ -41,12 +42,12 @@ export class DatabaseManager implements IDatabaseManager {
   /**
    * The registry singleton used by the manager.
    */
-  readonly registry: DatabaseRegistry;
+  readonly registry: ConnectorRegistry;
 
   private _isDisposed = false;
 }
 
-export namespace DatabaseManager {
+export namespace ConnectorManager {
   export interface IOptions {
     /**
      * A service manager instance.
@@ -56,6 +57,6 @@ export namespace DatabaseManager {
     /**
      * The database registry singleton.
      */
-    registry: DatabaseRegistry;
+    registry: ConnectorRegistry;
   }
 }

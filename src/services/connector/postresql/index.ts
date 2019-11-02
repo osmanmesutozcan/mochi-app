@@ -1,10 +1,10 @@
 import * as PG from '@mochi/pg';
 
-import { DatabaseConnector } from '../connector';
-import { IDatabaseIntrospection, IQueryParams, IQueryResult } from '../interfaces';
+import { DataConnector } from '../connector';
+import { IDataIntrospection, IQueryParams, IQueryResult } from '../interfaces';
 
-export class PostgreSQLConnector extends DatabaseConnector {
-  async introspect(): Promise<IDatabaseIntrospection> {
+export class PostgreSQLConnector extends DataConnector {
+  async introspect(): Promise<IDataIntrospection> {
     throw new Error('Not implemented');
   }
 

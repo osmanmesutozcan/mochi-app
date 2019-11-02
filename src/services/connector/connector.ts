@@ -1,4 +1,4 @@
-import { IDatabaseConnector, IDatabaseIntrospection, IQueryParams, IQueryResult } from './interfaces';
+import { IDataConnector, IDataIntrospection, IQueryParams, IQueryResult } from './interfaces';
 
 /**
  * An abstract client definition to
@@ -8,8 +8,8 @@ import { IDatabaseConnector, IDatabaseIntrospection, IQueryParams, IQueryResult 
  * @typeparam T - Type of the query.
  * @typeparam U - Type of the params.
  */
-export abstract class DatabaseConnector implements IDatabaseConnector {
-  protected constructor(options: DatabaseConnector.IOptions) {
+export abstract class DataConnector implements IDataConnector {
+  protected constructor(options: DataConnector.IOptions) {
     //
   }
   /**
@@ -32,7 +32,7 @@ export abstract class DatabaseConnector implements IDatabaseConnector {
   /**
    * Introspect the database to get overall database shape.
    */
-  abstract async introspect(): Promise<IDatabaseIntrospection>;
+  abstract async introspect(): Promise<IDataIntrospection>;
 
   /**
    * Runs a query on database and return an observable
@@ -60,7 +60,7 @@ export abstract class DatabaseConnector implements IDatabaseConnector {
   private _isDisposed = false;
 }
 
-export namespace DatabaseConnector {
+export namespace DataConnector {
   /**
    * Database connector options.
    */

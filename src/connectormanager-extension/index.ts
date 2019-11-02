@@ -1,20 +1,20 @@
 import { MochiFrontEnd, MochiFrontEndPlugin } from '@mochi/application';
-import { DatabaseManager, IDatabaseManager } from '@mochi/databasemanager';
+import { ConnectorManager, IConnectorManager } from '@mochi/connectormanager';
 
-const manager: MochiFrontEndPlugin<IDatabaseManager> = {
+const manager: MochiFrontEndPlugin<IConnectorManager> = {
   id: '@mochi/databasemanager-extension:manager',
   autoStart: true,
   activate: activateManager,
-  provides: IDatabaseManager,
+  provides: IConnectorManager,
 };
 
 /**
  * Activate the default database manager plugin.
  */
-function activateManager(app: MochiFrontEnd): IDatabaseManager {
+function activateManager(app: MochiFrontEnd): IConnectorManager {
   const manager = app.serviceManager;
   const registry = app.databaseRegistry;
-  return new DatabaseManager({ manager, registry });
+  return new ConnectorManager({ manager, registry });
 }
 
 const plugins: MochiFrontEndPlugin<any>[] = [manager];

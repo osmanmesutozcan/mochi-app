@@ -1,5 +1,5 @@
 import { IStateDB } from '../coreutils';
-import { IDatabaseManager } from '@mochi/databasemanager/tokens';
+import { IConnectorManager } from '@mochi/connectormanager/tokens';
 
 export class DatabaseBrowserModel {
   constructor(options: DatabaseBrowserModel.IOptions) {
@@ -23,6 +23,6 @@ export namespace DatabaseBrowserModel {
     /**
      * A database manager instance.
      */
-    manager: IDatabaseManager;
+    manager: IConnectorManager;
   }
 }

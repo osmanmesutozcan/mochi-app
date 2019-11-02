@@ -2,8 +2,8 @@ import './index.css';
 
 import { IStateDB } from '@mochi/coreutils';
 import { IMochiShell, MochiFrontEnd, MochiFrontEndPlugin } from '@mochi/application';
-import { DatabaseBrowser, IDatabaseBrowserFactory, DatabaseBrowserModel } from '@mochi/databasebrowser';
-import { IDatabaseManager } from '@mochi/databasemanager/tokens';
+import { DatabaseBrowser, IDatabaseBrowserFactory, DatabaseBrowserModel } from '@mochi/connectorbrowser';
+import { IConnectorManager } from '@mochi/connectormanager/tokens';
 
 namespace CommandIDs {
   export const SHOW_BROWSER = 'databasebrowser:show';
@@ -26,7 +26,7 @@ const factory: MochiFrontEndPlugin<IDatabaseBrowserFactory> = {
   activate: activateDatabaseBrowserFactory,
   id: '@mochi/databasebrowser-extension:factory',
   provides: IDatabaseBrowserFactory,
-  requires: [IStateDB, IDatabaseManager],
+  requires: [IStateDB, IConnectorManager],
 };
 
 /**
@@ -45,7 +45,7 @@ function activateDatabaseBrowser(app: MochiFrontEnd, factory: IDatabaseBrowserFa
 /**
  * Activate browser factory provider.
  */
-function activateDatabaseBrowserFactory(app: MochiFrontEnd, state: IStateDB, manager: IDatabaseManager): IDatabaseBrowserFactory {
+function activateDatabaseBrowserFactory(app: MochiFrontEnd, state: IStateDB, manager: IConnectorManager): IDatabaseBrowserFactory {
   const createDatabaseBrowser = (id: string, options: IDatabaseBrowserFactory.IOptions = {}) => {
     const model = new DatabaseBrowserModel({ refreshInterval: options.refreshInterval, state, manager });
     return new DatabaseBrowser({ id, model });

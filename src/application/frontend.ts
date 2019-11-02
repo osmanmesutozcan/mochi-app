@@ -3,7 +3,7 @@ import { IIterator } from '@phosphor/algorithm';
 import { Widget } from '@phosphor/widgets';
 
 import { ServiceManager } from '@mochi/services';
-import { DatabaseRegistry } from '@mochi/databaseregistry';
+import { ConnectorRegistry } from '@mochi/connectorregistry';
 
 /**
  * The type for all MochiFrontEnd application plugins.
@@ -25,12 +25,12 @@ export abstract class MochiFrontEnd<T extends MochiFrontEnd.IShell = MochiFrontE
   protected constructor(options: MochiFrontEnd.IOptions<T>) {
     super(options);
 
-    const registry  = (this.databaseRegistry = new DatabaseRegistry());
+    const registry  = (this.databaseRegistry = new ConnectorRegistry());
     this.serviceManager = options.serviceManager || new ServiceManager({ registry });
   }
 
   readonly serviceManager: ServiceManager;
-  readonly databaseRegistry: DatabaseRegistry;
+  readonly databaseRegistry: ConnectorRegistry;
 }
 
 /**
