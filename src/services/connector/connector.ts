@@ -12,6 +12,7 @@ export abstract class DataSourceConnector implements IDataSourceConnector {
   constructor(options: DataSourceConnector.IOptions) {
     //
   }
+
   /**
    * Runs a query on database and return `IQueryResult`.
    * @param query Query to run.
@@ -46,7 +47,7 @@ export abstract class DataSourceConnector implements IDataSourceConnector {
    * @param params Params to pass into the query.
    */
   watchQuery(query: string, params?: IQueryParams): void {
-    throw new Error('Not implemented');
+    throw new Error('DataSourceConnector#watchQuery is not implemented');
   }
 
   get isDisposed(): boolean {

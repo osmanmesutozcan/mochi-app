@@ -47,7 +47,7 @@ function activateDatabaseBrowser(app: MochiFrontEnd, factory: IDatabaseBrowserFa
  */
 function activateDatabaseBrowserFactory(app: MochiFrontEnd, state: IStateDB, manager: IConnectorManager): IDatabaseBrowserFactory {
   const createDatabaseBrowser = (id: string, options: IDatabaseBrowserFactory.IOptions = {}) => {
-    const model = new DatabaseBrowserModel({ refreshInterval: options.refreshInterval, state, manager });
+    const model = new DatabaseBrowserModel({ state, manager });
     return new DatabaseBrowser({ id, model });
   };
 

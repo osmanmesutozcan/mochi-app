@@ -37,9 +37,6 @@ export namespace IDatabaseBrowserFactory {
    * The options for creating a file browser using a browser factory.
    */
   export interface IOptions {
-    /**
-     * The time intervar for browser refreshing. in ms.
-     */
-    refreshInterval?: number;
+    //
   }
 }
