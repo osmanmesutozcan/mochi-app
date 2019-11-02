@@ -1,20 +1,25 @@
 import { IDisposable } from '@phosphor/disposable';
 import { Signal } from '@phosphor/signaling';
 
+import { DatabaseRegistry } from '@mochi/databaseregistry';
+
 import { Databases, DatabaseManager } from './database';
 import { Contents, ContentsManager } from './contents';
 import { Settings, SettingManager } from './setting';
+import { PromiseDelegate } from '@phosphor/coreutils';
 
 export class ServiceManager implements ServiceManager.IManager {
-  constructor(options: ServiceManager.IOptions = {}) {
-    let resolveReadyPromise: () => void;
-    this._readyPromise = new Promise<void>(res => resolveReadyPromise = res);
+  constructor(options: ServiceManager.IOptions) {
+    const readyPromiseDelegate = new PromiseDelegate<void>();
+    this._readyPromise = readyPromiseDelegate.promise;
 
     this.settings = new SettingManager();
     this.contents = new ContentsManager();
-    this.databases = new DatabaseManager();
+    this.databases = new DatabaseManager({
+      registry: options.registry,
+    });
 
-    resolveReadyPromise();
+    readyPromiseDelegate.resolve();
   }
 
   get isReady(): boolean {
@@ -83,6 +88,9 @@ export namespace ServiceManager {
   }
 
   export interface IOptions {
-    //
+    /**
+     * A database registry instance
+     */
+    registry: DatabaseRegistry;
   }
 }

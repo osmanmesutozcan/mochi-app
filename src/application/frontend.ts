@@ -25,8 +25,8 @@ export abstract class MochiFrontEnd<T extends MochiFrontEnd.IShell = MochiFrontE
   protected constructor(options: MochiFrontEnd.IOptions<T>) {
     super(options);
 
-    this.serviceManager = options.serviceManager || new ServiceManager();
-    this.databaseRegistry = new DatabaseRegistry();
+    const registry  = (this.databaseRegistry = new DatabaseRegistry());
+    this.serviceManager = options.serviceManager || new ServiceManager({ registry });
   }
 
   readonly serviceManager: ServiceManager;
@@ -61,7 +61,7 @@ export namespace MochiFrontEnd {
      * be added.
      *
      * @param options - @TODO Optional flags the shell might use when opening the
-     * widget, as defined in the `DocumentRegistry`.
+     *  widget, as defined in the `DocumentRegistry`.
      */
     add(widget: Widget, area?: string /* options?: DocumentRegistry.IOpenOptions */): void;
 

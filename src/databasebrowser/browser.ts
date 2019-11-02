@@ -19,7 +19,7 @@ export class DatabaseBrowser extends Widget {
 
 export namespace DatabaseBrowser {
   /**
-   * An options onbecj for initializing a database browser widget.
+   * Options for initializing a database browser widget.
    */
   export interface IOptions {
     /**

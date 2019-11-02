@@ -8,7 +8,7 @@ import DatabaseBrowserExtension from './databasebrowser-extension';
 window.onload = async () => {
   const mochi = new Mochi();
 
-  // Register plugins
+  // Register plugins.
   mochi.registerPlugins(AppUtilsExtension);
   mochi.registerPlugins(ApplicationExtension);
   mochi.registerPlugins(DatabaseBrowserExtension);

@@ -1,14 +1,15 @@
 import { Token } from '@phosphor/coreutils';
-import { IDisposable } from '@phosphor/disposable';
+import { DisposableSet, IDisposable } from '@phosphor/disposable';
 
 import { IDatabaseConnector } from './interfaces';
+import { DatabaseRegistry } from '@mochi/databaseregistry';
 
 export class DatabaseManager implements Databases.IManager {
-  constructor(options: DatabaseManager.IOptions = {}) {
-    //
+  constructor(options: DatabaseManager.IOptions) {
+    this.registry = options.registry;
   }
 
-  async start(id: Token<IDatabaseConnector>): Promise<void> {
+  async startNew(id: Token<IDatabaseConnector>): Promise<void> {
     throw new Error('Not implemented');
   }
 
@@ -21,11 +22,16 @@ export class DatabaseManager implements Databases.IManager {
       return;
     }
     this._isDisposed = true;
-    this._connectors.forEach(connector => connector.dispose());
+    this._disposables.dispose();
   }
 
-  private readonly _connectors: IDatabaseConnector[] = [];
+  /**
+   * A database registry instance.
+   */
+  readonly registry: DatabaseRegistry;
 
+  private readonly _connectors = new Set<IDatabaseConnector>();
+  private readonly _disposables = new DisposableSet();
   private _isDisposed = false;
 }
 
@@ -34,7 +40,10 @@ export namespace DatabaseManager {
    * Database manager options.
    */
   export interface IOptions {
-    //
+    /**
+     * A database registry instance.
+     */
+    readonly registry: DatabaseRegistry;
   }
 }
 
@@ -43,6 +52,11 @@ export namespace Databases {
     /**
      * Start a registered connector by its id.
      */
-    start(id: Token<IDatabaseConnector>): Promise<void>;
+    startNew(id: Token<IDatabaseConnector>): Promise<void>;
+
+    /**
+     * A database registry instance.
+     */
+    registry: DatabaseRegistry;
   }
 }

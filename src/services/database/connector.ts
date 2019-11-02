@@ -1,5 +1,3 @@
-import { Token } from '@phosphor/coreutils';
-
 import { IDatabaseConnector, IDatabaseIntrospection, IQueryParams, IQueryResult } from './interfaces';
 
 /**
@@ -14,12 +12,6 @@ export abstract class DatabaseConnector implements IDatabaseConnector {
   protected constructor(options: DatabaseConnector.IOptions) {
     //
   }
-
-  /**
-   * A token which contains type information of the concrete database connector.
-   */
-  abstract get type(): Token<IDatabaseConnector>;
-
   /**
    * Runs a query on database and return `IQueryResult`.
    * @param query Query to run.
