@@ -1,4 +1,4 @@
-import { IDataConnector, IDataIntrospection, IQueryParams, IQueryResult } from './interfaces';
+import { IDataSourceConnector, IDataIntrospection, IQueryParams, IQueryResult } from './interfaces';
 
 /**
  * An abstract client definition to
@@ -8,8 +8,8 @@ import { IDataConnector, IDataIntrospection, IQueryParams, IQueryResult } from '
  * @typeparam T - Type of the query.
  * @typeparam U - Type of the params.
  */
-export abstract class DataConnector implements IDataConnector {
-  protected constructor(options: DataConnector.IOptions) {
+export abstract class DataSourceConnector implements IDataSourceConnector {
+  constructor(options: DataSourceConnector.IOptions) {
     //
   }
   /**
@@ -60,9 +60,9 @@ export abstract class DataConnector implements IDataConnector {
   private _isDisposed = false;
 }
 
-export namespace DataConnector {
+export namespace DataSourceConnector {
   /**
-   * Database connector options.
+   * Database connectorRegistry options.
    */
   export interface IOptions {
     /**

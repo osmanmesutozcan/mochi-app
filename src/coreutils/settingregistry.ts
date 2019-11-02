@@ -241,7 +241,7 @@ export class SettingRegistry implements ISettingRegistry {
   }
 
   /**
-   * The data connector used by the setting registry.
+   * The data connectorRegistry used by the setting registry.
    */
   readonly connector: IDataConnector<ISettingRegistry.IPlugin, string, string>;
 
@@ -316,7 +316,7 @@ export class SettingRegistry implements ISettingRegistry {
       return new Settings({ plugin: plugins[plugin], registry });
     }
 
-    // If the plugin needs to be loaded from the data connector, fetch.
+    // If the plugin needs to be loaded from the data connectorRegistry, fetch.
     return this.reload(plugin);
   }
 
@@ -419,7 +419,7 @@ export class SettingRegistry implements ISettingRegistry {
    * to merge values. This behavior can be accomplished in a `compose`
    * transformation.
    * - `fetch` transformations: The registry uses the plugin data that is
-   * fetched from its connector. If a plugin wants to override, e.g. to update
+   * fetched from its connectorRegistry. If a plugin wants to override, e.g. to update
    * its schema with dynamic defaults, a `fetch` transformation can be applied.
    */
   transform(
@@ -817,7 +817,7 @@ export namespace SettingRegistry {
    */
   export interface IOptions {
     /**
-     * The data connector used by the setting registry.
+     * The data connectorRegistry used by the setting registry.
      */
     connector: IDataConnector<ISettingRegistry.IPlugin, string>;
 

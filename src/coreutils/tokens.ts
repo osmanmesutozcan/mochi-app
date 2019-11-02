@@ -18,7 +18,7 @@ export const ISettingRegistry = new Token<ISettingRegistry>('@mochi/coreutils:IS
  */
 export interface ISettingRegistry {
   /**
-   * The data connector used by the setting registry.
+   * The data connectorRegistry used by the setting registry.
    */
   readonly connector: IDataConnector<ISettingRegistry.IPlugin, string, string>;
 
@@ -115,7 +115,7 @@ export interface ISettingRegistry {
    * to merge values. This behavior can be accomplished in a `compose`
    * transformation.
    * - `fetch` transformations: The registry uses the plugin data that is
-   * fetched from its connector. If a plugin wants to override, e.g. to update
+   * fetched from its connectorRegistry. If a plugin wants to override, e.g. to update
    * its schema with dynamic defaults, a `fetch` transformation can be applied.
    */
   transform(

@@ -13,7 +13,7 @@ const manager: MochiFrontEndPlugin<IConnectorManager> = {
  */
 function activateManager(app: MochiFrontEnd): IConnectorManager {
   const manager = app.serviceManager;
-  const registry = app.databaseRegistry;
+  const registry = app.connectorRegistry;
   return new ConnectorManager({ manager, registry });
 }
 

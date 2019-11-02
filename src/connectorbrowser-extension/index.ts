@@ -13,20 +13,20 @@ namespace CommandIDs {
  * The default database browser extension.
  */
 const browser: MochiFrontEndPlugin<void> = {
-  activate: activateDatabaseBrowser,
   id: '@mochi/databasebrowser-extension:browser',
   requires: [IDatabaseBrowserFactory, IMochiShell],
   autoStart: true,
+  activate: activateDatabaseBrowser,
 };
 
 /**
  * The default factory browser provider.
  */
 const factory: MochiFrontEndPlugin<IDatabaseBrowserFactory> = {
-  activate: activateDatabaseBrowserFactory,
   id: '@mochi/databasebrowser-extension:factory',
   provides: IDatabaseBrowserFactory,
   requires: [IStateDB, IConnectorManager],
+  activate: activateDatabaseBrowserFactory,
 };
 
 /**
@@ -69,5 +69,5 @@ function addCommands(app: MochiFrontEnd, factory: IDatabaseBrowserFactory, shell
   });
 }
 
-const plugins: Array<MochiFrontEndPlugin<any>> = [browser, factory];
+const plugins: MochiFrontEndPlugin<any>[] = [browser, factory];
 export default plugins;

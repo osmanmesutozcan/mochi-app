@@ -1,7 +1,7 @@
 import { Token } from '@phosphor/coreutils';
 import { DisposableSet, IDisposable } from '@phosphor/disposable';
 
-import { IDataConnector } from './interfaces';
+import { IDataSourceConnector } from './interfaces';
 import { ConnectorRegistry } from '@mochi/connectorregistry';
 
 export class ConnectorManager implements Connectors.IManager {
@@ -9,7 +9,7 @@ export class ConnectorManager implements Connectors.IManager {
     this.registry = options.registry;
   }
 
-  async startNew(id: Token<IDataConnector>): Promise<void> {
+  async startNew(id: Token<IDataSourceConnector>): Promise<void> {
     throw new Error('Not implemented');
   }
 
@@ -26,11 +26,11 @@ export class ConnectorManager implements Connectors.IManager {
   }
 
   /**
-   * A connector registry instance.
+   * A connectorRegistry registry instance.
    */
   readonly registry: ConnectorRegistry;
 
-  private readonly _connectors = new Set<IDataConnector>();
+  private readonly _connectors = new Set<IDataSourceConnector>();
   private readonly _disposables = new DisposableSet();
   private _isDisposed = false;
 }
@@ -50,9 +50,9 @@ export namespace ConnectorManager {
 export namespace Connectors {
   export interface IManager extends IDisposable {
     /**
-     * Start a registered connector by its id.
+     * Start a registered connectorRegistry by its id.
      */
-    startNew(id: Token<IDataConnector>): Promise<void>;
+    startNew(id: Token<IDataSourceConnector>): Promise<void>;
 
     /**
      * A database registry instance.

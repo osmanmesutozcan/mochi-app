@@ -1,9 +1,9 @@
 import { IDisposable } from '@phosphor/disposable';
 
 /**
- * Definition of a general purpose database connector.
+ * Definition of a general purpose data source connectorRegistry.
  */
-export interface IDataConnector extends IDisposable {
+export interface IDataSourceConnector extends IDisposable {
 
   query(query: string, params?: IQueryParams): Promise<IQueryResult>;
 
@@ -21,7 +21,7 @@ export interface IQueryParams {
 }
 
 /**
- * Database query result returned from the connector.
+ * Database query result returned from the connectorRegistry.
  */
 export interface IQueryResult {
   //

@@ -25,12 +25,12 @@ export abstract class MochiFrontEnd<T extends MochiFrontEnd.IShell = MochiFrontE
   protected constructor(options: MochiFrontEnd.IOptions<T>) {
     super(options);
 
-    const registry  = (this.databaseRegistry = new ConnectorRegistry());
+    const registry  = (this.connectorRegistry = new ConnectorRegistry());
     this.serviceManager = options.serviceManager || new ServiceManager({ registry });
   }
 
   readonly serviceManager: ServiceManager;
-  readonly databaseRegistry: ConnectorRegistry;
+  readonly connectorRegistry: ConnectorRegistry;
 }
 
 /**

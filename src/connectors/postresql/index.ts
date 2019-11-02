@@ -1,8 +1,8 @@
 import * as PG from '@mochi/pg';
 
-import { DataConnector, IDataIntrospection, IQueryParams, IQueryResult } from '@mochi/services';
+import { DataSourceConnector, IDataIntrospection, IQueryParams, IQueryResult } from '@mochi/services';
 
-export class PostgreSQLConnector extends DataConnector {
+export class PostgreSQLConnector extends DataSourceConnector {
   async introspect(): Promise<IDataIntrospection> {
     throw new Error('Not implemented');
   }

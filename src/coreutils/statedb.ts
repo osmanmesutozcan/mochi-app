@@ -263,7 +263,7 @@ export namespace StateDB {
    */
   export interface IOptions {
     /**
-     * Optional string key/value connector. Defaults to in-memory connector.
+     * Optional string key/value connectorRegistry. Defaults to in-memory connectorRegistry.
      */
     connector?: IDataConnector<string>;
 
@@ -276,18 +276,18 @@ export namespace StateDB {
   }
 
   /**
-   * An in-memory string key/value data connector.
+   * An in-memory string key/value data connectorRegistry.
    */
   export class Connector implements IDataConnector<string> {
     /**
-     * Retrieve an item from the data connector.
+     * Retrieve an item from the data connectorRegistry.
      */
     async fetch(id: string): Promise<string> {
       return this._storage[id];
     }
 
     /**
-     * Retrieve the list of items available from the data connector.
+     * Retrieve the list of items available from the data connectorRegistry.
      */
     async list(query = ''): Promise<{ ids: string[]; values: string[] }> {
       return Object.keys(this._storage).reduce(
@@ -303,14 +303,14 @@ export namespace StateDB {
     }
 
     /**
-     * Remove a value using the data connector.
+     * Remove a value using the data connectorRegistry.
      */
     async remove(id: string): Promise<void> {
       delete this._storage[id];
     }
 
     /**
-     * Save a value using the data connector.
+     * Save a value using the data connectorRegistry.
      */
     async save(id: string, value: string): Promise<void> {
       this._storage[id] = value;
