@@ -3,6 +3,7 @@ import { PanelLayout, Widget } from '@phosphor/widgets';
 import { Dialog, showDialog, Toolbar, ToolbarButton } from '@mochi/apputils';
 
 import { DatabaseBrowserModel } from './model';
+import { Tree } from './tree';
 
 /**
  * The class name added to DatabaseBrowser instances.
@@ -26,6 +27,8 @@ export class DatabaseBrowser extends Widget {
     this.toolbar = new Toolbar<Widget>();
     this.toolbar.addClass(TOOLBAR_CLASS);
 
+    this.tree = new Tree();
+
     const newConnection = new ToolbarButton({
       iconClassName: 'm-AddIcon',
       tooltip: 'New Connection',
@@ -36,6 +39,7 @@ export class DatabaseBrowser extends Widget {
 
     const layout = new PanelLayout();
     layout.addWidget(this.toolbar);
+    layout.addWidget(this.tree);
 
     this.layout = layout;
   }
@@ -51,6 +55,8 @@ export class DatabaseBrowser extends Widget {
   }
 
   readonly toolbar: Toolbar<Widget>;
+
+  readonly tree: Tree;
 
   readonly model: DatabaseBrowserModel;
 }
