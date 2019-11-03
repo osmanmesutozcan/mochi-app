@@ -64,7 +64,7 @@ export class ConnectorRegistry implements IDisposable {
   }
 
   /**
-   * A signal emitted when the registry has changed.
+   * A signal emitted when the registry has definitionsChanged.
    */
   get changed(): ISignal<this, ConnectorRegistry.IChangedArgs> {
     return this._changed;
@@ -102,12 +102,12 @@ export namespace ConnectorRegistry {
 
   export interface IChangedArgs {
     /**
-     * Type of the changed item.
+     * Type of the definitionsChanged item.
      */
     readonly type: 'connectorFactory';
 
     /**
-     * Type name of the connector being changed.
+     * Type name of the connector being definitionsChanged.
      */
     readonly name: string;
 

@@ -295,7 +295,7 @@ export namespace ISettingRegistry {
    */
   export interface ISettings extends IDisposable {
     /**
-     * A signal that emits when the plugin's settings have changed.
+     * A signal that emits when the plugin's settings have definitionsChanged.
      */
     readonly changed: ISignal<this, void>;
 

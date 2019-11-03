@@ -640,7 +640,7 @@ export class Settings implements ISettingRegistry.ISettings {
   readonly registry: ISettingRegistry;
 
   /**
-   * A signal that emits when the plugin's settings have changed.
+   * A signal that emits when the plugin's settings have definitionsChanged.
    */
   get changed(): ISignal<this, void> {
     return this._changed;

@@ -14,17 +14,17 @@ import { ISignal } from '@phosphor/signaling';
  */
 export interface IChangedArgs<T, U extends string = string> {
   /**
-   * The name of the changed attribute.
+   * The name of the definitionsChanged attribute.
    */
   name: U;
 
   /**
-   * The old value of the changed attribute.
+   * The old value of the definitionsChanged attribute.
    */
   oldValue: T;
 
   /**
-   * The new value of the changed attribute.
+   * The new value of the definitionsChanged attribute.
    */
   newValue: T;
 }

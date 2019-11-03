@@ -1,9 +1,4 @@
 /*-----------------------------------------------------------------------------
-| Copyright (c) Jupyter Development Team.
-| Distributed under the terms of the Modified BSD License.
-|----------------------------------------------------------------------------*/
-
-/*-----------------------------------------------------------------------------
 | Variables
 |----------------------------------------------------------------------------*/
 
@@ -11,11 +6,6 @@
   --jp-private-filebrowser-button-height: 28px;
   --jp-private-filebrowser-button-width: 48px;
 }
-
-/*-----------------------------------------------------------------------------
-| Copyright (c) Jupyter Development Team.
-| Distributed under the terms of the Modified BSD License.
-|----------------------------------------------------------------------------*/
 
 .m-DatabaseBrowser {
   display: flex;
@@ -25,4 +15,31 @@
   /* This is needed so that all font sizing of children done in ems is
    * relative to this base size */
   font-size: var(--jp-ui-font-size1);
+}
+
+.m-DatabaseBrowser-toolbar.m-Toolbar {
+  border-bottom: none;
+  height: auto;
+  margin: var(--jp-toolbar-header-margin);
+  box-shadow: none;
+}
+
+/*-----------------------------------------------------------------------------
+| Buttons
+|----------------------------------------------------------------------------*/
+
+.m-DatabaseBrowser-toolbar.m-Toolbar {
+  padding: 0;
+}
+
+.m-DatabaseBrowser-toolbar.m-Toolbar {
+  justify-content: space-evenly;
+}
+
+.m-DatabaseBrowser-toolbar.m-Toolbar .m-Toolbar-item {
+  flex: 1;
+}
+
+.m-DatabaseBrowser-toolbar.m-Toolbar .m-ToolbarButtonComponent {
+  width: 100%;
 }

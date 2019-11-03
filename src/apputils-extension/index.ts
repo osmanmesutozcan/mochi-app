@@ -28,7 +28,7 @@ const state: MochiFrontEndPlugin<IStateDB> = {
   activate: app => {
     const db = new StateDB();
     // tslint:disable-next-line:no-console
-    db.changed.connect(() => console.log('DB State changed', db.toJSON()));
+    db.changed.connect(() => console.log('DB State definitionsChanged', db.toJSON()));
     return db;
   },
 };

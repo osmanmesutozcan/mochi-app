@@ -1,8 +1,11 @@
-import { DisposableDelegate, IDisposable } from '@phosphor/disposable';
+import { IDisposable } from '@phosphor/disposable';
+import { IIterator } from '@phosphor/algorithm';
+import { ISignal } from '@phosphor/signaling';
 import { Token } from '@phosphor/coreutils';
 
 import { DataSourceConnector, ServiceManager } from '@mochi/services';
-import { IIterator } from '@phosphor/algorithm';
+
+import { ConnectorManager } from './manager';
 
 export const IConnectorManager = new Token<IConnectorManager>('@mochi/connectormanager:IConnectorManager');
 
@@ -16,6 +19,11 @@ export interface IConnectorManager extends IDisposable {
    * An iterable of all connection definitions.
    */
   definitions: IIterator<IConnectionDefinition>;
+
+  /**
+   * A signal emitted when manager state change.
+   */
+  definitionsChanged: ISignal<IConnectorManager, ConnectorManager.IChangedArgs>;
 
   /**
    * Define a new connection and save connection information

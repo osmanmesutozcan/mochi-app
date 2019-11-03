@@ -230,7 +230,7 @@ export namespace StateDB {
    */
   export type Change = {
     /**
-     * The key of the database item that was changed.
+     * The key of the database item that was definitionsChanged.
      *
      * #### Notes
      * This field is set to `null` for global changes (i.e. `clear`).

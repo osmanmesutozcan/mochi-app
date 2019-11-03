@@ -65,7 +65,7 @@ export namespace IMochiShell {
   export type Area = 'main' | 'header' | 'top' | 'left' | 'right' | 'bottom';
 
   /**
-   * An arguments object for the changed signals.
+   * An arguments object for the definitionsChanged signals.
    */
   export type IChangedArgs = FocusTracker.IChangedArgs<Widget>;
 }
@@ -161,7 +161,7 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
     // Connect main layout change listener.
     this._dockPanel.layoutModified.connect(this._onLayoutModified, this);
 
-    // Catch current changed events on the side handlers.
+    // Catch current definitionsChanged events on the side handlers.
     this._leftHandler.sideBar.currentChanged.connect(this._onLayoutModified, this);
     this._rightHandler.sideBar.currentChanged.connect(this._onLayoutModified, this);
   }

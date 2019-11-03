@@ -1,4 +1,4 @@
-import { Signal } from '@phosphor/signaling';
+import { ISignal, Signal } from '@phosphor/signaling';
 import { ArrayIterator, IIterator, findIndex } from '@phosphor/algorithm';
 
 import { ServiceManager } from '@mochi/services';
@@ -33,7 +33,7 @@ export class ConnectorManager implements IConnectorManager {
     }
 
     this._definitions.push(definition);
-    this._changed.emit({ type: 'connectionDefinition', change: 'added' });
+    this._definitionsChanged.emit({ type: 'connectionDefinition', change: 'added' });
   }
 
   /**
@@ -48,7 +48,7 @@ export class ConnectorManager implements IConnectorManager {
     }
 
     this._definitions.splice(indexToRemove, 1);
-    this._changed.emit({ type: 'connectionDefinition', change: 'removed'});
+    this._definitionsChanged.emit({ type: 'connectionDefinition', change: 'removed'});
   }
 
   /**
@@ -65,6 +65,13 @@ export class ConnectorManager implements IConnectorManager {
    */
   get definitions(): IIterator<IConnectionDefinition> {
     return new ArrayIterator(this._definitions);
+  }
+
+  /**
+   * A signal emitted when manager definitionsChanged.
+   */
+  get definitionsChanged(): ISignal<this, ConnectorManager.IChangedArgs> {
+    return this._definitionsChanged;
   }
 
   /**
@@ -96,7 +103,7 @@ export class ConnectorManager implements IConnectorManager {
   readonly registry: ConnectorRegistry;
 
   private _isDisposed = false;
-  private _changed = new Signal<this, ConnectorManager.IChangedArgs>(this);
+  private _definitionsChanged = new Signal<this, ConnectorManager.IChangedArgs>(this);
   private _definitions: IConnectionDefinition[] = [];
 }
 
