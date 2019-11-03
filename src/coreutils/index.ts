@@ -6,3 +6,4 @@ export * from './interfaces';
 export * from './ratelimiter';
 export * from './poll';
 export * from './text';
+export * from './restorablepool';

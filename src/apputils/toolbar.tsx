@@ -333,7 +333,7 @@ export namespace ToolbarButtonComponent {
     iconClassName?: string;
     iconLabel?: string;
     tooltip?: string;
-    onClick?: () => void;
+    onClick?: () => void | Promise<void>;
     enabled?: boolean;
   }
 }

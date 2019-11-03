@@ -1,6 +1,6 @@
 import { PanelLayout, Widget } from '@phosphor/widgets';
 
-import { Toolbar, ToolbarButton } from '@mochi/apputils';
+import { Dialog, showDialog, Toolbar, ToolbarButton } from '@mochi/apputils';
 
 import { DatabaseBrowserModel } from './model';
 
@@ -28,8 +28,8 @@ export class DatabaseBrowser extends Widget {
 
     const newConnection = new ToolbarButton({
       iconClassName: 'm-AddIcon',
-      onClick: () => console.log('new'),
       tooltip: 'New Connection',
+      onClick: () => this._onNewConnection(),
     });
 
     this.toolbar.addItem('newConnection', newConnection);
@@ -38,6 +38,16 @@ export class DatabaseBrowser extends Widget {
     layout.addWidget(this.toolbar);
 
     this.layout = layout;
+  }
+
+  private async _onNewConnection() {
+    const result = await showDialog({
+      title: 'Add New Connection',
+      body: 'We cannot process this action at the moment',
+      buttons: [Dialog.okButton(), Dialog.cancelButton()],
+    });
+
+    console.log(result);
   }
 
   readonly toolbar: Toolbar<Widget>;
