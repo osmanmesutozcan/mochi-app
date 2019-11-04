@@ -8,12 +8,25 @@ import { PostgreSQLConnector } from './postresql';
 const postgresql: ConnectorRegistry.IConnector = {
   type: {
     name: 'postgresql',
-    displayName: 'Postgresql',
+    displayName: 'PostgreSQL',
   },
   factory: {
     create: options => new PostgreSQLConnector(options),
   },
 };
 
-const connectors: ConnectorRegistry.IConnector[] = [postgresql];
+/**
+ * Placeholder.
+ */
+const mysql: ConnectorRegistry.IConnector = {
+  type: {
+    name: 'mysql',
+    displayName: 'MySQL',
+  },
+  factory: {
+    create: options => new PostgreSQLConnector(options),
+  },
+};
+
+const connectors: ConnectorRegistry.IConnector[] = [postgresql, mysql];
 export default connectors;

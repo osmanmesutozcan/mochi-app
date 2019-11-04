@@ -66,5 +66,5 @@ export interface IConnectionDefinition {
   /**
    * Options to pass to when initalizing the connection.
    */
-  connectionOptions: DataSourceConnector.IOptions;
+  options: DataSourceConnector.IOptions;
 }

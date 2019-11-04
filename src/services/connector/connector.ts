@@ -66,20 +66,11 @@ export namespace DataSourceConnector {
    * Database connectorRegistry options.
    */
   export interface IOptions {
-    /**
-     * Connection options for underlying database driver.
-     */
-    connectionOptions: IConnectionOptions;
-  }
-
-  /**
-   * Database connection options.
-   */
-  export interface IConnectionOptions {
     user?: string;
     password?: string;
     hostname?: string;
     port?: string;
+    database?: string;
     connectionString?: string;
   }
 }

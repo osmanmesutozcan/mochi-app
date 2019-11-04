@@ -4,7 +4,7 @@ import { Dialog, ReactWidget } from '@mochi/apputils';
 import { FormGroup, InputGroup, Tabs } from '@mochi/ui-components';
 
 import { DatabaseBrowserModel } from './model';
-import { map, toArray } from '@phosphor/algorithm';
+import { toArray } from '@phosphor/algorithm';
 
 export class NewConnectionDialogBody extends ReactWidget implements Dialog.IBodyWidget<BrowserDialog.INewConnection> {
   constructor(private readonly options: NewConnectionDialogBody.IOptions) {
@@ -32,6 +32,8 @@ export class NewConnectionDialogBody extends ReactWidget implements Dialog.IBody
     user: '',
     password: '',
     database: '',
+    hostname: '',
+    port: '',
   };
 }
 
@@ -69,6 +71,21 @@ class NewConnectionDialog extends React.Component<NewConnectionDialog.IProps> {
           type='text'
           fill={true}
           onChange={e => this.props.onUpdate('database', e.target.value)}
+        />
+      </FormGroup>
+
+      <FormGroup label='Hostname:' inline={true}>
+        <InputGroup
+          type='text'
+          fill={true}
+          onChange={e => this.props.onUpdate('hostname', e.target.value)}
+        />
+      </FormGroup>
+      <FormGroup label='Port:' inline={true}>
+        <InputGroup
+          type='number'
+          fill={true}
+          onChange={e => this.props.onUpdate('port', e.target.value)}
         />
       </FormGroup>
     </React.Fragment>
@@ -145,5 +162,7 @@ export namespace BrowserDialog {
     user: string;
     password: string;
     database: string;
+    hostname: string;
+    port: string;
   }
 }

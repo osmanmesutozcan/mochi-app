@@ -5,6 +5,7 @@ import { Dialog, showDialog, Toolbar, ToolbarButton } from '@mochi/apputils';
 import { DatabaseBrowserModel } from './model';
 import { NewConnectionDialogBody } from './dialog';
 import { Tree } from './tree';
+import { UUID } from '@phosphor/coreutils';
 
 /**
  * The class name added to DatabaseBrowser instances.
@@ -30,7 +31,7 @@ export class DatabaseBrowser extends Widget {
     this.toolbar = new Toolbar<Widget>();
     this.toolbar.addClass(TOOLBAR_CLASS);
 
-    this.tree = new Tree();
+    this.tree = new Tree({ model: this.model });
 
     const newConnection = new ToolbarButton({
       iconClassName: 'm-AddIcon',
@@ -53,6 +54,24 @@ export class DatabaseBrowser extends Widget {
       title: 'Add New Connection',
       body: new NewConnectionDialogBody({ model: this.model }),
       buttons: [Dialog.okButton(), Dialog.cancelButton()],
+    });
+
+    if (!result.value) {
+      return;
+    }
+
+    this.model.manager.defineConnection({
+      name: UUID.uuid4(),
+      displayName: result.value.name,
+      connectorTypeName: result.value.type,
+      options: {
+        user: result.value.user,
+        password: result.value.password,
+        hostname: result.value.hostname,
+        port: result.value.port,
+        database: result.value.database,
+        connectionString: '',
+      },
     });
   }
 
