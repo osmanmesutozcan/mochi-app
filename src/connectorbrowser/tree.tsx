@@ -28,6 +28,7 @@ export class Tree extends ReactWidget {
             onNodeCollapse={node => this._model.collapseNode(node)}
             onNodeClick={node => this._model.clickNode(node)}
             onNodeDoubleClick={node => this._model.doubleClickNode(node)}
+            onNodeContextMenu={console.log}
           />
         )}
       </UseSignal>
