@@ -2,11 +2,17 @@ import './index.css';
 
 import { IStateDB } from '@mochi/coreutils';
 import { IMochiShell, MochiFrontEnd, MochiFrontEndPlugin } from '@mochi/application';
-import { DatabaseBrowser, IDatabaseBrowserFactory, DatabaseBrowserModel } from '@mochi/connectorbrowser';
+import {
+  DatabaseBrowser,
+  IDatabaseBrowserFactory,
+  DatabaseBrowserModel,
+} from '@mochi/connectorbrowser';
+
 import { IConnectorManager } from '@mochi/connectormanager/tokens';
 
 namespace CommandIDs {
   export const SHOW_BROWSER = 'databasebrowser:show';
+  export const NEW_CONNECTION = 'databasebrowser:new-connection';
 }
 
 /**
@@ -62,11 +68,10 @@ function addCommands(app: MochiFrontEnd, factory: IDatabaseBrowserFactory, shell
   const { commands } = app;
   const browser = factory.defaultDatabaseBrowser;
 
-  commands.addCommand(CommandIDs.SHOW_BROWSER, {
-    execute: args => {
-      shell.activateById(browser.id);
-    },
-  });
+  commands.addCommand(CommandIDs.SHOW_BROWSER, { execute: args => {shell.activateById(browser.id); } });
+
+  commands.addCommand(CommandIDs.NEW_CONNECTION, { execute: async args => {await browser.newConnection(); } });
+  commands.addKeyBinding({ command: CommandIDs.NEW_CONNECTION, selector: 'body', keys: ['Accel N'] });
 }
 
 const plugins: MochiFrontEndPlugin<any>[] = [browser, factory];

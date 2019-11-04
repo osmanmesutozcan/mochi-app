@@ -35,7 +35,7 @@ export class DatabaseBrowser extends Widget {
     const newConnection = new ToolbarButton({
       iconClassName: 'm-AddIcon',
       tooltip: 'New Connection',
-      onClick: () => this._onNewConnection(),
+      onClick: () => this.newConnection(),
     });
 
     this.toolbar.addItem('newConnection', newConnection);
@@ -47,7 +47,7 @@ export class DatabaseBrowser extends Widget {
     this.layout = layout;
   }
 
-  private async _onNewConnection() {
+  async newConnection() {
     const result = await showDialog({
       title: 'Add New Connection',
       body: new NewConnectionDialogBody({ model: this.model }),

@@ -11,8 +11,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -26,7 +26,8 @@
   margin-left: auto;
   margin-right: auto;
   background: var(--jp-layout-color1);
-  padding: 24px 24px 12px;
+  padding: 24px;
+  padding-bottom: 12px;
   min-width: 300px;
   min-height: 150px;
   box-sizing: border-box;
@@ -44,7 +45,9 @@
 }
 
 button.m-Dialog-button:focus {
-  outline: none;
+  outline: 1px solid var(--jp-brand-color1);
+  outline-offset: 2px;
+  -moz-outline-radius: 2px;
 }
 
 button.m-Dialog-button:focus::-moz-focus-inner {
