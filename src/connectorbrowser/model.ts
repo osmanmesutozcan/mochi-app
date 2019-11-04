@@ -115,6 +115,15 @@ export class DatabaseBrowserModel implements IDisposable {
   }
 
   /**
+   * Handle click event on a tree node.
+   */
+  clickNode(node: ITreeNode<string>): void {
+    Private.forEachNode(this.mock, node1 => (node1.isSelected = false));
+    node.isSelected = true;
+    this._changed.emit(void 0);
+  }
+
+  /**
    * Handle double click event on a node.
    *
    * ### Note
@@ -171,4 +180,23 @@ export namespace DatabaseBrowserModel {
      */
     registry: ConnectorRegistry;
   }
+}
+
+/**
+ * Module private statics.
+ */
+namespace Private {
+  /**
+   * Run a callback function for each node.
+   */
+  export const forEachNode = (nodes: ITreeNode[], callback: (node: ITreeNode) => void) => {
+    if (nodes == null) {
+      return;
+    }
+
+    for (const node of nodes) {
+      callback(node);
+      forEachNode(node.childNodes, callback);
+    }
+  };
 }

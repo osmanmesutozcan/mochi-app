@@ -26,6 +26,7 @@ export class Tree extends ReactWidget {
             className={TREE_NODE_CLASS}
             onNodeExpand={node => this._model.expandNode(node)}
             onNodeCollapse={node => this._model.collapseNode(node)}
+            onNodeClick={node => this._model.clickNode(node)}
             onNodeDoubleClick={node => this._model.doubleClickNode(node)}
           />
         )}
