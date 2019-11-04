@@ -69,6 +69,7 @@ function addCommands(app: MochiFrontEnd, factory: IDatabaseBrowserFactory, shell
   const browser = factory.defaultDatabaseBrowser;
 
   commands.addCommand(CommandIDs.SHOW_BROWSER, { execute: args => {shell.activateById(browser.id); } });
+  commands.addKeyBinding({ command: CommandIDs.SHOW_BROWSER, selector: 'body', keys: ['Accel E'] });
 
   commands.addCommand(CommandIDs.NEW_CONNECTION, { execute: async args => {await browser.newConnection(); } });
   commands.addKeyBinding({ command: CommandIDs.NEW_CONNECTION, selector: 'body', keys: ['Accel N'] });

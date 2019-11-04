@@ -47,6 +47,7 @@ export class DatabaseBrowser extends Widget {
     this.layout = layout;
   }
 
+  // TODO: This should be in the model layer not view!
   async newConnection() {
     const result = await showDialog({
       title: 'Add New Connection',

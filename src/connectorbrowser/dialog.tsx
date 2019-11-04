@@ -44,16 +44,69 @@ export namespace NewConnectionDialogBody {
  * Body of new connection dialog.
  */
 class NewConnectionDialog extends React.Component<NewConnectionDialog.IProps> {
+  private _general = (
+    <React.Fragment>
+      <FormGroup label='User:' inline={true}>
+        <InputGroup
+          type='text'
+          fill={true}
+          onChange={e => this.props.onUpdate('user', e.target.value)}
+        />
+      </FormGroup>
+
+      <FormGroup label='Password:' inline={true}>
+        <InputGroup
+          type='text'
+          fill={true}
+          placeholder='<hidden>'
+          onChange={e => this.props.onUpdate('password', e.target.value)}
+        />
+      </FormGroup>
+
+      <FormGroup label='Database:' inline={true}>
+        <InputGroup
+          type='text'
+          fill={true}
+          onChange={e => this.props.onUpdate('database', e.target.value)}
+        />
+      </FormGroup>
+    </React.Fragment>
+  );
+
+  private _SSL = (
+    <React.Fragment>
+      SSL
+    </React.Fragment>
+  );
+
+  private _categories: Tabs.ITab[] = [
+    {
+      tabId: 'general',
+      title: 'General',
+      panel: this._general,
+    },
+    {
+      tabId: 'ssl',
+      title: 'SSL',
+      panel: this._SSL,
+    },
+  ];
+
   private _panel = (
     <div className='m-NewConnectionDialog-panel'>
-      <FormGroup label='Settings'>
-        <InputGroup type='text' fill={true} placeholder='Name' onChange={e => this.props.onUpdate('name', e.target.value)} />
+      <FormGroup label='Name:' inline={true}>
+        <InputGroup
+          type='text'
+          fill={true}
+          onChange={e => this.props.onUpdate('name', e.target.value)}
+        />
       </FormGroup>
-      <FormGroup label='Auth'>
-        <InputGroup type='text' fill={true} placeholder='User' onChange={e => this.props.onUpdate('user', e.target.value)} />
-        <InputGroup type='text' fill={true} placeholder='Password' onChange={e => this.props.onUpdate('password', e.target.value)} />
-        <InputGroup type='text' fill={true} placeholder='Database' onChange={e => this.props.onUpdate('database', e.target.value)} />
-      </FormGroup>
+
+      <Tabs
+        id='m-newconnection-dialog-categories'
+        onChange={() => ({})}
+        tabs={this._categories}
+      />
     </div>
   );
 
@@ -86,12 +139,14 @@ class NewConnectionDialog extends React.Component<NewConnectionDialog.IProps> {
   ];
 
   public render() {
-    return <Tabs
-      vertical={true}
-      id='m-newconnection-dialog'
-      onChange={(id: string) => this.props.onUpdate('type', id)}
-      tabs={this._tabs}
-    />;
+    return (
+      <Tabs
+        id='m-newconnection-dialog'
+        vertical={true}
+        onChange={(id: string) => this.props.onUpdate('type', id)}
+        tabs={this._tabs}
+      />
+    );
   }
 }
 

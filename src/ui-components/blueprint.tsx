@@ -45,12 +45,12 @@ export const Button = (props: IButtonProps & CommonProps<any>) => (
 );
 
 export const FormGroup: React.FC<IBPFormGroupProps> = props => {
-  return <BPFormGroup {...props}>{props.children}</BPFormGroup>;
+  return <BPFormGroup {...props} className={combineClasses(props.className, 'm-FormGroup')}>{props.children}</BPFormGroup>;
 };
 
 export const Tabs: React.FC<IBPTabsProps & Tabs.IProps> = props => {
   return (
-    <IBPTabs {...props}>
+    <IBPTabs {...props} className={combineClasses(props.className, 'm-Tabs')}>
       {props.tabs.map(value => (
         <IBPTab key={value.tabId} id={value.tabId} title={value.title} panel={value.panel} />
       ))}

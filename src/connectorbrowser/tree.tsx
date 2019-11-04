@@ -1,16 +1,10 @@
 import * as React from 'react';
 
-import { findIndex } from '@phosphor/algorithm';
 import { IDisposable } from '@phosphor/disposable';
 import { ISignal, Signal } from '@phosphor/signaling';
 import { ITreeNode, Tree as BPTree } from '@blueprintjs/core';
 
 import { ReactWidget, UseSignal } from '@mochi/apputils';
-
-/**
- * Class name to append to tree component.
- */
-const TREE_CLASS = 'm-Tree';
 
 /**
  * Class name to append to all tree child elements.
