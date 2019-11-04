@@ -20,45 +20,56 @@ const TREE_NODE_CLASS = 'm-TreeNode';
 const mock: ITreeNode<string>[] = [
   {
     id: 0,
-    hasCaret: true,
     label: 'Local',
     className: TREE_NODE_CLASS,
     icon: 'database',
     childNodes: [
       {
         id: 3,
-        hasCaret: false,
-        label: 'users',
+        label: 'schemas',
         className: TREE_NODE_CLASS,
+        childNodes: [
+          {
+            id: 6,
+            label: 'users',
+            className: TREE_NODE_CLASS,
+          },
+          {
+            id: 7,
+            label: 'users',
+            className: TREE_NODE_CLASS,
+          },
+          {
+            id: 8,
+            label: 'users',
+            className: TREE_NODE_CLASS,
+          },
+        ],
       },
     ],
   },
   {
     id: 1,
-    hasCaret: true,
     label: 'Staging',
     icon: 'database',
     className: TREE_NODE_CLASS,
     childNodes: [
       {
         id: 4,
-        hasCaret: false,
         className: TREE_NODE_CLASS,
-        label: 'users',
+        label: 'schemas',
       },
     ],
   },
   {
     id: 2,
-    hasCaret: true,
     label: 'Prod',
     className: TREE_NODE_CLASS,
     icon: 'database',
     childNodes: [
       {
         id: 5,
-        hasCaret: false,
-        label: 'users',
+        label: 'schemas',
         className: TREE_NODE_CLASS,
       },
     ],
@@ -74,14 +85,14 @@ export class Tree extends ReactWidget {
   render() {
     return (
       <UseSignal signal={this._model.changed}>
-        {
-          () => <BPTree
+        {() => (
+          <BPTree
             contents={mock}
             className={TREE_NODE_CLASS}
-            onNodeExpand={({id}) => this._model.expandNode(id)}
-            onNodeCollapse={({id}) => this._model.collapseNode(id)}
+            onNodeExpand={node => this._model.expandNode(node)}
+            onNodeCollapse={node => this._model.collapseNode(node)}
           />
-        }
+        )}
       </UseSignal>
     );
   }
@@ -90,25 +101,23 @@ export class Tree extends ReactWidget {
 }
 
 export namespace Tree {
+  /**
+   * Model for database tree.
+   */
   export class Model implements IDisposable {
-
-    expandNode(id: string | number): void {
-      const idx = findIndex(this.data, n => n.id === id);
-      const node = this.data[idx];
-
+    /**
+     * Expand a node in the tree
+     */
+    expandNode(node: ITreeNode<string>): void {
       node.isExpanded = true;
-      this.data[idx] = node;
-
       this._changed.emit(void 0);
     }
 
-    collapseNode(id: string | number): void {
-      const idx = findIndex(this.data, n => n.id === id);
-      const node = this.data[idx];
-
+    /**
+     * Collapse a node in the tree.
+     */
+    collapseNode(node: ITreeNode<string>): void {
       node.isExpanded = false;
-      this.data[idx] = node;
-
       this._changed.emit(void 0);
     }
 

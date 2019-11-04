@@ -201,7 +201,7 @@ class InputDialogBase<T> extends Widget implements Dialog.IBodyWidget<T> {
 /**
  * Widget body for input boolean dialog
  */
-class InputBooleanDialog extends InputDialogBase<boolean> {
+export class InputBooleanDialog extends InputDialogBase<boolean> {
   /**
    * InputBooleanDialog constructor
    *
@@ -230,7 +230,7 @@ class InputBooleanDialog extends InputDialogBase<boolean> {
 /**
  * Widget body for input number dialog
  */
-class InputNumberDialog extends InputDialogBase<number> {
+export class InputNumberDialog extends InputDialogBase<number> {
   /**
    * InputNumberDialog constructor
    *
@@ -263,7 +263,7 @@ class InputNumberDialog extends InputDialogBase<number> {
 /**
  * Widget body for input text dialog
  */
-class InputTextDialog extends InputDialogBase<string> {
+export class InputTextDialog extends InputDialogBase<string> {
   /**
    * InputTextDialog constructor
    *
@@ -295,7 +295,7 @@ class InputTextDialog extends InputDialogBase<string> {
 /**
  * Widget body for input list dialog
  */
-class InputItemsDialog extends InputDialogBase<string> {
+export class InputItemsDialog extends InputDialogBase<string> {
   /**
    * InputItemsDialog constructor
    *
