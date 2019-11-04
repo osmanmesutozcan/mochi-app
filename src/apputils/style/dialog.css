@@ -26,12 +26,9 @@
   margin-left: auto;
   margin-right: auto;
   background: var(--jp-layout-color1);
-  padding: 24px;
-  padding-bottom: 12px;
+  padding: 24px 24px 12px;
   min-width: 300px;
   min-height: 150px;
-  max-width: 500px;
-  max-height: 500px;
   box-sizing: border-box;
   box-shadow: var(--jp-elevation-z20);
   word-wrap: break-word;
@@ -47,9 +44,7 @@
 }
 
 button.m-Dialog-button:focus {
-  outline: 1px solid var(--jp-brand-color1);
-  outline-offset: 4px;
-  -moz-outline-radius: 0px;
+  outline: none;
 }
 
 button.m-Dialog-button:focus::-moz-focus-inner {

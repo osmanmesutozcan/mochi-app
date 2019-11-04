@@ -1,12 +1,5 @@
-:root {
-  --jp-m-connection-dialog-width: 500px;
-}
-
-.m-NewConnectionDialog {
-  width: var(--jp-m-connection-dialog-width);
-}
-
 .m-NewConnectionDialog-panel {
+  width: 500px;
   height: 100%;
   margin-left: 20px;
 }

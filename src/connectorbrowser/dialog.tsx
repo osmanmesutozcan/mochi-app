@@ -30,6 +30,7 @@ export class NewConnectionDialogBody extends ReactWidget implements Dialog.IBody
     name: '',
     user: '',
     password: '',
+    database: '',
   };
 }
 
@@ -46,11 +47,12 @@ class NewConnectionDialog extends React.Component<NewConnectionDialog.IProps> {
   private _panel = (
     <div className='m-NewConnectionDialog-panel'>
       <FormGroup label='Settings'>
-        <InputGroup type='text' placeholder='Name' onChange={e => this.props.onUpdate('name', e.target.value)} />
+        <InputGroup type='text' fill={true} placeholder='Name' onChange={e => this.props.onUpdate('name', e.target.value)} />
       </FormGroup>
       <FormGroup label='Auth'>
-        <InputGroup type='text' placeholder='User' onChange={e => this.props.onUpdate('user', e.target.value)} />
-        <InputGroup type='text' placeholder='Password' onChange={e => this.props.onUpdate('password', e.target.value)} />
+        <InputGroup type='text' fill={true} placeholder='User' onChange={e => this.props.onUpdate('user', e.target.value)} />
+        <InputGroup type='text' fill={true} placeholder='Password' onChange={e => this.props.onUpdate('password', e.target.value)} />
+        <InputGroup type='text' fill={true} placeholder='Database' onChange={e => this.props.onUpdate('database', e.target.value)} />
       </FormGroup>
     </div>
   );
@@ -86,7 +88,6 @@ class NewConnectionDialog extends React.Component<NewConnectionDialog.IProps> {
   public render() {
     return <Tabs
       vertical={true}
-      className='m-NewConnectionDialog'
       id='m-newconnection-dialog'
       onChange={(id: string) => this.props.onUpdate('type', id)}
       tabs={this._tabs}
@@ -107,5 +108,6 @@ export namespace BrowserDialog {
     type: string;
     user: string;
     password: string;
+    database: string;
   }
 }
