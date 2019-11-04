@@ -85,9 +85,14 @@ export namespace ConnectorRegistry {
 
   export interface IConnectorType {
     /**
-     * human readable name of the connectorRegistry.
+     * unique name of the connector.
      */
     name: string;
+
+    /**
+     * human readable name of the connector.
+     */
+    displayName: string;
 
     // TODO:
     // icon?: something

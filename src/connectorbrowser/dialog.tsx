@@ -4,6 +4,7 @@ import { Dialog, ReactWidget } from '@mochi/apputils';
 import { FormGroup, InputGroup, Tabs } from '@mochi/ui-components';
 
 import { DatabaseBrowserModel } from './model';
+import { map, toArray } from '@phosphor/algorithm';
 
 export class NewConnectionDialogBody extends ReactWidget implements Dialog.IBodyWidget<BrowserDialog.INewConnection> {
   constructor(private readonly options: NewConnectionDialogBody.IOptions) {
@@ -110,33 +111,13 @@ class NewConnectionDialog extends React.Component<NewConnectionDialog.IProps> {
     </div>
   );
 
-  private _tabs: Tabs.ITab[] = [
-    {
-      tabId: 'msql',
-      title: 'Mysql',
+  private _tabs: Tabs.ITab[] = toArray(this.props.model.registry.getConnectorTypes()).map(type => {
+    return ({
+      tabId: type.name,
+      title: type.displayName,
       panel: this._panel,
-    },
-    {
-      tabId: 'pg',
-      title: 'Postgres',
-      panel: this._panel,
-    },
-    {
-      tabId: 'rds',
-      title: 'Redis',
-      panel: this._panel,
-    },
-    {
-      tabId: 'mongodb',
-      title: 'MongoDB',
-      panel: this._panel,
-    },
-    {
-      tabId: 'elastic',
-      title: 'ElasticSearch',
-      panel: this._panel,
-    },
-  ];
+    });
+  });
 
   public render() {
     return (

@@ -1,13 +1,15 @@
 import { IStateDB } from '../coreutils';
 import { ConnectorManager, IConnectorManager } from '@mochi/connectormanager';
 import { IDisposable } from '@phosphor/disposable';
+import { ConnectorRegistry } from '@mochi/connectorregistry';
 
 export class DatabaseBrowserModel implements IDisposable {
   constructor(options: DatabaseBrowserModel.IOptions) {
-    this._manager = options.manager;
-    this._state = options.state;
+    this.registry = options.registry;
+    this.manager = options.manager;
+    this.state = options.state;
 
-    this._manager.definitionsChanged.connect((sender, args) => {
+    this.manager.definitionsChanged.connect((sender, args) => {
       this._onConnectionDefinitionsChange(args);
     });
   }
@@ -37,8 +39,9 @@ export class DatabaseBrowserModel implements IDisposable {
     throw new Error('Not implemented');
   }
 
-  private readonly _manager: IConnectorManager;
-  private readonly _state: IStateDB;
+  readonly registry: ConnectorRegistry;
+  readonly manager: IConnectorManager;
+  readonly state: IStateDB;
 
   private _isDisposed = false;
 }
@@ -55,5 +58,10 @@ export namespace DatabaseBrowserModel {
      * A database manager instance.
      */
     manager: IConnectorManager;
+
+    /**
+     * A database connector registry.
+     */
+    registry: ConnectorRegistry;
   }
 }

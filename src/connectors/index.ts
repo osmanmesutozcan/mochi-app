@@ -8,6 +8,7 @@ import { PostgreSQLConnector } from './postresql';
 const postgresql: ConnectorRegistry.IConnector = {
   type: {
     name: 'postgresql',
+    displayName: 'Postgresql',
   },
   factory: {
     create: options => new PostgreSQLConnector(options),
