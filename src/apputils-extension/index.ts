@@ -26,9 +26,9 @@ const state: MochiFrontEndPlugin<IStateDB> = {
   autoStart: true,
   provides: IStateDB,
   activate: app => {
-    const db = new StateDB();
+    const db = new StateDB({ connector: new StateDB.StorageConnector() });
     // tslint:disable-next-line:no-console
-    db.changed.connect(() => console.log('DB State definitionsChanged', db.toJSON()));
+    db.changed.connect(async () => console.log('DB State changed', await db.toJSON()));
     return db;
   },
 };

@@ -3,7 +3,7 @@ import { MochiFrontEnd, MochiFrontEndPlugin } from '@mochi/application';
 import DefaultConnectors from '@mochi/connectors';
 
 /**
- * Connector extension which provides officially supported connectors.
+ * InMemoryConnector extension which provides officially supported connectors.
  */
 const connectors: MochiFrontEndPlugin<void> = {
   id: '@mochi/connectors-extension:connectors',

@@ -31,7 +31,7 @@ const browser: MochiFrontEndPlugin<void> = {
 const factory: MochiFrontEndPlugin<IDatabaseBrowserFactory> = {
   id: '@mochi/databasebrowser-extension:factory',
   provides: IDatabaseBrowserFactory,
-  requires: [IStateDB, IConnectorManager],
+  requires: [IConnectorManager],
   activate: activateDatabaseBrowserFactory,
 };
 
@@ -51,10 +51,10 @@ function activateDatabaseBrowser(app: MochiFrontEnd, factory: IDatabaseBrowserFa
 /**
  * Activate browser factory provider.
  */
-function activateDatabaseBrowserFactory(app: MochiFrontEnd, state: IStateDB, manager: IConnectorManager): IDatabaseBrowserFactory {
+function activateDatabaseBrowserFactory(app: MochiFrontEnd, manager: IConnectorManager): IDatabaseBrowserFactory {
   const createDatabaseBrowser = (id: string, options: IDatabaseBrowserFactory.IOptions = {}) => {
     const registry = app.connectorRegistry;
-    const model = new DatabaseBrowserModel({ state, manager, registry });
+    const model = new DatabaseBrowserModel({ manager, registry });
     return new DatabaseBrowser({ id, model });
   };
 

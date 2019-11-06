@@ -1,3 +1,4 @@
+import { JSONArray } from '@phosphor/coreutils';
 import { ISignal, Signal } from '@phosphor/signaling';
 import { ArrayIterator, IIterator, findIndex } from '@phosphor/algorithm';
 
@@ -5,6 +6,12 @@ import { ServiceManager } from '@mochi/services';
 import { ConnectorRegistry } from '@mochi/connectorregistry';
 
 import { IConnectionDefinition, IConnectorManager } from './tokens';
+import { IStateDB } from '@mochi/coreutils';
+
+/**
+ * Stat database key of connector manager.
+ */
+const CONNECTOR_MANAGER_STATE_KEY = 'connectormanager';
 
 /**
  * The database manager
@@ -21,6 +28,17 @@ export class ConnectorManager implements IConnectorManager {
   constructor(options: ConnectorManager.IOptions) {
     this.services = options.manager;
     this.registry = options.registry;
+    this.state = options.state;
+
+    this._restoreManager().then();
+
+    // FIXME: Maybe we should save the state before we emit the signal?
+    //  Because if state save goes wrong we will lose the definition on change. It could be better
+    //  to actually save first.
+    this._definitionsChanged.connect(() => {
+      // FIXME: Fix this cast
+      return this.state.save(CONNECTOR_MANAGER_STATE_KEY, (this._definitions as any) as JSONArray);
+    });
   }
 
   /**
@@ -48,7 +66,7 @@ export class ConnectorManager implements IConnectorManager {
     }
 
     this._definitions.splice(indexToRemove, 1);
-    this._definitionsChanged.emit({ type: 'connectionDefinition', change: 'removed'});
+    this._definitionsChanged.emit({ type: 'connectionDefinition', change: 'removed' });
   }
 
   /**
@@ -92,6 +110,15 @@ export class ConnectorManager implements IConnectorManager {
     Signal.clearData(this);
   }
 
+  private async _restoreManager(): Promise<void> {
+    const result = (await this.state.fetch(CONNECTOR_MANAGER_STATE_KEY)) as JSONArray;
+    if (result.length > 0) {
+      // FIXME: Fix this typecast...
+      this._definitions = (result as unknown) as IConnectionDefinition[];
+      this._definitionsChanged.emit({ type: 'connectionDefinition', change: 'added' });
+    }
+  }
+
   /**
    * The service manager used by the manager.
    */
@@ -101,6 +128,11 @@ export class ConnectorManager implements IConnectorManager {
    * The registry singleton used by the manager.
    */
   readonly registry: ConnectorRegistry;
+
+  /**
+   * State database used by the manager;
+   */
+  readonly state: IStateDB;
 
   private _isDisposed = false;
   private _definitionsChanged = new Signal<this, ConnectorManager.IChangedArgs>(this);
@@ -118,6 +150,11 @@ export namespace ConnectorManager {
      * The database registry singleton.
      */
     registry: ConnectorRegistry;
+
+    /**
+     * State database of the manager.
+     */
+    state: IStateDB;
   }
 
   export interface IChangedArgs {

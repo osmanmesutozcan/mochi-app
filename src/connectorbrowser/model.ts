@@ -1,80 +1,17 @@
-import { IStateDB } from '../coreutils';
-import { ConnectorManager, IConnectorManager } from '@mochi/connectormanager';
+import { ITreeNode } from '@blueprintjs/core';
 import { IDisposable } from '@phosphor/disposable';
 import { ISignal, Signal } from '@phosphor/signaling';
-import { ITreeNode } from '@blueprintjs/core';
+import { each } from '@phosphor/algorithm';
 
+import { ConnectorManager, IConnectionDefinition, IConnectorManager } from '@mochi/connectormanager';
 import { ConnectorRegistry } from '@mochi/connectorregistry';
 
 import { TREE_NODE_CLASS } from './tree';
-
-/**
- * Mock browser tree data.
- */
-const mock: ITreeNode<string>[] = [
-  {
-    id: 0,
-    label: 'Local',
-    className: TREE_NODE_CLASS,
-    icon: 'database',
-    childNodes: [
-      {
-        id: 3,
-        label: 'schemas',
-        className: TREE_NODE_CLASS,
-        childNodes: [
-          {
-            id: 6,
-            label: 'users',
-            className: TREE_NODE_CLASS,
-          },
-          {
-            id: 7,
-            label: 'users',
-            className: TREE_NODE_CLASS,
-          },
-          {
-            id: 8,
-            label: 'users',
-            className: TREE_NODE_CLASS,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 1,
-    label: 'Staging',
-    icon: 'database',
-    className: TREE_NODE_CLASS,
-    childNodes: [
-      {
-        id: 4,
-        className: TREE_NODE_CLASS,
-        label: 'schemas',
-      },
-    ],
-  },
-  {
-    id: 2,
-    label: 'Prod',
-    className: TREE_NODE_CLASS,
-    icon: 'database',
-    childNodes: [
-      {
-        id: 5,
-        label: 'schemas',
-        className: TREE_NODE_CLASS,
-      },
-    ],
-  },
-];
 
 export class DatabaseBrowserModel implements IDisposable {
   constructor(options: DatabaseBrowserModel.IOptions) {
     this.registry = options.registry;
     this.manager = options.manager;
-    this.state = options.state;
 
     this.manager.definitionsChanged.connect((sender, args) => {
       this._onConnectionDefinitionsChange(args);
@@ -118,7 +55,7 @@ export class DatabaseBrowserModel implements IDisposable {
    * Handle click event on a tree node.
    */
   clickNode(node: ITreeNode<string>): void {
-    Private.forEachNode(this.mock, node1 => (node1.isSelected = false));
+    Private.forEachNode(this.data, node1 => (node1.isSelected = false));
     node.isSelected = true;
     this._changed.emit(void 0);
   }
@@ -147,29 +84,37 @@ export class DatabaseBrowserModel implements IDisposable {
   }
 
   /**
+   * Get tree component data.
+   */
+  get data(): ITreeNode<string>[] {
+    return this._data;
+  }
+
+  /**
    * Handles definition change signals from ConnectorManager.
    */
   private _onConnectionDefinitionsChange(args: ConnectorManager.IChangedArgs): void {
+    each(this.manager.definitions, value => {
+      if (!this._data.some(d => d.id === value.name)) {
+        this._data.push(Private.definitionToTreeNode(value));
+      }
+    });
+
     this._changed.emit(void 0);
   }
 
   readonly registry: ConnectorRegistry;
   readonly manager: IConnectorManager;
-  readonly state: IStateDB;
-  readonly mock: ITreeNode<string>[] = mock;
 
   private _isDisposed = false;
   private _changed = new Signal<this, void>(this);
+
+  // FIXME: Convert this to a map so we can make faster lookups.
+  private readonly _data: ITreeNode<string>[] = [];
 }
 
 export namespace DatabaseBrowserModel {
   export interface IOptions {
-    /**
-     * State database to restore the model when
-     * model is restored.
-     */
-    state: IStateDB;
-
     /**
      * A database manager instance.
      */
@@ -186,6 +131,30 @@ export namespace DatabaseBrowserModel {
  * Module private statics.
  */
 namespace Private {
+  /**
+   * Incremented id to handout to tree nodes.
+   */
+  let NODE_ID = 0;
+
+  /**
+   * Get a new unique node id.
+   */
+  export const getNodeId = (): string => {
+    return (NODE_ID++).toString();
+  };
+
+  /**
+   * Convert a definition to a ITreeNode
+   */
+  export const definitionToTreeNode = (definition: IConnectionDefinition): ITreeNode<string> => {
+    return {
+      id: definition.name,
+      label: definition.displayName,
+      icon: 'database',
+      className: TREE_NODE_CLASS,
+    };
+  };
+
   /**
    * Run a callback function for each node.
    */

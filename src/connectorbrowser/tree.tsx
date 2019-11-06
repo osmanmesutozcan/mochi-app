@@ -22,7 +22,7 @@ export class Tree extends ReactWidget {
       <UseSignal signal={this._model.changed}>
         {() => (
           <BPTree
-            contents={this._model.mock}
+            contents={this._model.data}
             className={TREE_NODE_CLASS}
             onNodeExpand={node => this._model.expandNode(node)}
             onNodeCollapse={node => this._model.collapseNode(node)}

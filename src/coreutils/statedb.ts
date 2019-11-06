@@ -9,8 +9,7 @@ import { IStateDB } from './tokens';
 /**
  * The default concrete implementation of a state database.
  */
-export class StateDB<T extends ReadonlyJSONValue = ReadonlyJSONValue>
-  implements IStateDB<T> {
+export class StateDB<T extends ReadonlyJSONValue = ReadonlyJSONValue> implements IStateDB<T> {
   /**
    * Create a new state database.
    *
@@ -19,7 +18,7 @@ export class StateDB<T extends ReadonlyJSONValue = ReadonlyJSONValue>
   constructor(options: StateDB.IOptions = {}) {
     const { connector, transform } = options;
 
-    this._connector = connector || new StateDB.Connector();
+    this._connector = connector || new StateDB.InMemoryConnector();
     this._ready = (transform || Promise.resolve(null)).then(transformation => {
       if (!transformation) {
         return;
@@ -151,7 +150,7 @@ export class StateDB<T extends ReadonlyJSONValue = ReadonlyJSONValue>
         acc[ids[idx]] = val;
         return acc;
       },
-      {} as { [id: string]: T }
+      {} as { [id: string]: T },
     );
   }
 
@@ -181,7 +180,7 @@ export class StateDB<T extends ReadonlyJSONValue = ReadonlyJSONValue>
 
     return {
       ids,
-      values: values.map(val => (JSON.parse(val) as Private.Envelope).v as T)
+      values: values.map(val => (JSON.parse(val) as Private.Envelope).v as T),
     };
   }
 
@@ -189,9 +188,7 @@ export class StateDB<T extends ReadonlyJSONValue = ReadonlyJSONValue>
    * Merge data into the state database.
    */
   private async _merge(contents: { [id: string]: T }): Promise<void> {
-    await Promise.all(
-      Object.keys(contents).map(key => this._save(key, contents[key]))
-    );
+    await Promise.all(Object.keys(contents).map(key => this._save(key, contents[key])));
   }
 
   /**
@@ -278,7 +275,7 @@ export namespace StateDB {
   /**
    * An in-memory string key/value data connectorRegistry.
    */
-  export class Connector implements IDataConnector<string> {
+  export class InMemoryConnector implements IDataConnector<string> {
     /**
      * Retrieve an item from the data connectorRegistry.
      */
@@ -298,7 +295,7 @@ export namespace StateDB {
           }
           return acc;
         },
-        { ids: [], values: [] }
+        { ids: [], values: [] },
       );
     }
 
@@ -317,6 +314,69 @@ export namespace StateDB {
     }
 
     private _storage: { [key: string]: string } = {};
+  }
+
+  /**
+   * An chrome.storage string key/value data connectorRegistry.
+   */
+  export class StorageConnector implements IDataConnector<string> {
+    /**
+     * Retrieve an item from the data connectorRegistry.
+     */
+    async fetch(id: string): Promise<string> {
+      return new Promise<string>(resolve => {
+        chrome.storage.local.get(id, items => {
+          resolve(items[id]);
+        });
+      });
+    }
+
+    /**
+     * Retrieve the list of items available from the data connectorRegistry.
+     */
+    async list(query = ''): Promise<{ ids: string[]; values: string[] }> {
+      const items = await this._storageGet(null);
+      return Object.keys(items).reduce(
+        (acc, val) => {
+          if (val && val.indexOf(query) === 0) {
+            acc.ids.push(val);
+            acc.values.push(items[val]);
+          }
+          return acc;
+        },
+        { ids: [], values: [] },
+      );
+    }
+
+    /**
+     * Remove a value using the data connectorRegistry.
+     */
+    async remove(id: string): Promise<void> {
+      return this._storageSet({ [id]: null });
+    }
+
+    /**
+     * Save a value using the data connectorRegistry.
+     */
+    async save(id: string, value: string): Promise<void> {
+      return this._storageSet({ [id]: value });
+    }
+
+    private async _storageSet<T = object>(value: T): Promise<void> {
+      return new Promise<void>(resolve => {
+        chrome.storage.local.set(value, () => {
+          resolve();
+        });
+      });
+    }
+
+    private async _storageGet(id: string[] | null): Promise<{ [id: string]: any }> {
+      return new Promise<{ [id: string]: any }>(resolve => {
+        chrome.storage.local.get(id, items => {
+          resolve(items);
+        });
+      });
+    }
   }
 }
 
