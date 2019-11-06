@@ -352,7 +352,7 @@ export namespace StateDB {
      * Remove a value using the data connectorRegistry.
      */
     async remove(id: string): Promise<void> {
-      return this._storageSet({ [id]: null });
+      return this._storageRemove(id);
     }
 
     /**
@@ -374,6 +374,14 @@ export namespace StateDB {
       return new Promise<{ [id: string]: any }>(resolve => {
         chrome.storage.local.get(id, items => {
           resolve(items);
+        });
+      });
+    }
+
+    private async _storageRemove(value: string): Promise<void> {
+      return new Promise<void>(resolve => {
+        chrome.storage.local.remove(value, () => {
+          resolve();
         });
       });
     }
