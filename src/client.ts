@@ -6,6 +6,7 @@ import DatabaseManagerExtension from './connectormanager-extension';
 import DatabaseBrowserExtension from './connectorbrowser-extension';
 import DefaultConnectorsExtension from './connectors-extension';
 import UIComponentsExtension from './ui-components-extension';
+import TableViewerExtension from './tableviewer-extension';
 
 window.onload = async () => {
   const mochi = new Mochi();
@@ -17,6 +18,7 @@ window.onload = async () => {
   mochi.registerPlugins(DatabaseBrowserExtension);
   mochi.registerPlugins(DefaultConnectorsExtension);
   mochi.registerPlugins(DatabaseManagerExtension);
+  mochi.registerPlugins(TableViewerExtension);
 
   return mochi.start();
 };
