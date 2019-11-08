@@ -26,6 +26,11 @@ export interface IConnectorManager extends IDisposable {
   definitionsChanged: ISignal<IConnectorManager, ConnectorManager.IChangedArgs>;
 
   /**
+   * A signal emitted when managed connections state change.
+   */
+  connectionsChanged: ISignal<IConnectorManager, ConnectorManager.IConnectionChangedArgs>;
+
+  /**
    * Define a new connection and save connection information
    * for later retrieval.
    */

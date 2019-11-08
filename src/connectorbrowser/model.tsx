@@ -9,6 +9,7 @@ import { ConnectorManager, IConnectionDefinition, IConnectorManager } from '@moc
 import { ConnectorRegistry } from '@mochi/connectorregistry';
 
 import { TREE_NODE_CLASS } from './tree';
+import { BPIcon, Intent } from '@mochi/ui-components';
 
 export class DatabaseBrowserModel implements IDisposable {
   constructor(options: DatabaseBrowserModel.IOptions) {
@@ -17,6 +18,10 @@ export class DatabaseBrowserModel implements IDisposable {
 
     this.manager.definitionsChanged.connect((sender, args) => {
       this._onConnectionDefinitionsChange(args);
+    });
+
+    this.manager.connectionsChanged.connect((sender, args) => {
+      this._onConnectionStateChange(args);
     });
   }
 
@@ -118,6 +123,21 @@ export class DatabaseBrowserModel implements IDisposable {
       });
 
       this._data = toArray(filtered);
+    }
+
+    this._changed.emit(void 0);
+  }
+
+  /**
+   * Handle connection state change.
+   */
+  private _onConnectionStateChange(args: ConnectorManager.IConnectionChangedArgs): void {
+    const node = find(this._data, value => value.id === args.name);
+
+    if (args.change === 'connected') {
+      node.secondaryLabel = <BPIcon icon="symbol-circle" intent={Intent.SUCCESS} />;
+    } else {
+      node.secondaryLabel = undefined;
     }
 
     this._changed.emit(void 0);

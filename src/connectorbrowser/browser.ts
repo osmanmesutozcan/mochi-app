@@ -13,6 +13,11 @@ import { UUID } from '@phosphor/coreutils';
 const DATABASE_BROWSER_CLASS = 'm-DatabaseBrowser';
 
 /**
+ * The class name added to DatabaseBrowser instances.
+ */
+const TREE_CLASS = 'm-DatabaseTree';
+
+/**
  * The class name added to the database browser toolbar node.
  */
 const TOOLBAR_CLASS = 'm-DatabaseBrowser-toolbar';
@@ -33,6 +38,7 @@ export class DatabaseBrowser extends Widget {
     this.toolbar.addClass(TOOLBAR_CLASS);
 
     this.tree = new Tree({ model: this.model });
+    this.tree.addClass(TREE_CLASS);
 
     const newConnection = new ToolbarButton({
       iconClassName: 'm-AddIcon',
