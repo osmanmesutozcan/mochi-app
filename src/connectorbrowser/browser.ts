@@ -43,7 +43,7 @@ export class DatabaseBrowser extends Widget {
     const startConnection = new ToolbarButton({
       iconClassName: 'm-RunIcon',
       tooltip: 'Start Connection',
-      onClick: () => console.log('RUN!'),
+      onClick: () => this.startConnection(),
     });
 
     const stopConnection = new ToolbarButton({
@@ -96,6 +96,15 @@ export class DatabaseBrowser extends Widget {
     }
 
     this.model.manager.undefineConnection(definition);
+  }
+
+  async startConnection(): Promise<void> {
+    const definition = this.model.selectedDefinition;
+    if (!definition) {
+      return;
+    }
+
+    await this.model.manager.startConnection(definition.name);
   }
 
   readonly toolbar: Toolbar<Widget>;

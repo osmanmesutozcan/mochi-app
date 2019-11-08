@@ -28,6 +28,8 @@ export abstract class DataSourceConnector implements IDataSourceConnector {
 
   /**
    * Initializes database connection.
+   * Method must be idempotent since consumers
+   * might call this multiple times.
    */
   abstract async login(): Promise<void>;
 

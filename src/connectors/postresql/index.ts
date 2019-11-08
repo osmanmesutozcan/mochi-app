@@ -9,8 +9,7 @@ import { IChangedArgs } from '@mochi/services/connector';
 export class PostgreSQLConnector extends DataSourceConnector implements IDisposable {
   constructor(options: DataSourceConnector.IOptions) {
     super(options);
-    this._client = new PG.Client();
-    console.log(this._client);
+    this._client = new PG.Client({ ...options, host: options.hostname });
   }
 
   async introspect(): Promise<IDataIntrospection> {
@@ -18,7 +17,8 @@ export class PostgreSQLConnector extends DataSourceConnector implements IDisposa
   }
 
   async login(): Promise<void> {
-    throw new Error('Not implemented');
+    await this._client.connect();
+    this._changed.emit({change: 'connected', type: 'connectionStatus'});
   }
 
   async logout(): Promise<void> {
@@ -26,6 +26,8 @@ export class PostgreSQLConnector extends DataSourceConnector implements IDisposa
   }
 
   async query(query: string, params?: IQueryParams): Promise<IQueryResult> {
+    const result =  this._client.query(query);
+    console.log(result);
     throw new Error('Not implemented');
   }
 

@@ -75,15 +75,8 @@ export class ConnectorManager implements IConnectorManager {
    * rejected if cannot connect.
    */
   async startConnection(name: string): Promise<void> {
-    const definition = find(this._definitions, value => value.name === name);
-    const connector = this.registry.getConnector(definition.connectorTypeName);
-    const instance = connector.factory.create(definition.options);
-
-    Private.connections.set(instance, definition.name);
-
-    instance.changed.connect((sender, args) => {
-      this._connectionChanged.emit({ ...args, name: definition.name });
-    });
+    const connector = this._getOrCreateConnector(name);
+    await connector.login();
   }
 
   /**
@@ -135,6 +128,24 @@ export class ConnectorManager implements IConnectorManager {
         change: 'restored',
       });
     }
+  }
+
+  private _getOrCreateConnector(name: string): IDataSourceConnector {
+    const definition = find(this._definitions, value => value.name === name);
+
+    if (Private.connections.has(definition)) {
+      return Private.connections.get(definition);
+    }
+
+    const connector = this.registry.getConnector(definition.connectorTypeName);
+    const instance = connector.factory.create(definition.options);
+
+    instance.changed.connect((sender, args) => {
+      this._connectionChanged.emit({ ...args, name: definition.name });
+    });
+
+    Private.connections.set(definition, instance);
+    return instance;
   }
 
   /**
@@ -213,5 +224,5 @@ export namespace ConnectorManager {
 }
 
 namespace Private {
-  export const connections = new WeakMap<IDataSourceConnector, string>();
+  export const connections = new WeakMap<IConnectionDefinition, IDataSourceConnector>();
 }
