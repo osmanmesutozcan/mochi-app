@@ -41,5 +41,8 @@ export interface IQueryResult {
  * Shape of the connected database.
  */
 export interface IDataIntrospection {
-  //
+  /**
+   * List of available tables.
+   */
+  tables: string[];
 }

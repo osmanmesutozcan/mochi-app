@@ -13,7 +13,8 @@ export class PostgreSQLConnector extends DataSourceConnector implements IDisposa
   }
 
   async introspect(): Promise<IDataIntrospection> {
-    throw new Error('Not implemented');
+    const tables = await this._client.query(Private.ALL_TABLES);
+    return { tables: tables.rows.map(v => v.table_name) };
   }
 
   async login(): Promise<void> {
@@ -57,4 +58,8 @@ export class PostgreSQLConnector extends DataSourceConnector implements IDisposa
 
 export namespace PostgreSQLConnector {
   //
+}
+
+namespace Private {
+  export const ALL_TABLES = `SELECT table_name FROM information_schema.tables`;
 }

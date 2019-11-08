@@ -80,6 +80,18 @@ export class ConnectorManager implements IConnectorManager {
   }
 
   /**
+   * Get a connection instance.
+   */
+  getConnection(name: string): IDataSourceConnector {
+    const definition = find(this._definitions, value => value.name ===  name);
+    if (!definition || !Private.connections.has(definition)) {
+      return;
+    }
+
+    return Private.connections.get(definition);
+  }
+
+  /**
    * Get all defined connections.
    */
   get definitions(): IIterator<IConnectionDefinition> {

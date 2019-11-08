@@ -131,13 +131,14 @@ export class DatabaseBrowserModel implements IDisposable {
   /**
    * Handle connection state change.
    */
-  private _onConnectionStateChange(args: ConnectorManager.IConnectionChangedArgs): void {
+  private async _onConnectionStateChange(args: ConnectorManager.IConnectionChangedArgs): Promise<void> {
     const node = find(this._data, value => value.id === args.name);
 
+    node.secondaryLabel = undefined;
     if (args.change === 'connected') {
-      node.secondaryLabel = <BPIcon icon="symbol-circle" intent={Intent.SUCCESS} />;
-    } else {
-      node.secondaryLabel = undefined;
+      node.secondaryLabel = <BPIcon icon='symbol-circle' intent={Intent.SUCCESS} />;
+      const intros = await this.manager.getConnection(args.name).introspect();
+      node.childNodes = intros.tables.map(t => Private.tableToTreeNode(t));
     }
 
     this._changed.emit(void 0);
@@ -191,6 +192,17 @@ namespace Private {
     return {
       id: definition.name,
       label: definition.displayName,
+      className: TREE_NODE_CLASS,
+    };
+  };
+
+  /**
+   * Convert a table info to a ITreeNode
+   */
+  export const tableToTreeNode = (name: string): ITreeNode<string> => {
+    return {
+      id: name,
+      label: name,
       className: TREE_NODE_CLASS,
     };
   };

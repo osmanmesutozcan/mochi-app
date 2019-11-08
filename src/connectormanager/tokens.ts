@@ -3,7 +3,7 @@ import { IIterator } from '@phosphor/algorithm';
 import { ISignal } from '@phosphor/signaling';
 import { Token } from '@phosphor/coreutils';
 
-import { DataSourceConnector, ServiceManager } from '@mochi/services';
+import { DataSourceConnector, IDataSourceConnector, ServiceManager } from '@mochi/services';
 
 import { ConnectorManager } from './manager';
 
@@ -47,6 +47,11 @@ export interface IConnectorManager extends IDisposable {
    * rejected if cannot connect.
    */
   startConnection(name: string): Promise<void>;
+
+  /**
+   * Get a connection instance.
+   */
+  getConnection(name: string): IDataSourceConnector;
 }
 
 /**

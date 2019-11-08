@@ -6,6 +6,18 @@ body {
   width: 100vw;
 }
 
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--jp-layout-color0);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--jp-layout-color3);
+  border-radius: 2px;
+}
+
 .m-MochiShell {
   position: absolute;
   top: 0;

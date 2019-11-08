@@ -49,4 +49,5 @@
 |----------------------------------------------------------------------------*/
 .m-DatabaseTree {
   height: calc(100% - var(--jp-private-toolbar-height));
+  overflow-y: scroll;
 }
