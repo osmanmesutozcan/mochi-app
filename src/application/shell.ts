@@ -183,22 +183,21 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
   add(widget: Widget, area: IMochiShell.Area = 'main'): void {
     switch (area || 'main') {
       case 'main':
-        throw new Error('Not implemented');
-        // return this._addToMainArea(widget, options);
+        return this._addToMainArea(widget);
       case 'left':
         return this._addToLeftArea(widget);
       case 'right':
         throw new Error('Not implemented');
-        // return this._addToRightArea(widget, options);
+      // return this._addToRightArea(widget, options);
       case 'header':
         throw new Error('Not implemented');
-        // return this._addToHeaderArea(widget, options);
+      // return this._addToHeaderArea(widget, options);
       case 'top':
         throw new Error('Not implemented');
-        // return this._addToTopArea(widget, options);
+      // return this._addToTopArea(widget, options);
       case 'bottom':
         throw new Error('Not implemented');
-        // return this._addToBottomArea(widget, options);
+      // return this._addToBottomArea(widget, options);
       default:
         throw new Error(`Invalid area: ${area}`);
     }
@@ -268,6 +267,12 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
     }
   }
 
+  /**
+   * Add a widget to the left content area.
+   *
+   * #### Notes
+   * Widgets must have a unique `id` property, which will be used as the DOM id.
+   */
   private _addToLeftArea(widget: Widget): void {
     if (!widget.id) {
       console.error('Widgets added to app shell must have unique id property.');
@@ -275,6 +280,35 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
     }
     this._leftHandler.addWidget(widget, DEFAULT_RANK);
     this._onLayoutModified();
+  }
+
+  /**
+   * Add a widget to the main content area.
+   *
+   * #### Notes
+   * Widgets must have a unique `id` property, which will be used as the DOM id.
+   * All widgets added to the main area should be disposed after removal
+   * (disposal before removal will remove the widget automatically).
+   *
+   * In the options, `ref` defaults to `null`, `mode` defaults to `'tab-after'`,
+   * and `activate` defaults to `true`.
+   */
+  private _addToMainArea(widget: Widget): void {
+    if (!widget.id) {
+      console.error('Widgets added to app shell must have unique id property.');
+      return;
+    }
+
+    const dock = this._dockPanel;
+    const mode = 'tab-after';
+    let ref: Widget | null = this.currentWidget;
+
+    // Add widget ID to tab so that we can get a handle on the tab's widget
+    // (for context menu support)
+    widget.title.dataset = { ...widget.title.dataset, id: widget.id };
+
+    dock.addWidget(widget, { mode, ref });
+    dock.activateWidget(widget);
   }
 
   /**
