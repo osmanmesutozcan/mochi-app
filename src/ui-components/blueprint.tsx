@@ -2,15 +2,23 @@
 // Distributed under the terms of the Modified BSD License.
 
 import * as React from 'react';
+import { ReactElement } from 'react';
+
+import { Intent } from '@blueprintjs/core/lib/cjs/common/intent';
+import { Icon as BPIcon, IIconProps } from '@blueprintjs/core/lib/cjs/components/icon/icon';
+import { Tabs as IBPTabs, ITabsProps as IBPTabsProps } from '@blueprintjs/core/lib/cjs/components/tabs/tabs';
+import { Tab as IBPTab } from '@blueprintjs/core/lib/cjs/components/tabs/tab';
+import { Collapse as BPCollapse, ICollapseProps } from '@blueprintjs/core/lib/cjs/components/collapse/collapse';
+import { Select as BPSelect, ISelectProps } from '@blueprintjs/select/lib/cjs/components/select/select';
 
 import {
   Button as BPButton,
   IButtonProps as IBPButtonProps,
 } from '@blueprintjs/core/lib/cjs/components/button/buttons';
-import { Icon as BPIcon, IIconProps } from '@blueprintjs/core/lib/cjs/components/icon/icon';
-import { Tabs as IBPTabs, ITabsProps as IBPTabsProps } from '@blueprintjs/core/lib/cjs/components/tabs/tabs';
-import { Tab as IBPTab } from '@blueprintjs/core/lib/cjs/components/tabs/tab';
-import { Collapse as BPCollapse, ICollapseProps } from '@blueprintjs/core/lib/cjs/components/collapse/collapse';
+import {
+  Tooltip as BPTooltip,
+  ITooltipProps as IBPTooltip,
+} from '@blueprintjs/core/lib/cjs/components/tooltip/tooltip';
 import {
   InputGroup as BPInputGroup,
   IInputGroupProps as IBPInputGroupProps,
@@ -23,11 +31,8 @@ import {
   HTMLSelect as BPHTMLSelect,
   IHTMLSelectProps,
 } from '@blueprintjs/core/lib/cjs/components/html-select/htmlSelect';
-import { Select as BPSelect, ISelectProps } from '@blueprintjs/select/lib/cjs/components/select/select';
-import { combineClasses } from './utils';
-import { ReactElement } from 'react';
 
-export { Intent } from '@blueprintjs/core/lib/cjs/common/intent';
+import { combineClasses } from './utils';
 
 interface IButtonProps extends IBPButtonProps {
   title?: string;
@@ -40,12 +45,18 @@ interface IInputGroupProps extends IBPInputGroupProps {
 
 type CommonProps<T> = React.DOMAttributes<T>;
 
+export { BPIcon, Intent };
+
 export const Button = (props: IButtonProps & CommonProps<any>) => (
   <BPButton {...props} className={combineClasses(props.className, props.minimal && 'minimal', 'm-Button')} />
 );
 
 export const FormGroup: React.FC<IBPFormGroupProps> = props => {
-  return <BPFormGroup {...props} className={combineClasses(props.className, 'm-FormGroup')}>{props.children}</BPFormGroup>;
+  return (
+    <BPFormGroup {...props} className={combineClasses(props.className, 'm-FormGroup')}>
+      {props.children}
+    </BPFormGroup>
+  );
 };
 
 export const Tabs: React.FC<IBPTabsProps & Tabs.IProps> = props => {
@@ -78,7 +89,7 @@ export const InputGroup = (props: IInputGroupProps & CommonProps<any>) => {
         {...props}
         className={combineClasses(props.className, 'm-InputGroup')}
         rightElement={
-          <div className='m-InputGroupAction'>
+          <div className="m-InputGroupAction">
             <BPIcon className={'m-Icon'} icon={props.rightIcon} />
           </div>
         }
@@ -89,6 +100,8 @@ export const InputGroup = (props: IInputGroupProps & CommonProps<any>) => {
 };
 
 export const Collapse = (props: ICollapseProps & CommonProps<any>) => <BPCollapse {...props} />;
+
+export const Tooltip = (props: IBPTooltip) => <BPTooltip {...props} />;
 
 export const HTMLSelect = (props: IHTMLSelectProps & CommonProps<any>) => (
   <BPHTMLSelect {...props} className={combineClasses(props.className, 'm-HTMLSelect')} />

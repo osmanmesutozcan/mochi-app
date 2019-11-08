@@ -1,9 +1,14 @@
-import { IDisposable } from '@phosphor/disposable';
+import { ISignal } from '@phosphor/signaling';
 
 /**
  * Definition of a general purpose data source connectorRegistry.
  */
-export interface IDataSourceConnector extends IDisposable {
+export interface IDataSourceConnector {
+
+  /**
+   * Signal emitted when connection status change.
+   */
+  changed: ISignal<this, IChangedArgs>;
 
   query(query: string, params?: IQueryParams): Promise<IQueryResult>;
 
@@ -14,6 +19,11 @@ export interface IDataSourceConnector extends IDisposable {
   watchQuery(query: string, params?: IQueryParams): void;
 
   introspect(): Promise<IDataIntrospection>;
+}
+
+export interface IChangedArgs {
+  type: 'connectionStatus';
+  change: 'connected' | 'disconnected';
 }
 
 export interface IQueryParams {

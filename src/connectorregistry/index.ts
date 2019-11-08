@@ -22,12 +22,19 @@ export class ConnectorRegistry implements IDisposable {
     if (name.length === 0) {
       throw new Error('Invalid connector type name');
     }
-    if (this._types[name]) {
+    if (this._connectors[name]) {
       console.error(`Connector type name ${name} is already registered`);
       return;
     }
-    this._connectors[name] = connector.factory;
-    this._types[name] = connector.type;
+
+    this._connectors[name] = connector;
+  }
+
+  /**
+   * Get a connector with a factory function by type name.
+   */
+  getConnector(name: string): ConnectorRegistry.IConnector | undefined {
+    return this._connectors[name];
   }
 
   /**
@@ -35,14 +42,14 @@ export class ConnectorRegistry implements IDisposable {
    * by type name.
    */
   getConnectorType(name: string): ConnectorRegistry.IConnectorType | undefined {
-    return this._types[name];
+    return this._connectors[name].type;
   }
 
   /**
    * Get all connector types that are currently registered.
    */
   getConnectorTypes(): IIterator<ConnectorRegistry.IConnectorType> {
-    return map(Object.keys(this._types), name => this._types[name]);
+    return map(Object.keys(this._connectors), name => this._connectors[name].type);
   }
 
   /**
@@ -70,8 +77,7 @@ export class ConnectorRegistry implements IDisposable {
     return this._changed;
   }
 
-  private _connectors: { [name: string]: ConnectorRegistry.IConnectorFactory } = Object.create(null);
-  private _types: { [name: string]: ConnectorRegistry.IConnectorType } = Object.create(null);
+  private _connectors: { [name: string]: ConnectorRegistry.IConnector } = Object.create(null);
 
   private _isDisposed = false;
   private _changed = new Signal<this, ConnectorRegistry.IChangedArgs>(this);

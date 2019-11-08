@@ -1,8 +1,8 @@
 import { JSONArray } from '@phosphor/coreutils';
 import { ISignal, Signal } from '@phosphor/signaling';
-import { ArrayIterator, IIterator, findIndex } from '@phosphor/algorithm';
+import { ArrayIterator, IIterator, findIndex, find } from '@phosphor/algorithm';
 
-import { ServiceManager } from '@mochi/services';
+import { IDataSourceConnector, ServiceManager } from '@mochi/services';
 import { ConnectorRegistry } from '@mochi/connectorregistry';
 
 import { IConnectionDefinition, IConnectorManager } from './tokens';
@@ -51,7 +51,7 @@ export class ConnectorManager implements IConnectorManager {
     }
 
     this._definitions.push(definition);
-    this._definitionsChanged.emit({ type: 'connectionDefinition', change: 'added' });
+    this._definitionsChanged.emit({ name: definition.name, type: 'connectionDefinition', change: 'added' });
   }
 
   /**
@@ -66,7 +66,7 @@ export class ConnectorManager implements IConnectorManager {
     }
 
     this._definitions.splice(indexToRemove, 1);
-    this._definitionsChanged.emit({ type: 'connectionDefinition', change: 'removed' });
+    this._definitionsChanged.emit({ name: definition.name, type: 'connectionDefinition', change: 'removed' });
   }
 
   /**
@@ -74,8 +74,16 @@ export class ConnectorManager implements IConnectorManager {
    * a promise which resolves when the connection is ready, or
    * rejected if cannot connect.
    */
-  startConnection(name: string): Promise<void> {
-    throw new Error('Not implemented');
+  async startConnection(name: string): Promise<void> {
+    const definition = find(this._definitions, value => value.name === name);
+    const connector = this.registry.getConnector(definition.connectorTypeName);
+    const instance = connector.factory.create(definition.options);
+
+    Private.connections.set(instance, definition.name);
+
+    instance.changed.connect((sender, args) => {
+      this._connectionChanged.emit({ ...args, name: definition.name });
+    });
   }
 
   /**
@@ -90,6 +98,13 @@ export class ConnectorManager implements IConnectorManager {
    */
   get definitionsChanged(): ISignal<this, ConnectorManager.IChangedArgs> {
     return this._definitionsChanged;
+  }
+
+  /**
+   * A signal emitted when manager definitionsChanged.
+   */
+  get connectionsChanged(): ISignal<this, ConnectorManager.IConnectionChangedArgs> {
+    return this._connectionChanged;
   }
 
   /**
@@ -115,7 +130,10 @@ export class ConnectorManager implements IConnectorManager {
     if (result.length > 0) {
       // FIXME: Fix this typecast...
       this._definitions = (result as unknown) as IConnectionDefinition[];
-      this._definitionsChanged.emit({ type: 'connectionDefinition', change: 'added' });
+      this._definitionsChanged.emit({
+        type: 'connectionDefinition',
+        change: 'restored',
+      });
     }
   }
 
@@ -136,6 +154,8 @@ export class ConnectorManager implements IConnectorManager {
 
   private _isDisposed = false;
   private _definitionsChanged = new Signal<this, ConnectorManager.IChangedArgs>(this);
+  private _connectionChanged = new Signal<this, ConnectorManager.IConnectionChangedArgs>(this);
+
   private _definitions: IConnectionDefinition[] = [];
 }
 
@@ -157,7 +177,29 @@ export namespace ConnectorManager {
     state: IStateDB;
   }
 
+  export interface IConnectionChangedArgs {
+    /**
+     * Definition name of the changed connection.
+     */
+    name: string;
+
+    /**
+     * Type of the change made.
+     */
+    type: 'connectionStatus';
+
+    /**
+     * Definition of the change.
+     */
+    change: 'connected' | 'disconnected';
+  }
+
   export interface IChangedArgs {
+    /**
+     * Name of the changed definition
+     */
+    name?: string;
+
     /**
      * Type of the change made.
      */
@@ -166,6 +208,10 @@ export namespace ConnectorManager {
     /**
      * Definition of the change.
      */
-    change: 'added' | 'removed';
+    change: 'restored' | 'added' | 'removed';
   }
+}
+
+namespace Private {
+  export const connections = new WeakMap<IDataSourceConnector, string>();
 }

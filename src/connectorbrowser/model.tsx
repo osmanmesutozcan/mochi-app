@@ -1,7 +1,9 @@
-import { ITreeNode } from '@blueprintjs/core';
+import * as React from 'react';
+
 import { IDisposable } from '@phosphor/disposable';
 import { ISignal, Signal } from '@phosphor/signaling';
-import { each } from '@phosphor/algorithm';
+import { each, filter, find, toArray } from '@phosphor/algorithm';
+import { ITreeNode } from '@blueprintjs/core';
 
 import { ConnectorManager, IConnectionDefinition, IConnectorManager } from '@mochi/connectormanager';
 import { ConnectorRegistry } from '@mochi/connectorregistry';
@@ -56,6 +58,7 @@ export class DatabaseBrowserModel implements IDisposable {
    */
   clickNode(node: ITreeNode<string>): void {
     Private.forEachNode(this.data, node1 => (node1.isSelected = false));
+    this._selectedNode = node.id.toString();
     node.isSelected = true;
     this._changed.emit(void 0);
   }
@@ -91,14 +94,31 @@ export class DatabaseBrowserModel implements IDisposable {
   }
 
   /**
+   * Get definition for the selected node
+   */
+  get selectedDefinition(): IConnectionDefinition | undefined {
+    return find(this.manager.definitions, value => value.name === this._selectedNode);
+  }
+
+  /**
    * Handles definition change signals from ConnectorManager.
    */
   private _onConnectionDefinitionsChange(args: ConnectorManager.IChangedArgs): void {
-    each(this.manager.definitions, value => {
-      if (!this._data.some(d => d.id === value.name)) {
-        this._data.push(Private.definitionToTreeNode(value));
-      }
-    });
+    if (args.change === 'added' || args.change === 'restored') {
+      each(this.manager.definitions, value => {
+        if (!this._data.some(d => d.id === value.name)) {
+          this._data.push(Private.definitionToTreeNode(value));
+        }
+      });
+    }
+
+    if (args.change === 'removed') {
+      const filtered = filter(this._data, value => {
+        return value.id !== args.name;
+      });
+
+      this._data = toArray(filtered);
+    }
 
     this._changed.emit(void 0);
   }
@@ -107,10 +127,11 @@ export class DatabaseBrowserModel implements IDisposable {
   readonly manager: IConnectorManager;
 
   private _isDisposed = false;
+  private _selectedNode: string = null;
   private _changed = new Signal<this, void>(this);
 
   // FIXME: Convert this to a map so we can make faster lookups.
-  private readonly _data: ITreeNode<string>[] = [];
+  private _data: ITreeNode<string>[] = [];
 }
 
 export namespace DatabaseBrowserModel {
@@ -150,7 +171,6 @@ namespace Private {
     return {
       id: definition.name,
       label: definition.displayName,
-      icon: 'database',
       className: TREE_NODE_CLASS,
     };
   };

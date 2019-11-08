@@ -34,7 +34,7 @@ export interface IConnectorManager extends IDisposable {
   /**
    * Undefine a connection and remove connection information.
    */
-  undefineConnection(definitions: IConnectionDefinition): void;
+  undefineConnection(definition: IConnectionDefinition): void;
 
   /**
    * Start a connection to a previously defined connection and return

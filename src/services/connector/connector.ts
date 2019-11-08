@@ -1,4 +1,5 @@
-import { IDataSourceConnector, IDataIntrospection, IQueryParams, IQueryResult } from './interfaces';
+import { IDataSourceConnector, IDataIntrospection, IQueryParams, IQueryResult, IChangedArgs } from './interfaces';
+import { ISignal } from '@phosphor/signaling';
 
 /**
  * An abstract client definition to
@@ -12,6 +13,11 @@ export abstract class DataSourceConnector implements IDataSourceConnector {
   constructor(options: DataSourceConnector.IOptions) {
     //
   }
+
+  /**
+   * Signal emitted when connection status change.
+   */
+  abstract changed: ISignal<this, IChangedArgs>;
 
   /**
    * Runs a query on database and return `IQueryResult`.
@@ -49,16 +55,6 @@ export abstract class DataSourceConnector implements IDataSourceConnector {
   watchQuery(query: string, params?: IQueryParams): void {
     throw new Error('DataSourceConnector#watchQuery is not implemented');
   }
-
-  get isDisposed(): boolean {
-    return this._isDisposed;
-  }
-
-  dispose(): void {
-    this.logout().then(() => (this._isDisposed = true));
-  }
-
-  private _isDisposed = false;
 }
 
 export namespace DataSourceConnector {

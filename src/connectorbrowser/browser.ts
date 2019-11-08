@@ -48,7 +48,6 @@ export class DatabaseBrowser extends Widget {
     this.layout = layout;
   }
 
-  // TODO: This should be in the model layer not view!
   async newConnection() {
     const result = await showDialog({
       title: 'Add New Connection',
@@ -73,6 +72,15 @@ export class DatabaseBrowser extends Widget {
         connectionString: '',
       },
     });
+  }
+
+  async removeConnection(): Promise<void> {
+    const definition = this.model.selectedDefinition;
+    if (!definition) {
+      return;
+    }
+
+    this.model.manager.undefineConnection(definition);
   }
 
   readonly toolbar: Toolbar<Widget>;

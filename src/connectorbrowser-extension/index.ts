@@ -1,6 +1,5 @@
 import './index.css';
 
-import { IStateDB } from '@mochi/coreutils';
 import { IMochiShell, MochiFrontEnd, MochiFrontEndPlugin } from '@mochi/application';
 import {
   DatabaseBrowser,
@@ -13,6 +12,7 @@ import { IConnectorManager } from '@mochi/connectormanager/tokens';
 namespace CommandIDs {
   export const SHOW_BROWSER = 'databasebrowser:show';
   export const NEW_CONNECTION = 'databasebrowser:new-connection';
+  export const REMOVE_CONNECTION = 'databasebrowser:remove-connection';
 }
 
 /**
@@ -74,6 +74,9 @@ function addCommands(app: MochiFrontEnd, factory: IDatabaseBrowserFactory, shell
 
   commands.addCommand(CommandIDs.NEW_CONNECTION, { execute: async args => {await browser.newConnection(); } });
   commands.addKeyBinding({ command: CommandIDs.NEW_CONNECTION, selector: 'body', keys: ['Accel N'] });
+
+  commands.addCommand(CommandIDs.REMOVE_CONNECTION, { execute: async args => { await browser.removeConnection(); }});
+  commands.addKeyBinding({ command: CommandIDs.REMOVE_CONNECTION, selector: 'body', keys: ['Delete'] });
 }
 
 const plugins: MochiFrontEndPlugin<any>[] = [browser, factory];
