@@ -1,4 +1,4 @@
-import { PanelLayout, Widget } from '@phosphor/widgets';
+import { PanelLayout, Title, Widget } from '@phosphor/widgets';
 
 import { Dialog, showDialog, Toolbar, ToolbarButton } from '@mochi/apputils';
 
@@ -25,6 +25,7 @@ export class DatabaseBrowser extends Widget {
     super();
     this.addClass(DATABASE_BROWSER_CLASS);
     this.id = options.id;
+    this.title.label = 'Database';
 
     this.model = options.model;
 
@@ -39,7 +40,21 @@ export class DatabaseBrowser extends Widget {
       onClick: () => this.newConnection(),
     });
 
+    const startConnection = new ToolbarButton({
+      iconClassName: 'm-RunIcon',
+      tooltip: 'Start Connection',
+      onClick: () => console.log('RUN!'),
+    });
+
+    const stopConnection = new ToolbarButton({
+      iconClassName: 'm-StopIcon',
+      tooltip: 'Stop Connection',
+      onClick: () => this.removeConnection(),
+    });
+
     this.toolbar.addItem('newConnection', newConnection);
+    this.toolbar.addItem('startConnection', startConnection);
+    this.toolbar.addItem('stopConnection', stopConnection);
 
     const layout = new PanelLayout();
     layout.addWidget(this.toolbar);
