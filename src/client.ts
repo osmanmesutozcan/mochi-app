@@ -15,6 +15,7 @@ import DatabaseBrowserExtension from './connectorbrowser-extension';
 import DefaultConnectorsExtension from './connectors-extension';
 import UIComponentsExtension from './ui-components-extension';
 import TableViewerExtension from './tableviewer-extension';
+import QueryEditorExtension from './queryeditor-extension';
 
 window.onload = async () => {
   // Instantiate new application.
@@ -28,6 +29,7 @@ window.onload = async () => {
   mochi.registerPlugins(DefaultConnectorsExtension);
   mochi.registerPlugins(DatabaseManagerExtension);
   mochi.registerPlugins(TableViewerExtension);
+  mochi.registerPlugins(QueryEditorExtension);
 
   return mochi.start();
 };

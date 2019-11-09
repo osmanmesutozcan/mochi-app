@@ -74,9 +74,10 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.json'],
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
   },
+  externals: { '@microsoft/typescript-etw': 'FakeModule' },
   plugins: [
     // exclude locale files in moment
-    new MonacoEditorWebpackPlugin({ languages: [] }),
+    new MonacoEditorWebpackPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new CopyPlugin([{ from: '.', to: '../' }], { context: 'public' }),
   ],
