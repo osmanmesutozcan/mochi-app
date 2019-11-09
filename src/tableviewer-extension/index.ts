@@ -1,3 +1,5 @@
+import './index.css';
+
 import { IMochiShell, MochiFrontEnd, MochiFrontEndPlugin } from '@mochi/application';
 import { ITableViewer, TableViewer } from '@mochi/tableviewer';
 
