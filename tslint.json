@@ -10,7 +10,7 @@
     "no-string-literal": false,
     "no-shadowed-variable": false,
     "no-namespace": false,
-    "quotemark": [true, "single"],
+    "quotemark": [true, "double"],
     "member-access": [false],
     "ordered-imports": [false],
     "max-line-length": [true, 150],

@@ -1,0 +1,9 @@
+.m-NewConnectionDialog-panel {
+  width: 500px;
+  height: 100%;
+  margin-left: 20px;
+}
+
+.m-NewConnectionDialog-panel .m-FormGroup .bp3-label {
+  min-width: 70px;
+}

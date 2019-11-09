@@ -1,17 +1,25 @@
-import { Contents, ContentsManager } from './contents';
-import { Settings, SettingManager } from './setting';
 import { IDisposable } from '@phosphor/disposable';
 import { Signal } from '@phosphor/signaling';
 
-export class ServiceManager implements ServiceManager.IServiceManager {
-  constructor(options: ServiceManager.IOptions = {}) {
-    let resolveReadyPromise: () => void;
-    this._readyPromise = new Promise<void>(res => resolveReadyPromise = res);
+import { ConnectorRegistry } from '@mochi/connectorregistry';
 
-    this.settings = new SettingManager(options);
-    this.contents = new ContentsManager(options);
+import { Connectors, ConnectorManager } from './connector';
+import { Contents, ContentsManager } from './contents';
+import { Settings, SettingManager } from './setting';
+import { PromiseDelegate } from '@phosphor/coreutils';
 
-    resolveReadyPromise();
+export class ServiceManager implements ServiceManager.IManager {
+  constructor(options: ServiceManager.IOptions) {
+    const readyPromiseDelegate = new PromiseDelegate<void>();
+    this._readyPromise = readyPromiseDelegate.promise;
+
+    this.settings = new SettingManager();
+    this.contents = new ContentsManager();
+    this.databases = new ConnectorManager({
+      registry: options.registry,
+    });
+
+    readyPromiseDelegate.resolve();
   }
 
   get isReady(): boolean {
@@ -51,13 +59,18 @@ export class ServiceManager implements ServiceManager.IServiceManager {
    */
   readonly settings: SettingManager;
 
+  /**
+   * Get the databases manager instance.
+   */
+  readonly databases: ConnectorManager;
+
   private _isDisposed = false;
   private _isReady = false;
-  private _readyPromise: Promise<void>;
+  private readonly _readyPromise: Promise<void>;
 }
 
 export namespace ServiceManager {
-  export interface IServiceManager extends IDisposable {
+  export interface IManager extends IDisposable {
     /**
      * Test whether the manager is ready.
      */
@@ -71,9 +84,13 @@ export namespace ServiceManager {
     // List of managers managed by the service manager.
     readonly contents: Contents.IManager;
     readonly settings: Settings.IManager;
+    readonly databases: Connectors.IManager;
   }
 
   export interface IOptions {
-    //
+    /**
+     * A database registry instance
+     */
+    registry: ConnectorRegistry;
   }
 }

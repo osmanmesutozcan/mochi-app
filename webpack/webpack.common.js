@@ -34,19 +34,50 @@ module.exports = {
     rules: [
       // { test: /\.worker\.ts$/, use: ['ts-loader', 'worker-loader'] },
       { test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/ },
-      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
-      { test: /\.png$/, use: 'file-loader' },
+      {
+        test: /\.(s[ac]ss|css)$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.(jpe?g|png|gif)$/i,
+        issuer: { test: /\.(s[ac]ss|css)$/i },
+        use: { loader: 'file-loader' },
+      },
+      {
+        // in css files, svg is loaded as a url formatted string
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        issuer: { test: /\.css$/ },
+        use: {
+          loader: 'svg-url-loader',
+          options: { encoding: 'none', limit: 10000 },
+        },
+      },
+      {
+        // in ts and tsx files (both of which compile to js),
+        // svg is loaded as a raw string
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        issuer: { test: /\.[tj]sx?$/ },
+        use: {
+          loader: 'raw-loader',
+        },
+      },
     ],
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
-    plugins: [
-      new TsconfigPathsPlugin({ configFile: './tsconfig.json' }),
-    ],
+    plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
   },
+  externals: { '@microsoft/typescript-etw': 'FakeModule' },
   plugins: [
     // exclude locale files in moment
-    new MonacoEditorWebpackPlugin({ languages: [] }),
+    new MonacoEditorWebpackPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new CopyPlugin([{ from: '.', to: '../' }], { context: 'public' }),
   ],

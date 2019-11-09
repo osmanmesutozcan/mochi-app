@@ -1,0 +1,135 @@
+/*-----------------------------------------------------------------------------
+| Copyright (c) Jupyter Development Team.
+| Distributed under the terms of the Modified BSD License.
+|----------------------------------------------------------------------------*/
+
+/* Override Blueprint's _reset.scss styles */
+html {
+  box-sizing: unset;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: unset;
+}
+
+body {
+  color: unset;
+  font-family: var(--jp-ui-font-family);
+}
+
+p {
+  margin-top: unset;
+  margin-bottom: unset;
+}
+
+small {
+  font-size: unset;
+}
+
+strong {
+  font-weight: unset;
+}
+
+/* Override Blueprint's _typography.scss styles */
+a {
+  text-decoration: unset;
+  color: unset;
+}
+a:hover {
+  text-decoration: unset;
+  color: unset;
+}
+
+/* Override Blueprint's _accessibility.scss styles */
+:focus {
+  outline: unset;
+  outline-offset: unset;
+  -moz-outline-radius: unset;
+}
+
+/* Styles for ui-components */
+.m-Button {
+  border-radius: var(--jp-border-radius);
+  padding: 0 12px;
+  font-size: var(--jp-ui-font-size1);
+}
+
+/* Use our own theme for hover styles */
+button.m-Button.bp3-button.bp3-minimal:hover {
+  background-color: var(--jp-layout-color2);
+}
+.m-Button.minimal {
+  color: unset !important;
+}
+
+.m-Button.m-ToolbarButtonComponent {
+  text-transform: none;
+}
+
+.m-FormGroup .bp3-label {
+  font-weight: bold;
+}
+
+
+.m-Tabs:not(.bp3-vertical) .bp3-tab-list {
+  border-bottom: 1px solid var(--jp-border-color0);
+}
+
+.m-InputGroup input {
+  box-sizing: border-box;
+
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid var(--jp-border-color0);
+
+  background-color: transparent;
+  color: var(--jp-ui-font-color0);
+
+  margin-bottom: 5px;
+}
+
+.m-InputGroup .bp3-input[type='number'] {
+  padding: 0 0 0 10px !important;
+}
+
+.m-InputGroup input:focus {
+  box-shadow: none;
+  border-bottom: 2px solid var(--jp-brand-color1);
+}
+
+.m-InputGroup input::placeholder,
+input::placeholder {
+  color: var(--jp-ui-font-color3);
+}
+
+.m-Icon {
+  color: var(--jp-layout-color4);
+}
+
+.m-InputGroupAction {
+  /*padding: 6px;*/
+}
+
+.m-HTMLSelect.bp3-html-select.bp3-minimal select {
+  height: 24px;
+  font-size: var(--jp-ui-font-size1);
+  line-height: 14px;
+  border-radius: 0;
+  display: block;
+  color: var(--jp-ui-font-color0);
+}
+
+/* Use our own theme for hover styles */
+.m-HTMLSelect.bp3-html-select.bp3-minimal select:hover {
+  color: var(--jp-ui-font-color0);
+  background-color: var(--jp-layout-color2);
+}
+select {
+  box-sizing: border-box;
+}
+
+/* Sibling imports */
+@import './deprecated.css';
+@import './deprecatedExtra.css';

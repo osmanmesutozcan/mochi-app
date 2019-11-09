@@ -14,25 +14,25 @@ import { ISignal } from '@phosphor/signaling';
  */
 export interface IChangedArgs<T, U extends string = string> {
   /**
-   * The name of the changed attribute.
+   * The name of the definitionsChanged attribute.
    */
   name: U;
 
   /**
-   * The old value of the changed attribute.
+   * The old value of the definitionsChanged attribute.
    */
   oldValue: T;
 
   /**
-   * The new value of the changed attribute.
+   * The new value of the definitionsChanged attribute.
    */
   newValue: T;
 }
 
 /**
- * The description of a general purpose data connector.
+ * The description of a general purpose data connectorRegistry.
  *
- * @typeparam T - The basic entity response type a service's connector.
+ * @typeparam T - The basic entity response type a service's connectorRegistry.
  *
  * @typeparam U - The basic entity request type, which is conventionally the
  * same as the response type but may be different if a service's implementation
@@ -44,7 +44,7 @@ export interface IChangedArgs<T, U extends string = string> {
  */
 export interface IDataConnector<T, U = T, V = string> {
   /**
-   * Retrieve an item from the data connector.
+   * Retrieve an item from the data connectorRegistry.
    *
    * @param id - The identifier used to retrieve an item.
    *
@@ -57,9 +57,9 @@ export interface IDataConnector<T, U = T, V = string> {
   fetch(id: V): Promise<T | undefined>;
 
   /**
-   * Retrieve the list of items available from the data connector.
+   * Retrieve the list of items available from the data connectorRegistry.
    *
-   * @param query - The optional query filter to apply to the connector request.
+   * @param query - The optional query filter to apply to the connectorRegistry request.
    *
    * @returns A promise that bears a list of `values` and an associated list of
    * fetch `ids`.
@@ -72,7 +72,7 @@ export interface IDataConnector<T, U = T, V = string> {
   list(query?: any): Promise<{ ids: V[]; values: T[] }>;
 
   /**
-   * Remove a value using the data connector.
+   * Remove a value using the data connectorRegistry.
    *
    * @param id - The identifier for the data being removed.
    *
@@ -87,7 +87,7 @@ export interface IDataConnector<T, U = T, V = string> {
   remove(id: V): Promise<any>;
 
   /**
-   * Save a value using the data connector.
+   * Save a value using the data connectorRegistry.
    *
    * @param id - The identifier for the data being saved.
    *
@@ -440,7 +440,7 @@ export namespace IRestorable {
    */
   export interface IOptions<T extends IObservableDisposable> extends IRestorer.IOptions<T> {
     /**
-     * The data connector to fetch restore data.
+     * The data connectorRegistry to fetch restore data.
      */
     connector: IDataConnector<ReadonlyJSONValue>;
 

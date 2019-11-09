@@ -4,7 +4,7 @@ import { Signal } from '@phosphor/signaling';
 import { DataConnector, ISettingRegistry } from '@mochi/coreutils';
 
 export class SettingManager extends DataConnector<ISettingRegistry.IPlugin, string> {
-  constructor(options: SettingManager.IOptions) {
+  constructor(options: SettingManager.IOptions = {}) {
     super();
   }
 

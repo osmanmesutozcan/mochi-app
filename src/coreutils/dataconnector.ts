@@ -1,9 +1,9 @@
 import { IDataConnector } from './interfaces';
 
 /**
- * An abstract class that adheres to the data connector interface.
+ * An abstract class that adheres to the data connectorRegistry interface.
  *
- * @typeparam T - The basic entity response type a service's connector.
+ * @typeparam T - The basic entity response type a service's connectorRegistry.
  *
  * @typeparam U - The basic entity request type, which is conventionally the
  * same as the response type but may be different if a service's implementation
@@ -22,7 +22,7 @@ import { IDataConnector } from './interfaces';
 export abstract class DataConnector<T, U = T, V = string>
   implements IDataConnector<T, U, V> {
   /**
-   * Retrieve an item from the data connector.
+   * Retrieve an item from the data connectorRegistry.
    *
    * @param id - The identifier used to retrieve an item.
    *
@@ -35,9 +35,9 @@ export abstract class DataConnector<T, U = T, V = string>
   abstract async fetch(id: V): Promise<T | undefined>;
 
   /**
-   * Retrieve the list of items available from the data connector.
+   * Retrieve the list of items available from the data connectorRegistry.
    *
-   * @param query - The optional query filter to apply to the connector request.
+   * @param query - The optional query filter to apply to the connectorRegistry request.
    *
    * @returns A promise that always rejects with an error.
    *
@@ -49,7 +49,7 @@ export abstract class DataConnector<T, U = T, V = string>
   }
 
   /**
-   * Remove a value using the data connector.
+   * Remove a value using the data connectorRegistry.
    *
    * @param id - The identifier for the data being removed.
    *
@@ -63,7 +63,7 @@ export abstract class DataConnector<T, U = T, V = string>
   }
 
   /**
-   * Save a value using the data connector.
+   * Save a value using the data connectorRegistry.
    *
    * @param id - The identifier for the data being saved.
    *

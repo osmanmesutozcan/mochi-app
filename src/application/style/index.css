@@ -9,10 +9,11 @@
 @import url('~@phosphor/widgets/style/tabpanel.css');
 @import url('~@phosphor/widgets/style/widget.css');
 
-@import './theme/variables.css';
+@import './theme/index.css';
 
 @import './base.css';
 @import './dockpanel.css';
 @import './sidepanel.css';
 @import './menus.css';
 @import './tabs.css';
+@import './buttons.css';

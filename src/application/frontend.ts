@@ -2,7 +2,8 @@ import { IPlugin, Application } from '@phosphor/application';
 import { IIterator } from '@phosphor/algorithm';
 import { Widget } from '@phosphor/widgets';
 
-import { ServiceManager } from '../services';
+import { ServiceManager } from '@mochi/services';
+import { ConnectorRegistry } from '@mochi/connectorregistry';
 
 /**
  * The type for all MochiFrontEnd application plugins.
@@ -24,10 +25,12 @@ export abstract class MochiFrontEnd<T extends MochiFrontEnd.IShell = MochiFrontE
   protected constructor(options: MochiFrontEnd.IOptions<T>) {
     super(options);
 
-    this.serviceManager = options.serviceManager || new ServiceManager();
+    const registry  = (this.connectorRegistry = new ConnectorRegistry());
+    this.serviceManager = options.serviceManager || new ServiceManager({ registry });
   }
 
   readonly serviceManager: ServiceManager;
+  readonly connectorRegistry: ConnectorRegistry;
 }
 
 /**
@@ -58,7 +61,7 @@ export namespace MochiFrontEnd {
      * be added.
      *
      * @param options - @TODO Optional flags the shell might use when opening the
-     * widget, as defined in the `DocumentRegistry`.
+     *  widget, as defined in the `DocumentRegistry`.
      */
     add(widget: Widget, area?: string /* options?: DocumentRegistry.IOpenOptions */): void;
 
