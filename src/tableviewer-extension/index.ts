@@ -1,5 +1,5 @@
-import { IMochiShell, MochiFrontEndPlugin } from '@mochi/application';
-import { ITableViewer } from '@mochi/tableviewer';
+import { IMochiShell, MochiFrontEnd, MochiFrontEndPlugin } from '@mochi/application';
+import { ITableViewer, TableViewer } from '@mochi/tableviewer';
 
 namespace CommandIDs {
   //
@@ -13,9 +13,15 @@ const viewer: MochiFrontEndPlugin<ITableViewer> = {
   requires: [IMochiShell],
   provides: ITableViewer,
   activate: activateViewer,
+
+  // FIXME: Remove this!
+  autoStart: true,
 };
 
-function activateViewer() {
+function activateViewer(app: MochiFrontEnd, shell: IMochiShell) {
+  shell.add(new TableViewer({}), 'main');
+  shell.add(new TableViewer({}), 'main');
+  shell.add(new TableViewer({}), 'main');
   return {};
 }
 
