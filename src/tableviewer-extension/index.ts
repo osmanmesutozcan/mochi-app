@@ -15,15 +15,10 @@ const viewer: MochiFrontEndPlugin<ITableViewer> = {
   requires: [IMochiShell],
   provides: ITableViewer,
   activate: activateViewer,
-
-  // FIXME: Remove this!
-  autoStart: true,
 };
 
+// TODO: Write activator...
 function activateViewer(app: MochiFrontEnd, shell: IMochiShell) {
-  shell.add(new TableViewer({}), 'main');
-  shell.add(new TableViewer({}), 'main');
-  shell.add(new TableViewer({}), 'main');
   return {};
 }
 
