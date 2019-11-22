@@ -12,7 +12,7 @@ import { TREE_NODE_CLASS } from './tree';
 import { BPIcon, Intent } from '@mochi/ui-components';
 
 export class DatabaseBrowserModel implements IDisposable {
-  constructor(options: DatabaseBrowserModel.IOptions) {
+  constructor(private readonly options: DatabaseBrowserModel.IOptions) {
     this.registry = options.registry;
     this.manager = options.manager;
 
@@ -21,7 +21,7 @@ export class DatabaseBrowserModel implements IDisposable {
     });
 
     this.manager.connectionsChanged.connect((sender, args) => {
-      this._onConnectionStateChange(args);
+      void this._onConnectionStateChange(args);
     });
   }
 
@@ -76,7 +76,8 @@ export class DatabaseBrowserModel implements IDisposable {
    */
   doubleClickNode(node: ITreeNode<string>): void {
     if (!Array.isArray(node.childNodes)) {
-      console.error('Cannot open the editor yet!');
+      console.log(node);
+      this.options.commands.handleOpenDatabase(node.id.toString());
       return;
     }
 
@@ -166,6 +167,16 @@ export namespace DatabaseBrowserModel {
      * A database connector registry.
      */
     registry: ConnectorRegistry;
+
+    /**
+     * Command handlers.
+     */
+    commands: {
+      /**
+       * Handle opening a new editor and binding a connection to it.
+       */
+      handleOpenDatabase: (connectionId: string) => void;
+    };
   }
 }
 

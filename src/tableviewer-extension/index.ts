@@ -1,7 +1,7 @@
-import "./index.css";
+import './index.css';
 
-import { IMochiShell, MochiFrontEnd, MochiFrontEndPlugin } from "@mochi/application";
-import { ITableViewer, TableViewer } from "@mochi/tableviewer";
+import { IMochiShell, MochiFrontEnd, MochiFrontEndPlugin } from '@mochi/application';
+import { ITableViewer, TableViewer } from '@mochi/tableviewer';
 
 namespace CommandIDs {
   //
@@ -11,7 +11,7 @@ namespace CommandIDs {
  * Default extension to view table data.
  */
 const viewer: MochiFrontEndPlugin<ITableViewer> = {
-  id: "@mochi/table-viewer-extension:viewer",
+  id: '@mochi/table-viewer-extension:viewer',
   requires: [IMochiShell],
   provides: ITableViewer,
   activate: activateViewer,

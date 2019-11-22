@@ -1,11 +1,8 @@
 import './index.css';
 
 import { IMochiShell, MochiFrontEnd, MochiFrontEndPlugin } from '@mochi/application';
-import {
-  DatabaseBrowser,
-  IDatabaseBrowserFactory,
-  DatabaseBrowserModel,
-} from '@mochi/connectorbrowser';
+import { DatabaseBrowser, DatabaseBrowserModel, IDatabaseBrowserFactory } from '@mochi/connectorbrowser';
+import { CommandIDs as EditorCommandIDs } from '@mochi/queryeditor-extension';
 
 import { IConnectorManager } from '@mochi/connectormanager/tokens';
 
@@ -54,7 +51,14 @@ function activateDatabaseBrowser(app: MochiFrontEnd, factory: IDatabaseBrowserFa
 function activateDatabaseBrowserFactory(app: MochiFrontEnd, manager: IConnectorManager): IDatabaseBrowserFactory {
   const createDatabaseBrowser = (id: string, options: IDatabaseBrowserFactory.IOptions = {}) => {
     const registry = app.connectorRegistry;
-    const model = new DatabaseBrowserModel({ manager, registry });
+
+    const commands = {
+      handleOpenDatabase: connectionId => {
+        void app.commands.execute(EditorCommandIDs.NEW_EDITOR, { connectionId });
+      },
+    };
+
+    const model = new DatabaseBrowserModel({ manager, registry, commands });
     return new DatabaseBrowser({ id, model });
   };
 
@@ -69,13 +73,26 @@ function addCommands(app: MochiFrontEnd, factory: IDatabaseBrowserFactory, shell
   const { commands } = app;
   const browser = factory.defaultDatabaseBrowser;
 
-  commands.addCommand(CommandIDs.SHOW_BROWSER, { execute: args => {shell.activateById(browser.id); } });
+  commands.addCommand(CommandIDs.SHOW_BROWSER, {
+    execute: args => {
+      shell.activateById(browser.id);
+    },
+  });
+
+  commands.addCommand(CommandIDs.NEW_CONNECTION, {
+    execute: async args => {
+      await browser.newConnection();
+    },
+  });
+
+  commands.addCommand(CommandIDs.REMOVE_CONNECTION, {
+    execute: async args => {
+      await browser.removeConnection();
+    },
+  });
+
   commands.addKeyBinding({ command: CommandIDs.SHOW_BROWSER, selector: 'body', keys: ['Accel E'] });
-
-  commands.addCommand(CommandIDs.NEW_CONNECTION, { execute: async args => {await browser.newConnection(); } });
   commands.addKeyBinding({ command: CommandIDs.NEW_CONNECTION, selector: 'body', keys: ['Accel N'] });
-
-  commands.addCommand(CommandIDs.REMOVE_CONNECTION, { execute: async args => { await browser.removeConnection(); }});
   commands.addKeyBinding({ command: CommandIDs.REMOVE_CONNECTION, selector: 'body', keys: ['Delete'] });
 }
 

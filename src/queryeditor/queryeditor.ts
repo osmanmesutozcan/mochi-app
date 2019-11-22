@@ -1,18 +1,18 @@
-import { BoxLayout, Widget } from "@phosphor/widgets";
+import { BoxLayout, Widget } from '@phosphor/widgets';
 
-import { Toolbar, ToolbarButton } from "@mochi/apputils";
+import { Toolbar, ToolbarButton } from '@mochi/apputils';
 
-import { Editor } from "./editor";
+import { Editor } from './editor';
 
 /**
  * The class name added to the query editor toolbar node.
  */
-const TOOLBAR_CLASS = "m-QueryEditor-toolbar";
+const TOOLBAR_CLASS = 'm-QueryEditor-toolbar';
 
 /**
  * The class name added to the editor node.
  */
-const EDITOR_CLASS = "m-QueryEditor-editor";
+const EDITOR_CLASS = 'm-QueryEditor-editor';
 
 export class QueryEditor extends Widget {
   constructor(options: QueryEditor.IOptions = {}) {
@@ -29,12 +29,12 @@ export class QueryEditor extends Widget {
     this.toolbar.addClass(TOOLBAR_CLASS);
 
     const runQuery = new ToolbarButton({
-      iconClassName: "m-RunIcon",
-      tooltip: "Run Query",
-      label: "Run",
+      iconClassName: 'm-RunIcon',
+      tooltip: 'Run Query',
+      label: 'Run',
     });
 
-    this.toolbar.addItem("runQuery", runQuery);
+    this.toolbar.addItem('runQuery', runQuery);
 
     const layout = new BoxLayout();
     layout.addWidget(this.toolbar);

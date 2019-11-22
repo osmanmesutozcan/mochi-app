@@ -1,12 +1,13 @@
-import { BoxLayout, Widget } from "@phosphor/widgets";
+import { BoxLayout, Widget } from '@phosphor/widgets';
 
-import { DataGrid } from "./datagrid";
-import { Toolbar, ToolbarButton } from "@mochi/apputils";
+import { DataGrid } from './datagrid';
+import { Toolbar, ToolbarButton } from '@mochi/apputils';
+import { TableViewerModel } from '@mochi/tableviewer/model';
 
 /**
  * Class added to the table viewer instances.
  */
-const TABLE_VIEWER_CLASS = "m-TableViewer";
+const TABLE_VIEWER_CLASS = 'm-TableViewer';
 
 /**
  * Table viewer widget.
@@ -16,22 +17,23 @@ export class TableViewer extends Widget {
     super();
 
     const id = Private.getNewID();
+    const model = new TableViewerModel();
 
     this.addClass(TABLE_VIEWER_CLASS);
     this.title.label = options.label || `Output ${id}`;
     this.id = `table-viewer-${id}-widget`;
 
-    this.grid = new DataGrid({ id });
+    this.grid = new DataGrid({ model });
 
     const fitButton = new ToolbarButton({
-      iconClassName: "m-RefreshIcon",
-      tooltip: "Fit To View",
-      label: "Fit",
+      iconClassName: 'm-RefreshIcon',
+      tooltip: 'Fit To View',
+      label: 'Fit',
       onClick: () => this.grid.fit(),
     });
 
     const toolbar = new Toolbar();
-    toolbar.addItem("fitToView", fitButton);
+    toolbar.addItem('fitToView', fitButton);
 
     const layout = new BoxLayout();
     layout.addWidget(toolbar);
