@@ -7,9 +7,14 @@ import { ITreeNode } from '@blueprintjs/core';
 
 import { ConnectorManager, IConnectionDefinition, IConnectorManager } from '@mochi/connectormanager';
 import { ConnectorRegistry } from '@mochi/connectorregistry';
+import { BPIcon, Intent } from '@mochi/ui-components';
+import { ITableViewerFactory } from '@mochi/tableviewer';
+import { SqlQuery } from '@mochi/databaseutils';
 
 import { TREE_NODE_CLASS } from './tree';
-import { BPIcon, Intent } from '@mochi/ui-components';
+import ITreeNodeData = Private.ITreeNodeData;
+import { IQueryResultColumn, IQueryResultRow } from '@mochi/services/connector';
+import { TableViewerModel } from '@mochi/tableviewer/model';
 
 export class DatabaseBrowserModel implements IDisposable {
   constructor(private readonly options: DatabaseBrowserModel.IOptions) {
@@ -45,7 +50,7 @@ export class DatabaseBrowserModel implements IDisposable {
   /**
    * Expand a node in the browser tree
    */
-  expandNode(node: ITreeNode<string>): void {
+  expandNode(node: ITreeNode<ITreeNodeData>): void {
     node.isExpanded = true;
     this._changed.emit(void 0);
   }
@@ -53,7 +58,7 @@ export class DatabaseBrowserModel implements IDisposable {
   /**
    * Collapse a node in the browser tree.
    */
-  collapseNode(node: ITreeNode<string>): void {
+  collapseNode(node: ITreeNode<Private.ITreeNodeData>): void {
     node.isExpanded = false;
     this._changed.emit(void 0);
   }
@@ -61,7 +66,7 @@ export class DatabaseBrowserModel implements IDisposable {
   /**
    * Handle click event on a tree node.
    */
-  clickNode(node: ITreeNode<string>): void {
+  clickNode(node: ITreeNode<Private.ITreeNodeData>): void {
     Private.forEachNode(this.data, node1 => (node1.isSelected = false));
     this._selectedNode = node.id.toString();
     node.isSelected = true;
@@ -74,10 +79,22 @@ export class DatabaseBrowserModel implements IDisposable {
    * ### Note
    * If node is a leaf node. It will open the editor, expand the node otherwise.
    */
-  doubleClickNode(node: ITreeNode<string>): void {
+  async doubleClickNode(node: ITreeNode<Private.ITreeNodeData>): Promise<void> {
     if (!Array.isArray(node.childNodes)) {
-      console.log(node);
-      this.options.commands.handleOpenDatabase(node.id.toString());
+      const activated = this.options.viewerFactory.createViewer(node.id.toString(), {
+        label: node.label.toString() || 'Viewer',
+      });
+
+      const query = SqlQuery.newBuilder()
+        .setFrom(node.label.toString())
+        .build();
+
+      const connection = this.manager.getConnection(node.nodeData.dbId);
+      const result = await connection.query(query);
+
+      activated.model.setColumns(Private.connectorColumnToViewerColumn(result.columns));
+      activated.model.setItems(Private.connectorRowToViewerRow(result.rows));
+
       return;
     }
 
@@ -95,7 +112,7 @@ export class DatabaseBrowserModel implements IDisposable {
   /**
    * Get tree component data.
    */
-  get data(): ITreeNode<string>[] {
+  get data(): ITreeNode<Private.ITreeNodeData>[] {
     return this._data;
   }
 
@@ -137,9 +154,20 @@ export class DatabaseBrowserModel implements IDisposable {
 
     node.secondaryLabel = undefined;
     if (args.change === 'connected') {
-      node.secondaryLabel = <BPIcon icon='symbol-circle' intent={Intent.SUCCESS} />;
       const intros = await this.manager.getConnection(args.name).introspect();
-      node.childNodes = intros.tables.map(t => Private.tableToTreeNode(t));
+      const definition = find(this.manager.definitions, value => value.name === args.name);
+
+      node.secondaryLabel = <BPIcon icon='symbol-circle' intent={Intent.SUCCESS} />;
+
+      node.childNodes = intros.tables.map(t =>
+        Private.tableToTreeNode(
+          {
+            dbId: args.name,
+            dbVisibleName: definition.displayName,
+          },
+          t,
+        ),
+      );
     }
 
     this._changed.emit(void 0);
@@ -153,7 +181,7 @@ export class DatabaseBrowserModel implements IDisposable {
   private _changed = new Signal<this, void>(this);
 
   // FIXME: Convert this to a map so we can make faster lookups.
-  private _data: ITreeNode<string>[] = [];
+  private _data: ITreeNode<Private.ITreeNodeData>[] = [];
 }
 
 export namespace DatabaseBrowserModel {
@@ -167,6 +195,11 @@ export namespace DatabaseBrowserModel {
      * A database connector registry.
      */
     registry: ConnectorRegistry;
+
+    /**
+     * Table viewer factory.
+     */
+    viewerFactory: ITableViewerFactory;
 
     /**
      * Command handlers.
@@ -185,6 +218,15 @@ export namespace DatabaseBrowserModel {
  */
 namespace Private {
   /**
+   * Type for the attached data of ITreeNode
+   */
+  export interface ITreeNodeData {
+    dbId: string;
+
+    dbVisibleName: string;
+  }
+
+  /**
    * Incremented id to handout to tree nodes.
    */
   let NODE_ID = 0;
@@ -192,36 +234,37 @@ namespace Private {
   /**
    * Get a new unique node id.
    */
-  export const getNodeId = (): string => {
+  export function getNodeId(): string {
     return (NODE_ID++).toString();
-  };
+  }
 
   /**
    * Convert a definition to a ITreeNode
    */
-  export const definitionToTreeNode = (definition: IConnectionDefinition): ITreeNode<string> => {
+  export function definitionToTreeNode(definition: IConnectionDefinition): ITreeNode<ITreeNodeData> {
     return {
       id: definition.name,
       label: definition.displayName,
       className: TREE_NODE_CLASS,
     };
-  };
+  }
 
   /**
    * Convert a table info to a ITreeNode
    */
-  export const tableToTreeNode = (name: string): ITreeNode<string> => {
+  export function tableToTreeNode(nodeData: ITreeNodeData, tableName: string): ITreeNode<ITreeNodeData> {
     return {
-      id: name,
-      label: name,
+      nodeData,
+      id: tableName,
+      label: tableName,
       className: TREE_NODE_CLASS,
     };
-  };
+  }
 
   /**
    * Run a callback function for each node.
    */
-  export const forEachNode = (nodes: ITreeNode[], callback: (node: ITreeNode) => void) => {
+  export function forEachNode(nodes: ITreeNode[], callback: (node: ITreeNode) => void) {
     if (nodes == null) {
       return;
     }
@@ -230,5 +273,21 @@ namespace Private {
       callback(node);
       forEachNode(node.childNodes, callback);
     }
-  };
+  }
+
+  /**
+   * Convert a connector query result column into
+   * table viewer column.
+   */
+  export function connectorColumnToViewerColumn(cols: IQueryResultColumn[]): TableViewerModel.ITableViewerColumn[] {
+    return cols.map(c => ({ ...c, id: c.name, field: c.name }));
+  }
+
+  /**
+   * Convert a connector query result row into
+   * table viewer data row.
+   */
+  export function connectorRowToViewerRow(cols: IQueryResultRow[]): (IQueryResultRow & { id: string | number })[] {
+    return cols.map((c, id) => ({ ...c, id }));
+  }
 }

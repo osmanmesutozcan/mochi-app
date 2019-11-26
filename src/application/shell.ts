@@ -1,5 +1,5 @@
-import { ArrayExt, find, IIterator } from "@phosphor/algorithm";
-import { MessageLoop, IMessageHandler, Message } from "@phosphor/messaging";
+import { ArrayExt, find, IIterator } from '@phosphor/algorithm';
+import { MessageLoop, IMessageHandler, Message } from '@phosphor/messaging';
 
 import {
   Widget,
@@ -12,33 +12,33 @@ import {
   StackedPanel,
   Title,
   BoxLayout,
-} from "@phosphor/widgets";
-import { Signal, ISignal } from "@phosphor/signaling";
-import { Token } from "@phosphor/coreutils";
-import { Debouncer } from "../coreutils";
-import { MochiFrontEnd } from "./frontend";
+} from '@phosphor/widgets';
+import { Signal, ISignal } from '@phosphor/signaling';
+import { Token } from '@phosphor/coreutils';
+import { Debouncer } from '../coreutils';
+import { MochiFrontEnd } from './frontend';
 
 /**
  * The class name added to the MochiShell instances
  */
-const APPLICATION_SHELL_CLASS = "m-MochiShell";
+const APPLICATION_SHELL_CLASS = 'm-MochiShell';
 
 /**
  * The class name added to the SideBar instances.
  */
-const SIDEBAR_CLASS = "m-SideBar";
+const SIDEBAR_CLASS = 'm-SideBar';
 
 /**
  * The class name added to the current widget's title.
  */
-const CURRENT_CLASS = "m-mod-current";
+const CURRENT_CLASS = 'm-mod-current';
 
 /*
  * The class name added to the active widget's title.
  */
-const ACTIVE_CLASS = "m-mod-active";
+const ACTIVE_CLASS = 'm-mod-active';
 
-const ACTIVITY_CLASS = "m-Activity";
+const ACTIVITY_CLASS = 'm-Activity';
 
 /**
  * Default rank for widget added to the shell.
@@ -48,7 +48,7 @@ const DEFAULT_RANK = 400;
 /**
  * The Mochi application shell token.
  */
-export const IMochiShell = new Token<IMochiShell>("@mochi/application:IMochiShell");
+export const IMochiShell = new Token<IMochiShell>('@mochi/application:IMochiShell');
 
 /**
  * The Mochi application shell interface.
@@ -62,7 +62,7 @@ export namespace IMochiShell {
   /**
    * The areas of the application shell where widgets can reside.
    */
-  export type Area = "main" | "header" | "top" | "left" | "right" | "bottom";
+  export type Area = 'main' | 'header' | 'top' | 'left' | 'right' | 'bottom';
 
   /**
    * An arguments object for the definitionsChanged signals.
@@ -77,7 +77,7 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
   constructor() {
     super();
     this.addClass(APPLICATION_SHELL_CLASS);
-    this.id = "main";
+    this.id = 'main';
 
     let headerPanel = (this._headerPanel = new Panel());
     let topHandler = (this._topHandler = new Private.PanelHandler());
@@ -91,28 +91,28 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
     let rightHandler = (this._rightHandler = new Private.SideBarHandler());
     let rootLayout = new BoxLayout();
 
-    headerPanel.id = "m-header-panel";
-    topHandler.panel.id = "m-top-panel";
-    bottomPanel.id = "m-bottom-panel";
-    hboxPanel.id = "m-main-content-panel";
-    dockPanel.id = "m-main-dock-panel";
-    hsplitPanel.id = "m-main-split-panel";
+    headerPanel.id = 'm-header-panel';
+    topHandler.panel.id = 'm-top-panel';
+    bottomPanel.id = 'm-bottom-panel';
+    hboxPanel.id = 'm-main-content-panel';
+    dockPanel.id = 'm-main-dock-panel';
+    hsplitPanel.id = 'm-main-split-panel';
 
     leftHandler.sideBar.addClass(SIDEBAR_CLASS);
-    leftHandler.sideBar.addClass("m-mod-left");
-    leftHandler.stackedPanel.id = "m-left-stack";
+    leftHandler.sideBar.addClass('m-mod-left');
+    leftHandler.stackedPanel.id = 'm-left-stack';
 
     rightHandler.sideBar.addClass(SIDEBAR_CLASS);
-    rightHandler.sideBar.addClass("m-mod-right");
-    rightHandler.stackedPanel.id = "m-right-stack";
+    rightHandler.sideBar.addClass('m-mod-right');
+    rightHandler.stackedPanel.id = 'm-right-stack';
 
     hboxPanel.spacing = 0;
     dockPanel.spacing = 5;
     hsplitPanel.spacing = 1;
 
-    hboxPanel.direction = "left-to-right";
-    hsplitPanel.orientation = "horizontal";
-    bottomPanel.direction = "bottom-to-top";
+    hboxPanel.direction = 'left-to-right';
+    hsplitPanel.orientation = 'horizontal';
+    bottomPanel.direction = 'bottom-to-top';
 
     SplitPanel.setStretch(leftHandler.stackedPanel, 0);
     SplitPanel.setStretch(dockPanel, 1);
@@ -130,7 +130,7 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
     hboxPanel.addWidget(hsplitPanel);
     hboxPanel.addWidget(rightHandler.sideBar);
 
-    rootLayout.direction = "top-to-bottom";
+    rootLayout.direction = 'top-to-bottom';
     rootLayout.spacing = 0;
 
     // Use relatice sizing to set the width of the side panels.
@@ -180,23 +180,23 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
     return this._tracker.activeWidget;
   }
 
-  add(widget: Widget, area: IMochiShell.Area = "main"): void {
-    switch (area || "main") {
-      case "main":
+  add(widget: Widget, area: IMochiShell.Area = 'main'): void {
+    switch (area || 'main') {
+      case 'main':
         return this._addToMainArea(widget);
-      case "left":
+      case 'left':
         return this._addToLeftArea(widget);
-      case "right":
-        throw new Error("Not implemented");
+      case 'right':
+        throw new Error('Not implemented');
       // return this._addToRightArea(widget, options);
-      case "header":
-        throw new Error("Not implemented");
+      case 'header':
+        throw new Error('Not implemented');
       // return this._addToHeaderArea(widget, options);
-      case "top":
-        throw new Error("Not implemented");
+      case 'top':
+        throw new Error('Not implemented');
       // return this._addToTopArea(widget, options);
-      case "bottom":
-        throw new Error("Not implemented");
+      case 'bottom':
+        throw new Error('Not implemented');
       // return this._addToBottomArea(widget, options);
       default:
         throw new Error(`Invalid area: ${area}`);
@@ -207,7 +207,7 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
    * Returns the widgets for an application area.
    */
   widgets(area?: IMochiShell.Area): IIterator<Widget> {
-    throw new Error("Not Implemented");
+    throw new Error('Not Implemented');
   }
 
   /**
@@ -275,7 +275,7 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
    */
   private _addToLeftArea(widget: Widget): void {
     if (!widget.id) {
-      console.error("Widgets added to app shell must have unique id property.");
+      console.error('Widgets added to app shell must have unique id property.');
       return;
     }
     this._leftHandler.addWidget(widget, DEFAULT_RANK);
@@ -295,12 +295,12 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
    */
   private _addToMainArea(widget: Widget): void {
     if (!widget.id) {
-      console.error("Widgets added to app shell must have unique id property.");
+      console.error('Widgets added to app shell must have unique id property.');
       return;
     }
 
     const dock = this._dockPanel;
-    const mode = "tab-after";
+    const mode = 'tab-after';
     let ref: Widget | null = this.currentWidget;
 
     // Add widget ID to tab so that we can get a handle on the tab's widget
@@ -319,7 +319,7 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
       args.newValue.title.className += ` ${ACTIVE_CLASS}`;
     }
     if (args.oldValue) {
-      args.oldValue.title.className = args.oldValue.title.className.replace(ACTIVE_CLASS, "");
+      args.oldValue.title.className = args.oldValue.title.className.replace(ACTIVE_CLASS, '');
     }
     this._activeChanged.emit(args);
   }
@@ -332,7 +332,7 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
       args.newValue.title.className += ` ${CURRENT_CLASS}`;
     }
     if (args.oldValue) {
-      args.oldValue.title.className = args.oldValue.title.className.replace(CURRENT_CLASS, "");
+      args.oldValue.title.className = args.oldValue.title.className.replace(CURRENT_CLASS, '');
     }
     this._currentChanged.emit(args);
   }
@@ -349,11 +349,11 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
    */
   private _dockChildHook = (handler: IMessageHandler, msg: Message): boolean => {
     switch (msg.type) {
-      case "child-added":
+      case 'child-added':
         (msg as Widget.ChildMessage).child.addClass(ACTIVITY_CLASS);
         this._tracker.add((msg as Widget.ChildMessage).child);
         break;
-      case "child-removed":
+      case 'child-removed':
         (msg as Widget.ChildMessage).child.removeClass(ACTIVITY_CLASS);
         this._tracker.remove((msg as Widget.ChildMessage).child);
         break;
@@ -361,7 +361,7 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
         break;
     }
     return true;
-  }
+  };
 
   private _activeChanged = new Signal<this, IMochiShell.IChangedArgs>(this);
   private _currentChanged = new Signal<this, IMochiShell.IChangedArgs>(this);
@@ -429,8 +429,8 @@ namespace Private {
   export class SideBarHandler {
     constructor() {
       this._sideBar = new TabBar({
-        insertBehavior: "none",
-        removeBehavior: "none",
+        insertBehavior: 'none',
+        removeBehavior: 'none',
         allowDeselect: true,
       });
 

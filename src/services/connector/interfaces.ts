@@ -34,6 +34,15 @@ export interface IQueryParams {
  * Database query result returned from the connectorRegistry.
  */
 export interface IQueryResult {
+  columns: IQueryResultColumn[];
+  rows: IQueryResultRow[];
+}
+
+export interface IQueryResultColumn {
+  name: string;
+}
+
+export interface IQueryResultRow {
   //
 }
 

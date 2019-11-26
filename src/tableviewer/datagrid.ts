@@ -5,15 +5,6 @@ import { TableViewerModel } from '@mochi/tableviewer/model';
 
 const Slick = (window as any).Slick;
 
-const columns = [
-  { id: 'title', name: 'Title', field: 'title' },
-  { id: 'duration', name: 'Duration', field: 'duration' },
-  { id: '%', name: '% Complete', field: 'percentComplete' },
-  { id: 'start', name: 'Start', field: 'start' },
-  { id: 'finish', name: 'Finish', field: 'finish' },
-  { id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven' },
-];
-
 const _options = {
   enableCellNavigation: true,
   enableColumnReorder: true,
@@ -27,7 +18,16 @@ export class DataGrid extends Widget {
   }
 
   protected onAfterAttach(msg: Message): void {
-    this._grid = new Slick.Grid(this.node, this._model.dataView, columns, _options);
+    this._grid = new Slick.Grid(this.node, this._model.dataView, this._model.columns, _options);
+
+    this._model.onColumnsChange.connect((sender, args) => {
+      this._grid.setColumns(args.columns);
+    });
+
+    this._model.onDataItemsChange.connect(() => {
+      this._grid.updateRowCount();
+      this._grid.render();
+    });
   }
 
   protected onResize(msg: Widget.ResizeMessage): void {

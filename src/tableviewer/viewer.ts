@@ -17,7 +17,7 @@ export class TableViewer extends Widget {
     super();
 
     const id = Private.getNewID();
-    const model = new TableViewerModel();
+    const model = options.model || new TableViewerModel();
 
     this.addClass(TABLE_VIEWER_CLASS);
     this.title.label = options.label || `Output ${id}`;
@@ -57,6 +57,11 @@ export namespace TableViewer {
      * Tab label of the viewer.
      */
     label?: string;
+
+    /**
+     * Model of the viewer.
+     */
+    model?: TableViewerModel;
   }
 }
 

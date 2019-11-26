@@ -32,6 +32,9 @@ export class QueryEditor extends Widget {
       iconClassName: 'm-RunIcon',
       tooltip: 'Run Query',
       label: 'Run',
+      onClick: () => {
+        //
+      },
     });
 
     this.toolbar.addItem('runQuery', runQuery);

@@ -1,7 +1,7 @@
-import { Widget } from "@phosphor/widgets";
-import { Message } from "@phosphor/messaging";
+import { Widget } from '@phosphor/widgets';
+import { Message } from '@phosphor/messaging';
 
-import * as Monaco from "monaco-editor";
+import * as Monaco from 'monaco-editor';
 
 export class Editor extends Widget {
   constructor(options: Editor.IOptions = {}) {
@@ -29,8 +29,7 @@ export namespace Editor {
   /**
    * Query editor options.
    */
-  export interface IOptions {
-  }
+  export interface IOptions {}
 }
 
 /**
@@ -43,15 +42,15 @@ namespace Private {
   function getWorkerUrl(label: string): string {
     const chromeUrl = (prefix: string) => chrome.runtime.getURL(`js/${prefix}.worker.js`);
     switch (label) {
-      case "html":
-      case "json":
-      case "css":
+      case 'html':
+      case 'json':
+      case 'css':
         return chromeUrl(label);
-      case "javascript":
-      case "typescript":
-        return chromeUrl("typescript");
+      case 'javascript':
+      case 'typescript':
+        return chromeUrl('typescript');
       default:
-        return chromeUrl("editor");
+        return chromeUrl('editor');
     }
   }
 
@@ -64,8 +63,8 @@ namespace Private {
     };
 
     return Monaco.editor.create(node, {
-      value: "SELECT * FROM 'test'",
-      language: "sql",
+      value: '-- All roles\nSELECT * FROM \'pg_roles\';',
+      language: 'sql',
       minimap: {
         enabled: false,
       },

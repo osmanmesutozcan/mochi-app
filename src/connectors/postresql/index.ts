@@ -19,7 +19,7 @@ export class PostgreSQLConnector extends DataSourceConnector implements IDisposa
 
   async login(): Promise<void> {
     await this._client.connect();
-    this._changed.emit({change: 'connected', type: 'connectionStatus'});
+    this._changed.emit({ change: 'connected', type: 'connectionStatus' });
   }
 
   async logout(): Promise<void> {
@@ -27,9 +27,11 @@ export class PostgreSQLConnector extends DataSourceConnector implements IDisposa
   }
 
   async query(query: string, params?: IQueryParams): Promise<IQueryResult> {
-    const result =  this._client.query(query);
-    console.log(result);
-    throw new Error('Not implemented');
+    const result = await this._client.query(query);
+    return {
+      columns: result.fields,
+      rows: result.rows,
+    };
   }
 
   get changed(): ISignal<this, IChangedArgs> {

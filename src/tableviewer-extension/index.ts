@@ -1,7 +1,8 @@
 import './index.css';
 
 import { IMochiShell, MochiFrontEnd, MochiFrontEndPlugin } from '@mochi/application';
-import { ITableViewer, TableViewer } from '@mochi/tableviewer';
+import { ITableViewerFactory, TableViewer } from '@mochi/tableviewer';
+import { TableViewerModel } from '@mochi/tableviewer/model';
 
 namespace CommandIDs {
   //
@@ -10,18 +11,22 @@ namespace CommandIDs {
 /**
  * Default extension to view table data.
  */
-const viewer: MochiFrontEndPlugin<ITableViewer> = {
+const viewer: MochiFrontEndPlugin<ITableViewerFactory> = {
   id: '@mochi/table-viewer-extension:viewer',
   requires: [IMochiShell],
-  provides: ITableViewer,
-  activate: activateViewer,
-  autoStart: true,
+  provides: ITableViewerFactory,
+  activate: activateFactory,
 };
 
-// TODO: Write activator...
-function activateViewer(app: MochiFrontEnd, shell: IMochiShell) {
-  shell.add(new TableViewer({}));
-  return {};
+function activateFactory(app: MochiFrontEnd, shell: IMochiShell): ITableViewerFactory {
+  const createViewer = (id: string, options: TableViewer.IOptions) => {
+    const model = options.model || new TableViewerModel();
+    const viewer = new TableViewer({ model, ...options });
+    shell.add(viewer);
+    return { model, viewer };
+  };
+
+  return { createViewer };
 }
 
 const plugins: MochiFrontEndPlugin<any>[] = [viewer];

@@ -3,8 +3,8 @@ import './index.css';
 import { IMochiShell, MochiFrontEnd, MochiFrontEndPlugin } from '@mochi/application';
 import { DatabaseBrowser, DatabaseBrowserModel, IDatabaseBrowserFactory } from '@mochi/connectorbrowser';
 import { CommandIDs as EditorCommandIDs } from '@mochi/queryeditor-extension';
-
-import { IConnectorManager } from '@mochi/connectormanager/tokens';
+import { IConnectorManager } from '@mochi/connectormanager';
+import { ITableViewerFactory } from '@mochi/tableviewer';
 
 namespace CommandIDs {
   export const SHOW_BROWSER = 'databasebrowser:show';
@@ -28,7 +28,7 @@ const browser: MochiFrontEndPlugin<void> = {
 const factory: MochiFrontEndPlugin<IDatabaseBrowserFactory> = {
   id: '@mochi/databasebrowser-extension:factory',
   provides: IDatabaseBrowserFactory,
-  requires: [IConnectorManager],
+  requires: [IConnectorManager, ITableViewerFactory],
   activate: activateDatabaseBrowserFactory,
 };
 
@@ -48,17 +48,22 @@ function activateDatabaseBrowser(app: MochiFrontEnd, factory: IDatabaseBrowserFa
 /**
  * Activate browser factory provider.
  */
-function activateDatabaseBrowserFactory(app: MochiFrontEnd, manager: IConnectorManager): IDatabaseBrowserFactory {
+function activateDatabaseBrowserFactory(
+  app: MochiFrontEnd,
+  manager: IConnectorManager,
+  viewerFactory: ITableViewerFactory,
+): IDatabaseBrowserFactory {
   const createDatabaseBrowser = (id: string, options: IDatabaseBrowserFactory.IOptions = {}) => {
     const registry = app.connectorRegistry;
 
     const commands = {
-      handleOpenDatabase: connectionId => {
-        void app.commands.execute(EditorCommandIDs.NEW_EDITOR, { connectionId });
+      handleOpenDatabase: async connectionId => {
+        const model = await app.commands.execute(EditorCommandIDs.NEW_EDITOR, { connectionId });
+        console.log(model);
       },
     };
 
-    const model = new DatabaseBrowserModel({ manager, registry, commands });
+    const model = new DatabaseBrowserModel({ manager, registry, commands, viewerFactory });
     return new DatabaseBrowser({ id, model });
   };
 
