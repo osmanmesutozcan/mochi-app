@@ -1,32 +1,61 @@
 import * as React from 'react';
 
-import { Dialog, ReactWidget } from '@mochi/apputils';
+import { Dialog, ReactWidget, UseSignal } from '@mochi/apputils';
 import { FormGroup, InputGroup, Tabs } from '@mochi/ui-components';
 
 import { DatabaseBrowserModel } from './model';
 import { toArray } from '@phosphor/algorithm';
+import { Signal } from '@phosphor/signaling';
 
-export class NewConnectionDialogBody extends ReactWidget implements Dialog.IBodyWidget<BrowserDialog.INewConnection> {
+export class NewConnectionDialogBody extends ReactWidget implements Dialog.IBodyWidget<BrowserDialog.IConnection> {
   constructor(private readonly options: NewConnectionDialogBody.IOptions) {
     super();
+
+    if (options.value) {
+      this._value = options.value;
+    }
   }
 
-  getValue(): BrowserDialog.INewConnection {
+  dispose(): void {
+    if (this._isDisposed) {
+      return;
+    }
+
+    this._isDisposed = true;
+    Signal.clearData(this);
+  }
+
+  getValue(): BrowserDialog.IConnection {
     return this._value;
   }
 
   render() {
-    return <NewConnectionDialog model={this.options.model} onUpdate={(p, v) => this._updateValue(p, v)} />;
+    return (
+      <UseSignal
+        signal={this._onValueUpdated}
+        children={() => (
+          <NewConnectionDialog
+            value={this._value}
+            model={this.options.model}
+            onUpdate={(p, v) => this._updateValue(p, v)}
+          />
+        )}
+      />
+    );
   }
 
-  private _updateValue(property: keyof BrowserDialog.INewConnection, value: string): void {
+  private _updateValue(property: keyof BrowserDialog.IConnection, value: string): void {
     this._value[property] = value;
+    this._onValueUpdated.emit(void 0);
   }
+
+  private _onValueUpdated = new Signal<this, void>(this);
+  private _isDisposed = false;
 
   /**
    * Default values for new connection...
    */
-  private _value: BrowserDialog.INewConnection = {
+  private _value: BrowserDialog.IConnection = {
     type: '',
     name: '',
     user: '',
@@ -40,6 +69,7 @@ export class NewConnectionDialogBody extends ReactWidget implements Dialog.IBody
 export namespace NewConnectionDialogBody {
   export interface IOptions {
     model: DatabaseBrowserModel;
+    value?: BrowserDialog.IConnection;
   }
 }
 
@@ -47,12 +77,13 @@ export namespace NewConnectionDialogBody {
  * Body of new connection dialog.
  */
 class NewConnectionDialog extends React.Component<NewConnectionDialog.IProps> {
-  private _general = (
+  private _general = () => (
     <React.Fragment>
       <FormGroup label='User:' inline={true}>
         <InputGroup
           type='text'
           fill={true}
+          value={this.props.value['user']}
           onChange={e => this.props.onUpdate('user', e.target.value)}
         />
       </FormGroup>
@@ -62,6 +93,7 @@ class NewConnectionDialog extends React.Component<NewConnectionDialog.IProps> {
           type='text'
           fill={true}
           placeholder='<hidden>'
+          value={this.props.value['password']}
           onChange={e => this.props.onUpdate('password', e.target.value)}
         />
       </FormGroup>
@@ -70,6 +102,7 @@ class NewConnectionDialog extends React.Component<NewConnectionDialog.IProps> {
         <InputGroup
           type='text'
           fill={true}
+          value={this.props.value['database']}
           onChange={e => this.props.onUpdate('database', e.target.value)}
         />
       </FormGroup>
@@ -78,6 +111,7 @@ class NewConnectionDialog extends React.Component<NewConnectionDialog.IProps> {
         <InputGroup
           type='text'
           fill={true}
+          value={this.props.value['hostname']}
           onChange={e => this.props.onUpdate('hostname', e.target.value)}
         />
       </FormGroup>
@@ -85,56 +119,59 @@ class NewConnectionDialog extends React.Component<NewConnectionDialog.IProps> {
         <InputGroup
           type='number'
           fill={true}
+          value={this.props.value['port']}
           onChange={e => this.props.onUpdate('port', e.target.value)}
         />
       </FormGroup>
     </React.Fragment>
-  );
+  )
 
-  private _SSL = (
-    <React.Fragment>
-      SSL
-    </React.Fragment>
-  );
+  private _SSL = () => <React.Fragment>SSL</React.Fragment>;
 
-  private _categories: Tabs.ITab[] = [
+  private _categories = (): Tabs.ITab[] => [
     {
       tabId: 'general',
       title: 'General',
-      panel: this._general,
+      panel: this._general(),
     },
     {
       tabId: 'ssl',
       title: 'SSL',
-      panel: this._SSL,
+      panel: this._SSL(),
     },
-  ];
+  ]
 
-  private _panel = (
+  private _panel = () => (
     <div className='m-NewConnectionDialog-panel'>
       <FormGroup label='Name:' inline={true}>
         <InputGroup
           type='text'
           fill={true}
+          value={this.props.value['name']}
           onChange={e => this.props.onUpdate('name', e.target.value)}
         />
       </FormGroup>
 
-      <Tabs
-        id='m-newconnection-dialog-categories'
-        onChange={() => ({})}
-        tabs={this._categories}
-      />
+      <Tabs id='m-newconnection-dialog-categories' onChange={() => ({})} tabs={this._categories()} />
     </div>
-  );
+  )
 
-  private _tabs: Tabs.ITab[] = toArray(this.props.model.registry.getConnectorTypes()).map(type => {
-    return ({
-      tabId: type.name,
-      title: type.displayName,
-      panel: this._panel,
+  private _tabs = (): Tabs.ITab[] => {
+    return toArray(this.props.model.registry.getConnectorTypes()).map(type => {
+      return {
+        tabId: type.name,
+        title: type.displayName,
+        panel: this._panel(),
+      };
     });
-  });
+  }
+
+  public componentDidMount(): void {
+    const connectors = toArray(this.props.model.registry.getConnectorTypes());
+    if (connectors.length > 0) {
+      this.props.onUpdate('type', connectors[0].name);
+    }
+  }
 
   public render() {
     return (
@@ -142,7 +179,7 @@ class NewConnectionDialog extends React.Component<NewConnectionDialog.IProps> {
         id='m-newconnection-dialog'
         vertical={true}
         onChange={(id: string) => this.props.onUpdate('type', id)}
-        tabs={this._tabs}
+        tabs={this._tabs()}
       />
     );
   }
@@ -151,12 +188,13 @@ class NewConnectionDialog extends React.Component<NewConnectionDialog.IProps> {
 namespace NewConnectionDialog {
   export interface IProps {
     model: DatabaseBrowserModel;
-    onUpdate(property: keyof BrowserDialog.INewConnection, value: string): void;
+    value: BrowserDialog.IConnection;
+    onUpdate(property: keyof BrowserDialog.IConnection, value: string): void;
   }
 }
 
 export namespace BrowserDialog {
-  export interface INewConnection {
+  export interface IConnection {
     name: string;
     type: string;
     user: string;
