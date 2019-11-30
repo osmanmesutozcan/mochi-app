@@ -96,7 +96,7 @@ export class DatabaseBrowser extends Widget {
   }
 
   async removeConnection(): Promise<void> {
-    const definition = this.model.selectedDefinition;
+    const { definition } = this.model.selectedDefinition;
     if (!definition) {
       return;
     }
@@ -105,7 +105,7 @@ export class DatabaseBrowser extends Widget {
   }
 
   async startConnection(): Promise<void> {
-    const definition = this.model.selectedDefinition;
+    const { definition } = this.model.selectedDefinition;
     if (!definition) {
       return;
     }

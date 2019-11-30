@@ -68,6 +68,7 @@
   border: var(--jp-border-width) solid var(--jp-border-color1);
   font-size: var(--jp-ui-font-size1);
   box-shadow: var(--jp-elevation-z6);
+  display: inline-block;
 }
 
 .p-Menu-item {

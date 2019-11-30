@@ -2,6 +2,7 @@
   min-width: unset;
 }
 
+.m-TreeLeaf .bp3-tree-node-content,
 .m-TreeNode .bp3-tree-node-content {
   width: unset;
 }

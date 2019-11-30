@@ -7,6 +7,7 @@ import { IConnectorManager } from '@mochi/connectormanager';
 import { ITableViewerFactory } from '@mochi/tableviewer';
 
 namespace CommandIDs {
+  export const OPEN_TABLE_IN_EDITOR = 'databasebrowser:open-editor';
   export const SHOW_BROWSER = 'databasebrowser:show';
   export const NEW_CONNECTION = 'databasebrowser:new-connection';
   export const REMOVE_CONNECTION = 'databasebrowser:remove-connection';
@@ -41,6 +42,7 @@ function activateDatabaseBrowser(app: MochiFrontEnd, factory: IDatabaseBrowserFa
 
   shell.add(browser, 'left');
   addCommands(app, factory, shell);
+  addTableContextMenu(app);
 
   void commands.execute(CommandIDs.SHOW_BROWSER, void 0);
 }
@@ -56,14 +58,7 @@ function activateDatabaseBrowserFactory(
   const createDatabaseBrowser = (id: string, options: IDatabaseBrowserFactory.IOptions = {}) => {
     const registry = app.connectorRegistry;
 
-    const commands = {
-      handleOpenDatabase: async connectionId => {
-        const model = await app.commands.execute(EditorCommandIDs.NEW_EDITOR, { connectionId });
-        console.log(model);
-      },
-    };
-
-    const model = new DatabaseBrowserModel({ manager, registry, commands, viewerFactory });
+    const model = new DatabaseBrowserModel({ manager, registry, viewerFactory });
     return new DatabaseBrowser({ id, model });
   };
 
@@ -72,11 +67,34 @@ function activateDatabaseBrowserFactory(
 }
 
 /**
+ * Add context menu items of browser.
+ */
+function addTableContextMenu(app: MochiFrontEnd) {
+  app.contextMenu.addItem({
+    command: CommandIDs.OPEN_TABLE_IN_EDITOR,
+    selector: '.m-TreeLeaf',
+    type: 'command',
+  });
+}
+
+/**
  * Add commands to MochiApp.
  */
 function addCommands(app: MochiFrontEnd, factory: IDatabaseBrowserFactory, shell: IMochiShell): void {
   const { commands } = app;
   const browser = factory.defaultDatabaseBrowser;
+
+  commands.addCommand(CommandIDs.OPEN_TABLE_IN_EDITOR, {
+    label: 'Open in editor',
+    mnemonic: 8,
+    execute: () => {
+      const { definition } = browser.model.selectedDefinition;
+      void commands.execute(EditorCommandIDs.NEW_EDITOR, {
+        label: definition.displayName,
+        connectionId: definition.name,
+      });
+    },
+  });
 
   commands.addCommand(CommandIDs.SHOW_BROWSER, {
     execute: args => {

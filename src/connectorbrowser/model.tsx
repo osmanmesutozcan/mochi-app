@@ -11,7 +11,7 @@ import { BPIcon, Intent } from '@mochi/ui-components';
 import { ITableViewerFactory } from '@mochi/tableviewer';
 import { SqlQuery } from '@mochi/databaseutils';
 
-import { TREE_NODE_CLASS } from './tree';
+import { TREE_NODE_CLASS, TREE_LEAF_CLASS } from './tree';
 import ITreeNodeData = Private.ITreeNodeData;
 import { IQueryResultColumn, IQueryResultRow } from '@mochi/services/connector';
 import { TableViewerModel } from '@mochi/tableviewer/model';
@@ -68,7 +68,7 @@ export class DatabaseBrowserModel implements IDisposable {
    */
   clickNode(node: ITreeNode<Private.ITreeNodeData>): void {
     Private.forEachNode(this.data, node1 => (node1.isSelected = false));
-    this._selectedNode = node.id.toString();
+    this._selectedNode = node;
     node.isSelected = true;
     this._changed.emit(void 0);
   }
@@ -119,8 +119,18 @@ export class DatabaseBrowserModel implements IDisposable {
   /**
    * Get definition for the selected node
    */
-  get selectedDefinition(): IConnectionDefinition | undefined {
-    return find(this.manager.definitions, value => value.name === this._selectedNode);
+  get selectedDefinition(): { definition: IConnectionDefinition; table: string } {
+    if (this._selectedNode.className.includes(TREE_LEAF_CLASS)) {
+      return {
+        table: this._selectedNode.id.toString(),
+        definition: find(this.manager.definitions, value => value.name === this._selectedNode.nodeData.dbId),
+      };
+    }
+
+    return {
+      table: null,
+      definition: find(this.manager.definitions, value => value.name === this._selectedNode.id.toString()),
+    };
   }
 
   /**
@@ -177,7 +187,7 @@ export class DatabaseBrowserModel implements IDisposable {
   readonly manager: IConnectorManager;
 
   private _isDisposed = false;
-  private _selectedNode: string = null;
+  private _selectedNode: ITreeNode<ITreeNodeData> = null;
   private _changed = new Signal<this, void>(this);
 
   // FIXME: Convert this to a map so we can make faster lookups.
@@ -200,16 +210,6 @@ export namespace DatabaseBrowserModel {
      * Table viewer factory.
      */
     viewerFactory: ITableViewerFactory;
-
-    /**
-     * Command handlers.
-     */
-    commands: {
-      /**
-       * Handle opening a new editor and binding a connection to it.
-       */
-      handleOpenDatabase: (connectionId: string) => void;
-    };
   }
 }
 
@@ -257,7 +257,7 @@ namespace Private {
       nodeData,
       id: tableName,
       label: tableName,
-      className: TREE_NODE_CLASS,
+      className: TREE_LEAF_CLASS,
     };
   }
 

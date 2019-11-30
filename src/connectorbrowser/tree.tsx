@@ -11,6 +11,11 @@ import { DatabaseBrowserModel } from './model';
  */
 export const TREE_NODE_CLASS = 'm-TreeNode';
 
+/**
+ * Class name to append to all tree leaf elements.
+ */
+export const TREE_LEAF_CLASS = 'm-TreeLeaf';
+
 export class Tree extends ReactWidget {
   constructor(props: Tree.IProps) {
     super();
@@ -28,7 +33,7 @@ export class Tree extends ReactWidget {
             onNodeCollapse={node => this._model.collapseNode(node)}
             onNodeClick={node => this._model.clickNode(node)}
             onNodeDoubleClick={node => this._model.doubleClickNode(node)}
-            onNodeContextMenu={console.log}
+            onNodeContextMenu={node => this._model.clickNode(node)}
           />
         )}
       </UseSignal>

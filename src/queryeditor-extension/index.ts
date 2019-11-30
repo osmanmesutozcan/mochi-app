@@ -7,7 +7,7 @@ export namespace CommandIDs {
   /**
    * Creates a new editor and binds it to a connection.
    */
-  export const NEW_EDITOR = 'NEW_EDITOR';
+  export const NEW_EDITOR = 'queryeditor:NEW_EDITOR';
 }
 
 const editor: MochiFrontEndPlugin<void> = {
@@ -24,8 +24,9 @@ function activateEditor(app: MochiFrontEnd, shell: IMochiShell): void {
   const { commands } = app;
 
   commands.addCommand(CommandIDs.NEW_EDITOR, {
-    execute: (args: { connectionId: string }) => {
-      shell.add(queryEditorFactory({ label: args.connectionId }), 'main');
+    label: 'Open editor',
+    execute: (args: { connectionId: string, label: string }) => {
+      shell.add(queryEditorFactory({ label: args.label }), 'main');
     },
   });
 }
