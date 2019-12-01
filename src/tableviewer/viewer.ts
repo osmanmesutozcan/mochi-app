@@ -1,7 +1,6 @@
 import { BoxLayout, Widget } from '@phosphor/widgets';
 
-import { DataGrid } from './datagrid';
-import { Toolbar, ToolbarButton } from '@mochi/apputils';
+import { DataGrid, Toolbar, ToolbarButton } from '@mochi/apputils';
 import { TableViewerModel } from '@mochi/tableviewer/model';
 
 /**

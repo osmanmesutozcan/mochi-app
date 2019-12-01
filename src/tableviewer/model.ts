@@ -1,7 +1,6 @@
 import { IDisposable } from '@phosphor/disposable';
 import { ISignal, Signal } from '@phosphor/signaling';
-
-const Slick = (window as any).Slick;
+import { Slick } from '@mochi/apputils';
 
 export class TableViewerModel implements IDisposable {
   constructor(options: TableViewerModel.IOptions = {}) {

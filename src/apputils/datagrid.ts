@@ -3,7 +3,7 @@ import { Widget } from '@phosphor/widgets';
 import { Message } from '@phosphor/messaging';
 import { TableViewerModel } from '@mochi/tableviewer/model';
 
-const Slick = (window as any).Slick;
+export const Slick = (window as any).Slick;
 
 const _options = {
   enableCellNavigation: true,
