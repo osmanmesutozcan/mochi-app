@@ -10,6 +10,11 @@ export interface IDataSourceConnector {
    */
   changed: ISignal<this, IChangedArgs>;
 
+  /**
+   * Run a query on using the connector.
+   *
+   * @TODO: We need to be able to cancel inflight requests.
+   */
   query(query: string, params?: IQueryParams): Promise<IQueryResult>;
 
   login(): Promise<void>;

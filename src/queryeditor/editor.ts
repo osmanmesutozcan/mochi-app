@@ -16,6 +16,16 @@ export class Editor extends Widget {
     this._monaco.layout();
   }
 
+  public getContent(): string {
+    const model = this._monaco.getModel();
+    if (!model) {
+      console.warn('Could not get monaco content');
+      return '';
+    }
+
+    return model.getLinesContent().join('\n');
+  }
+
   /**
    * Monaco editor instance.
    */
@@ -29,7 +39,9 @@ export namespace Editor {
   /**
    * Query editor options.
    */
-  export interface IOptions {}
+  export interface IOptions {
+    //
+  }
 }
 
 /**
@@ -63,7 +75,7 @@ namespace Private {
     };
 
     return Monaco.editor.create(node, {
-      value: '-- All roles\nSELECT * FROM \'pg_roles\';',
+      value: '-- All roles\nSELECT * FROM pg_roles;',
       language: 'sql',
       minimap: {
         enabled: false,

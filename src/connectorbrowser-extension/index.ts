@@ -42,7 +42,7 @@ function activateDatabaseBrowser(app: MochiFrontEnd, factory: IDatabaseBrowserFa
 
   shell.add(browser, 'left');
   addCommands(app, factory, shell);
-  addTableContextMenu(app);
+  addContextMenu(app);
 
   void commands.execute(CommandIDs.SHOW_BROWSER, void 0);
 }
@@ -69,10 +69,10 @@ function activateDatabaseBrowserFactory(
 /**
  * Add context menu items of browser.
  */
-function addTableContextMenu(app: MochiFrontEnd) {
+function addContextMenu(app: MochiFrontEnd) {
   app.contextMenu.addItem({
     command: CommandIDs.OPEN_TABLE_IN_EDITOR,
-    selector: '.m-TreeLeaf',
+    selector: '.m-TreeNode',
     type: 'command',
   });
 }

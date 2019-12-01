@@ -12,3 +12,4 @@ import 'jquery-ui-dist/jquery-ui.min.css';
 
 export * from './tokens';
 export * from './viewer';
+export * from './model';

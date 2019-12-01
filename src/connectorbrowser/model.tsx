@@ -8,13 +8,12 @@ import { ITreeNode } from '@blueprintjs/core';
 import { ConnectorManager, IConnectionDefinition, IConnectorManager } from '@mochi/connectormanager';
 import { ConnectorRegistry } from '@mochi/connectorregistry';
 import { BPIcon, Intent } from '@mochi/ui-components';
-import { ITableViewerFactory } from '@mochi/tableviewer';
+import { IQueryResultColumn, IQueryResultRow } from '@mochi/services';
+import { ITableViewerFactory, TableViewerModel } from '@mochi/tableviewer';
 import { SqlQuery } from '@mochi/databaseutils';
 
 import { TREE_NODE_CLASS, TREE_LEAF_CLASS } from './tree';
 import ITreeNodeData = Private.ITreeNodeData;
-import { IQueryResultColumn, IQueryResultRow } from '@mochi/services/connector';
-import { TableViewerModel } from '@mochi/tableviewer/model';
 
 export class DatabaseBrowserModel implements IDisposable {
   constructor(private readonly options: DatabaseBrowserModel.IOptions) {

@@ -1,6 +1,8 @@
 import { BoxLayout, Widget } from '@phosphor/widgets';
 
 import { Toolbar, ToolbarButton } from '@mochi/apputils';
+import { QueryEditorModel } from '@mochi/queryeditor';
+import { IDataSourceConnector } from '@mochi/services';
 
 import { Editor } from './editor';
 
@@ -15,7 +17,7 @@ const TOOLBAR_CLASS = 'm-QueryEditor-toolbar';
 const EDITOR_CLASS = 'm-QueryEditor-editor';
 
 export class QueryEditor extends Widget {
-  constructor(options: QueryEditor.IOptions = {}) {
+  constructor(options: QueryEditor.IOptions) {
     super();
 
     const id = Private.getId();
@@ -28,13 +30,16 @@ export class QueryEditor extends Widget {
     this.toolbar = new Toolbar();
     this.toolbar.addClass(TOOLBAR_CLASS);
 
+    this.model = new QueryEditorModel({
+      connection: options.connection,
+      editor: this.editor,
+    });
+
     const runQuery = new ToolbarButton({
       iconClassName: 'm-RunIcon',
       tooltip: 'Run Query',
       label: 'Run',
-      onClick: () => {
-        //
-      },
+      onClick: () => this.model.runQuery(),
     });
 
     this.toolbar.addItem('runQuery', runQuery);
@@ -49,6 +54,7 @@ export class QueryEditor extends Widget {
     this.layout = layout;
   }
 
+  readonly model: QueryEditorModel;
   readonly toolbar: Toolbar;
   readonly editor: Editor;
 }
@@ -59,6 +65,11 @@ export namespace QueryEditor {
      * Label of the editor on main tab.
      */
     label?: string;
+
+    /**
+     * Data connection which the model is bound to.
+     */
+    connection: IDataSourceConnector;
   }
 }
 
