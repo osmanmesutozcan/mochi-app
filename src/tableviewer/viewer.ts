@@ -1,7 +1,6 @@
 import { BoxLayout, Widget } from '@phosphor/widgets';
 
-import { DataGrid, Toolbar, ToolbarButton } from '@mochi/apputils';
-import { TableViewerModel } from '@mochi/tableviewer/model';
+import { DataGrid, DataGridModel, Toolbar, ToolbarButton } from '@mochi/apputils';
 
 /**
  * Class added to the table viewer instances.
@@ -16,7 +15,7 @@ export class TableViewer extends Widget {
     super();
 
     const id = Private.getNewID();
-    const model = options.model || new TableViewerModel();
+    const model = options.model || new DataGridModel();
 
     this.addClass(TABLE_VIEWER_CLASS);
     this.title.label = options.label || `Output ${id}`;
@@ -60,7 +59,7 @@ export namespace TableViewer {
     /**
      * Model of the viewer.
      */
-    model?: TableViewerModel;
+    model?: DataGridModel;
   }
 }
 

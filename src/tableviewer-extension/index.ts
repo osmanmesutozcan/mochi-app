@@ -2,7 +2,7 @@ import './index.css';
 
 import { IMochiShell, MochiFrontEnd, MochiFrontEndPlugin } from '@mochi/application';
 import { ITableViewerFactory, TableViewer } from '@mochi/tableviewer';
-import { TableViewerModel } from '@mochi/tableviewer/model';
+import { DataGridModel } from '@mochi/apputils';
 
 namespace CommandIDs {
   //
@@ -20,10 +20,10 @@ const viewer: MochiFrontEndPlugin<ITableViewerFactory> = {
 
 function activateFactory(app: MochiFrontEnd, shell: IMochiShell): ITableViewerFactory {
   const createViewer = (id: string, options: TableViewer.IOptions) => {
-    const model = options.model || new TableViewerModel();
+    const model = new DataGridModel();
     const viewer = new TableViewer({ model, ...options });
     shell.add(viewer);
-    return { model, viewer };
+    return { model };
   };
 
   return { createViewer };

@@ -9,11 +9,12 @@ import { ConnectorManager, IConnectionDefinition, IConnectorManager } from '@moc
 import { ConnectorRegistry } from '@mochi/connectorregistry';
 import { BPIcon, Intent } from '@mochi/ui-components';
 import { IQueryResultColumn, IQueryResultRow } from '@mochi/services';
-import { ITableViewerFactory, TableViewerModel } from '@mochi/tableviewer';
+import { ITableViewerFactory } from '@mochi/tableviewer';
 import { SqlQuery } from '@mochi/databaseutils';
 
 import { TREE_NODE_CLASS, TREE_LEAF_CLASS } from './tree';
 import ITreeNodeData = Private.ITreeNodeData;
+import { DataGridModel } from "@mochi/apputils";
 
 export class DatabaseBrowserModel implements IDisposable {
   constructor(private readonly options: DatabaseBrowserModel.IOptions) {
@@ -278,7 +279,7 @@ namespace Private {
    * Convert a connector query result column into
    * table viewer column.
    */
-  export function connectorColumnToViewerColumn(cols: IQueryResultColumn[]): TableViewerModel.ITableViewerColumn[] {
+  export function connectorColumnToViewerColumn(cols: IQueryResultColumn[]): DataGridModel.IDataGridColumn[] {
     return cols.map(c => ({ ...c, id: c.name, field: c.name }));
   }
 
