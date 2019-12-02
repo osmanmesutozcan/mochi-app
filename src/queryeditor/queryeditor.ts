@@ -1,8 +1,8 @@
-import { BoxLayout, Widget } from '@phosphor/widgets';
+import { BoxLayout, SplitPanel, Widget } from '@phosphor/widgets';
 
-import { Toolbar, ToolbarButton } from '@mochi/apputils';
+import { IDataSourceConnector, IQueryResultColumn, IQueryResultRow } from '@mochi/services';
+import { DataGrid, DataGridModel, Toolbar, ToolbarButton } from '@mochi/apputils';
 import { QueryEditorModel } from '@mochi/queryeditor';
-import { IDataSourceConnector } from '@mochi/services';
 
 import { Editor } from './editor';
 
@@ -30,33 +30,49 @@ export class QueryEditor extends Widget {
     this.toolbar = new Toolbar();
     this.toolbar.addClass(TOOLBAR_CLASS);
 
+    this.datagridModel = new DataGridModel();
+    this.datagrid = new DataGrid({ model: this.datagridModel });
+
     this.model = new QueryEditorModel({
-      connection: options.connection,
       editor: this.editor,
+      connection: options.connection,
+    });
+
+    this.model.onQuerySuccess.connect((sender, args) => {
+      this.datagridModel.setColumns(Private.connectorColumnToViewerColumn(args.result.columns));
+      this.datagridModel.setItems(Private.connectorRowToViewerRow(args.result.rows));
     });
 
     const runQuery = new ToolbarButton({
-      iconClassName: 'm-RunIcon',
-      tooltip: 'Run Query',
       label: 'Run',
+      tooltip: 'Run Query',
+      iconClassName: 'm-RunIcon',
       onClick: () => this.model.runQuery(),
     });
 
     this.toolbar.addItem('runQuery', runQuery);
 
+    const panels = new SplitPanel({ orientation: 'vertical' });
+    panels.addWidget(this.editor);
+    panels.addWidget(this.datagrid);
+
     const layout = new BoxLayout();
     layout.addWidget(this.toolbar);
-    layout.addWidget(this.editor);
+    layout.addWidget(panels);
 
     BoxLayout.setStretch(this.toolbar, 0);
-    BoxLayout.setStretch(this.editor, 1);
+    BoxLayout.setStretch(panels, 1);
 
     this.layout = layout;
   }
 
-  readonly model: QueryEditorModel;
   readonly toolbar: Toolbar;
+
+  readonly model: QueryEditorModel;
   readonly editor: Editor;
+
+  readonly datagridModel: DataGridModel;
+  readonly datagrid: DataGrid;
 }
 
 export namespace QueryEditor {
@@ -87,5 +103,23 @@ namespace Private {
    */
   export function getId(): string {
     return (WIDGET_ID_TRACKER++).toString();
+  }
+}
+
+namespace Private {
+  /**
+   * Convert a connector query result column into
+   * table viewer column.
+   */
+  export function connectorColumnToViewerColumn(cols: IQueryResultColumn[]): DataGridModel.IDataGridColumn[] {
+    return cols.map(c => ({ ...c, id: c.name, field: c.name }));
+  }
+
+  /**
+   * Convert a connector query result row into
+   * table viewer data row.
+   */
+  export function connectorRowToViewerRow(cols: IQueryResultRow[]): (IQueryResultRow & { id: string | number })[] {
+    return cols.map((c, id) => ({ ...c, id }));
   }
 }
