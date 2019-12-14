@@ -8,13 +8,13 @@ import { ITreeNode } from '@blueprintjs/core';
 import { ConnectorManager, IConnectionDefinition, IConnectorManager } from '@mochi/connectormanager';
 import { ConnectorRegistry } from '@mochi/connectorregistry';
 import { BPIcon, Intent } from '@mochi/ui-components';
-import { IQueryResultColumn, IQueryResultRow } from '@mochi/services';
+import { IQueryResultColumn, IQueryResultRow, ColumnType } from '@mochi/services';
 import { ITableViewerFactory } from '@mochi/tableviewer';
 import { SqlQuery } from '@mochi/databaseutils';
+import { DataGridModel, Slick } from "@mochi/apputils";
 
 import { TREE_NODE_CLASS, TREE_LEAF_CLASS } from './tree';
 import ITreeNodeData = Private.ITreeNodeData;
-import { DataGridModel } from "@mochi/apputils";
 
 export class DatabaseBrowserModel implements IDisposable {
   constructor(private readonly options: DatabaseBrowserModel.IOptions) {
@@ -278,9 +278,33 @@ namespace Private {
   /**
    * Convert a connector query result column into
    * table viewer column.
+   * 
    */
   export function connectorColumnToViewerColumn(cols: IQueryResultColumn[]): DataGridModel.IDataGridColumn[] {
-    return cols.map(c => ({ ...c, id: c.name, field: c.name }));
+    return cols.map(c => ({
+      ...c,
+      id: c.name,
+      field: c.name,
+      editor: getCellEditorByType(c.type),
+      width: 100,
+    }));
+  }
+
+  /**
+   * 
+   * TODO: Check the column type and pass the correct editor by type.
+   */
+  function getCellEditorByType(type: ColumnType) {
+    switch (type) {
+      case ColumnType.TEXT: 
+        return Slick.Editors.Text;
+
+      case ColumnType.BOOLEAN: 
+        return Slick.Editors.CheckBox;
+
+      default: 
+        return Slick.Editors.Text;
+    }
   }
 
   /**

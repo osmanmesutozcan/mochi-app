@@ -4,7 +4,7 @@ import { ISignal, Signal } from '@phosphor/signaling';
 import { IDisposable } from '@phosphor/disposable';
 
 import { DataSourceConnector, IDataIntrospection, IQueryParams, IQueryResult } from '@mochi/services';
-import { IChangedArgs, Mutation } from '@mochi/services/connector';
+import { IChangedArgs, Mutation, ColumnType } from '@mochi/services/connector';
 
 export class PostgreSQLConnector extends DataSourceConnector implements IDisposable {
   constructor(options: DataSourceConnector.IOptions) {
@@ -14,7 +14,7 @@ export class PostgreSQLConnector extends DataSourceConnector implements IDisposa
 
   async introspect(): Promise<IDataIntrospection> {
     const tables = await this._client.query(Private.ALL_TABLES);
-    return { tables: tables.rows.map(v => v.table_name) };
+    return { tables: tables.rows.map((v: any) => v.table_name) };
   }
 
   async login(): Promise<void> {
@@ -29,7 +29,8 @@ export class PostgreSQLConnector extends DataSourceConnector implements IDisposa
   async query(query: string, params?: IQueryParams): Promise<IQueryResult> {
     const result = await this._client.query(query);
     return {
-      columns: result.fields,
+      // FIXME: Figure out what does dataTypeId mean
+      columns: result.fields.map((f: any) => ({ name: f.name, type: ColumnType.TEXT })),
       rows: result.rows,
       mutation: new Mutation.Envelope(),
     };

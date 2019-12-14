@@ -7,6 +7,8 @@ import { ISignal, Signal } from '@phosphor/signaling';
 export const Slick = (window as any).Slick;
 
 const _options = {
+  editable: true,
+  autoEdit: false,
   enableCellNavigation: true,
   enableColumnReorder: true,
   autosizeColsMode: Slick.GridAutosizeColsMode.FitColsToViewport,
@@ -20,6 +22,7 @@ export class DataGrid extends Widget {
 
   protected onAfterAttach(msg: Message): void {
     this._grid = new Slick.Grid(this.node, this._model.dataView, this._model.columns, _options);
+    this._grid.setSelectionModel(new Slick.CellSelectionModel());
 
     this._model.onColumnsChange.connect((sender, args) => {
       this._grid.setColumns(args.columns);
@@ -137,5 +140,11 @@ export namespace DataGridModel {
     id: string;
     name: string;
     field: string;
+
+    // Slick editor
+    editor?: any;
+
+    // TODO:
+    // readonly: boolean;
   }
 }

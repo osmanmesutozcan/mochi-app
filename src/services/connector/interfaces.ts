@@ -48,6 +48,14 @@ export interface IQueryResult {
 
 export interface IQueryResultColumn {
   name: string;
+
+  type: ColumnType;
+}
+
+export enum ColumnType {
+  TEXT = 'TEXT',
+
+  BOOLEAN = 'BOOLEAN',
 }
 
 export interface IQueryResultRow {
