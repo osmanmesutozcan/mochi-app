@@ -40,7 +40,10 @@ export interface IQueryParams {
  */
 export interface IQueryResult {
   columns: IQueryResultColumn[];
+
   rows: IQueryResultRow[];
+
+  mutation: IMutationEnvelope | null;
 }
 
 export interface IQueryResultColumn {
@@ -48,6 +51,13 @@ export interface IQueryResultColumn {
 }
 
 export interface IQueryResultRow {
+  //
+}
+
+/**
+ * A container for building up the diff made to the query result.
+ */
+export interface IMutationEnvelope {
   //
 }
 

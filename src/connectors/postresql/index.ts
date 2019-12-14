@@ -4,7 +4,7 @@ import { ISignal, Signal } from '@phosphor/signaling';
 import { IDisposable } from '@phosphor/disposable';
 
 import { DataSourceConnector, IDataIntrospection, IQueryParams, IQueryResult } from '@mochi/services';
-import { IChangedArgs } from '@mochi/services/connector';
+import { IChangedArgs, Mutation } from '@mochi/services/connector';
 
 export class PostgreSQLConnector extends DataSourceConnector implements IDisposable {
   constructor(options: DataSourceConnector.IOptions) {
@@ -31,6 +31,7 @@ export class PostgreSQLConnector extends DataSourceConnector implements IDisposa
     return {
       columns: result.fields,
       rows: result.rows,
+      mutation: new Mutation.Envelope(),
     };
   }
 
