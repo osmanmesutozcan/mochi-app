@@ -95,6 +95,11 @@ export class DatabaseBrowserModel implements IDisposable {
       activated.model.setColumns(Private.connectorColumnToViewerColumn(result.columns));
       activated.model.setItems(Private.connectorRowToViewerRow(result.rows));
 
+      // TODO: Notify connection on cell edited.
+      // Not sure if data binding here is a good architecture. It kind of makes sense since this is the model,
+      // but also it could be difficult to maintain if we have this kind of data binding all over the place.
+      activated.model.onCellEdited.connect(console.log);
+
       return;
     }
 

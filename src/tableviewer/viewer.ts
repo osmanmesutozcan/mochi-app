@@ -30,8 +30,16 @@ export class TableViewer extends Widget {
       onClick: () => this.grid.fit(),
     });
 
+    const commitButton = new ToolbarButton({
+      iconClassName: 'm-RefreshIcon',
+      tooltip: 'Commit changes',
+      label: 'Commit',
+      onClick: () => console.log('Commiting'),
+    });
+
     const toolbar = new Toolbar();
     toolbar.addItem('fitToView', fitButton);
+    toolbar.addItem('commitChanges', commitButton);
 
     const layout = new BoxLayout();
     layout.addWidget(toolbar);
