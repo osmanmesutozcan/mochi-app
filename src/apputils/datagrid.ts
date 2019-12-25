@@ -3,6 +3,8 @@ import { Widget } from '@phosphor/widgets';
 import { Message } from '@phosphor/messaging';
 import { IDisposable } from '@phosphor/disposable';
 import { ISignal, Signal } from '@phosphor/signaling';
+import { ObjectLiteral } from '@mochi/coreutils';
+import { RowType } from '@mochi/connectorbrowser';
 
 export const Slick = (window as any).Slick;
 
@@ -21,15 +23,10 @@ export class DataGrid extends Widget {
   }
 
   protected onAfterAttach(msg: Message): void {
-    this._grid = new Slick.Grid(
-      this.node,
-      this._model.dataView,
-      this._model.columns,
-      {
-        ..._options,
-        editCommandHandler: this._model.setCell.bind(this._model),
-      }
-    );
+    this._grid = new Slick.Grid(this.node, this._model.dataView, this._model.columns, {
+      ..._options,
+      editCommandHandler: this._model.setCell.bind(this._model),
+    });
 
     this._grid.setSelectionModel(new Slick.CellSelectionModel());
 
@@ -90,6 +87,7 @@ export class DataGridModel implements IDisposable {
     this._onCellEdited.emit({
       row: {
         index: command.row,
+        content: this._data.getItem(command.row),
       },
       column: {
         name: column.id,
@@ -97,7 +95,7 @@ export class DataGridModel implements IDisposable {
       value: {
         new: command.serializedValue,
         old: command.prevSerializedValue,
-      }
+      },
     });
   }
 
@@ -180,14 +178,15 @@ export namespace DataGridModel {
      */
     row: {
       index: number;
-    }
+      content: ObjectLiteral<RowType>;
+    };
 
     /**
      * Column which the change is applied
      */
     column: {
       name: string;
-    }
+    };
 
     /**
      * Value change made to data.
@@ -195,7 +194,7 @@ export namespace DataGridModel {
     value: {
       new: string | number | boolean;
       old: string | number | boolean;
-    }
+    };
   }
 
   export interface IDataGridColumn {

@@ -1,4 +1,7 @@
 import { ISignal } from '@phosphor/signaling';
+import { DataGridModel } from '@mochi/apputils';
+import { Mutation } from '@mochi/services';
+import { ObjectLiteral } from '@mochi/coreutils';
 
 /**
  * Definition of a general purpose data source connectorRegistry.
@@ -66,7 +69,14 @@ export interface IQueryResultRow {
  * A container for building up the diff made to the query result.
  */
 export interface IMutationEnvelope {
-  //
+  edit(args: Mutation.IEditArgs): void;
+
+  purge(): void;
+
+  /**
+   * Array of changes made to the data.
+   */
+  diff: ObjectLiteral<any>;
 }
 
 /**

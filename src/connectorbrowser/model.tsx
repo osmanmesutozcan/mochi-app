@@ -83,22 +83,11 @@ export class DatabaseBrowserModel implements IDisposable {
     if (!Array.isArray(node.childNodes)) {
       const activated = this.options.viewerFactory.createViewer(node.id.toString(), {
         label: node.label.toString() || 'Viewer',
+        connectionId: node.id.toString(),
       });
 
-      const query = SqlQuery.newBuilder()
-        .setFrom(node.label.toString())
-        .build();
-
-      const connection = this.manager.getConnection(node.nodeData.dbId);
-      const result = await connection.query(query);
-
-      activated.model.setColumns(Private.connectorColumnToViewerColumn(result.columns));
-      activated.model.setItems(Private.connectorRowToViewerRow(result.rows));
-
-      // TODO: Notify connection on cell edited.
-      // Not sure if data binding here is a good architecture. It kind of makes sense since this is the model,
-      // but also it could be difficult to maintain if we have this kind of data binding all over the place.
-      activated.model.onCellEdited.connect(console.log);
+      // TODO: Move this into `createViewer` function
+      await activated.model.initialize(node.label.toString(), node.nodeData.dbId);
 
       return;
     }
@@ -278,45 +267,5 @@ namespace Private {
       callback(node);
       forEachNode(node.childNodes, callback);
     }
-  }
-
-  /**
-   * Convert a connector query result column into
-   * table viewer column.
-   * 
-   */
-  export function connectorColumnToViewerColumn(cols: IQueryResultColumn[]): DataGridModel.IDataGridColumn[] {
-    return cols.map(c => ({
-      ...c,
-      id: c.name,
-      field: c.name,
-      editor: getCellEditorByType(c.type),
-      width: 100,
-    }));
-  }
-
-  /**
-   * 
-   * TODO: Check the column type and pass the correct editor by type.
-   */
-  function getCellEditorByType(type: ColumnType) {
-    switch (type) {
-      case ColumnType.TEXT: 
-        return Slick.Editors.Text;
-
-      case ColumnType.BOOLEAN: 
-        return Slick.Editors.CheckBox;
-
-      default: 
-        return Slick.Editors.Text;
-    }
-  }
-
-  /**
-   * Convert a connector query result row into
-   * table viewer data row.
-   */
-  export function connectorRowToViewerRow(cols: IQueryResultRow[]): (IQueryResultRow & { id: string | number })[] {
-    return cols.map((c, id) => ({ ...c, id }));
   }
 }

@@ -1,6 +1,11 @@
 import { DatabaseBrowser } from './browser';
 import { Token } from '@phosphor/coreutils';
 
+/**
+ * Type definition for row.
+ */
+export type RowType = string | number | boolean;
+
 export const IDatabaseBrowserFactory = new Token<IDatabaseBrowserFactory>(
   '@mochi/databasebrowser:IDatabaseBrowserFactory',
 );

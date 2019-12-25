@@ -1,6 +1,8 @@
 import { BoxLayout, Widget } from '@phosphor/widgets';
 
 import { DataGrid, DataGridModel, Toolbar, ToolbarButton } from '@mochi/apputils';
+import { TableViewerModel } from '@mochi/tableviewer/model';
+import { IConnectorManager } from '@mochi/connectormanager';
 
 /**
  * Class added to the table viewer instances.
@@ -15,13 +17,13 @@ export class TableViewer extends Widget {
     super();
 
     const id = Private.getNewID();
-    const model = options.model || new DataGridModel();
+    const model = options.model;
 
     this.addClass(TABLE_VIEWER_CLASS);
     this.title.label = options.label || `Output ${id}`;
     this.id = `table-viewer-${id}-widget`;
 
-    this.grid = new DataGrid({ model });
+    this.grid = new DataGrid({ model:  options.model.dataGridModel });
 
     const fitButton = new ToolbarButton({
       iconClassName: 'm-RefreshIcon',
@@ -34,7 +36,7 @@ export class TableViewer extends Widget {
       iconClassName: 'm-RefreshIcon',
       tooltip: 'Commit changes',
       label: 'Commit',
-      onClick: () => console.log('Commiting'),
+      onClick: () => model.commit(),
     });
 
     const toolbar = new Toolbar();
@@ -65,9 +67,19 @@ export namespace TableViewer {
     label?: string;
 
     /**
+     * Reference to the application connector manager.
+     */
+    manager?: IConnectorManager;
+
+    /**
      * Model of the viewer.
      */
-    model?: DataGridModel;
+    model: TableViewerModel;
+
+    /**
+     * Id of the connection managed by this viewer.
+     */
+    connectionId: string;
   }
 }
 
