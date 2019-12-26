@@ -1,6 +1,7 @@
 import { ArrayExt, find, IIterator } from '@phosphor/algorithm';
 import { MessageLoop, IMessageHandler, Message } from '@phosphor/messaging';
-
+import { Signal, ISignal } from '@phosphor/signaling';
+import { Token } from '@phosphor/coreutils';
 import {
   Widget,
   Panel,
@@ -13,15 +14,20 @@ import {
   Title,
   BoxLayout,
 } from '@phosphor/widgets';
-import { Signal, ISignal } from '@phosphor/signaling';
-import { Token } from '@phosphor/coreutils';
-import { Debouncer } from '../coreutils';
+
+import { Debouncer } from '@mochi/coreutils';
+
 import { MochiFrontEnd } from './frontend';
 
 /**
  * The class name added to the MochiShell instances
  */
 const APPLICATION_SHELL_CLASS = 'm-MochiShell';
+
+/**
+ * The class name added to the MochiShel main dock area
+ */
+const MAIN_DOCK_CLASS = 'm-MainDock';
 
 /**
  * The class name added to the SideBar instances.
@@ -85,6 +91,7 @@ export class MochiShell extends Widget implements MochiFrontEnd.IShell {
     let hboxPanel = new BoxPanel();
     let dockPanel = (this._dockPanel = new DockPanel());
     MessageLoop.installMessageHook(dockPanel, this._dockChildHook);
+    dockPanel.addClass(MAIN_DOCK_CLASS);
 
     let hsplitPanel = new SplitPanel();
     let leftHandler = (this._leftHandler = new Private.SideBarHandler());

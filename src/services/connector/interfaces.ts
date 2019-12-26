@@ -1,4 +1,6 @@
 import { ISignal } from '@phosphor/signaling';
+import { DataGridModel } from '@mochi/apputils';
+import { ObjectLiteral } from '@mochi/coreutils';
 
 /**
  * Definition of a general purpose data source connectorRegistry.
@@ -23,7 +25,7 @@ export interface IDataSourceConnector {
 
   watchQuery(query: string, params?: IQueryParams): void;
 
-  introspect(): Promise<IDataIntrospection>;
+  introspect(): Promise<DataIntrospection.IIntrospection>;
 }
 
 export interface IChangedArgs {
@@ -40,23 +42,79 @@ export interface IQueryParams {
  */
 export interface IQueryResult {
   columns: IQueryResultColumn[];
+
   rows: IQueryResultRow[];
+
+  mutation: Mutation.IMutationEnvelope | null;
 }
 
 export interface IQueryResultColumn {
   name: string;
+
+  type: ColumnType;
+}
+
+export enum ColumnType {
+  TEXT = 'TEXT',
+
+  BOOLEAN = 'BOOLEAN',
 }
 
 export interface IQueryResultRow {
   //
 }
 
-/**
- * Shape of the connected database.
- */
-export interface IDataIntrospection {
+export namespace Mutation {
   /**
-   * List of available tables.
+   * A container for building up the diff made to the query result.
    */
-  tables: string[];
+  export interface IMutationEnvelope {
+    edit(args: Mutation.IEditArgs): void;
+
+    purge(): void;
+
+    /**
+     * Array of changes made to the data.
+     */
+    diff: ObjectLiteral<any>;
+  }
+
+  /**
+   * When user edits a part of the entity.
+   *
+   * ## Note
+   * This also includes removing a cell value (in SQL that is). Removing a cell value
+   * is simply setting a cell to NULL
+   */
+  export interface IEditArgs extends DataGridModel.ICellEditedArgs {
+    db: {
+      table: {
+        name: string;
+      }
+    }
+  }
+}
+
+export namespace DataIntrospection {
+  /**
+   * Shape of the connected database.
+   */
+  export interface IIntrospection {
+    tables: ITableIntrospection[];
+  }
+
+  /**
+   * Table description.
+   */
+  export interface ITableIntrospection {
+    /**
+     * Table name.
+     */
+    name: string;
+
+    /**
+     * Primary key columns.
+     */
+    pk: string[];
+  }
 }

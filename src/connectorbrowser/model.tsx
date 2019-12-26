@@ -8,13 +8,10 @@ import { ITreeNode } from '@blueprintjs/core';
 import { ConnectorManager, IConnectionDefinition, IConnectorManager } from '@mochi/connectormanager';
 import { ConnectorRegistry } from '@mochi/connectorregistry';
 import { BPIcon, Intent } from '@mochi/ui-components';
-import { IQueryResultColumn, IQueryResultRow } from '@mochi/services';
 import { ITableViewerFactory } from '@mochi/tableviewer';
-import { SqlQuery } from '@mochi/databaseutils';
 
 import { TREE_NODE_CLASS, TREE_LEAF_CLASS } from './tree';
 import ITreeNodeData = Private.ITreeNodeData;
-import { DataGridModel } from "@mochi/apputils";
 
 export class DatabaseBrowserModel implements IDisposable {
   constructor(private readonly options: DatabaseBrowserModel.IOptions) {
@@ -83,17 +80,11 @@ export class DatabaseBrowserModel implements IDisposable {
     if (!Array.isArray(node.childNodes)) {
       const activated = this.options.viewerFactory.createViewer(node.id.toString(), {
         label: node.label.toString() || 'Viewer',
+        connectionId: node.nodeData.dbId,
       });
 
-      const query = SqlQuery.newBuilder()
-        .setFrom(node.label.toString())
-        .build();
-
-      const connection = this.manager.getConnection(node.nodeData.dbId);
-      const result = await connection.query(query);
-
-      activated.model.setColumns(Private.connectorColumnToViewerColumn(result.columns));
-      activated.model.setItems(Private.connectorRowToViewerRow(result.rows));
+      // TODO: Move this into `createViewer` function
+      await activated.model.initialize(node.label.toString());
 
       return;
     }
@@ -175,7 +166,7 @@ export class DatabaseBrowserModel implements IDisposable {
             dbId: args.name,
             dbVisibleName: definition.displayName,
           },
-          t,
+          t.name,
         ),
       );
     }
@@ -273,21 +264,5 @@ namespace Private {
       callback(node);
       forEachNode(node.childNodes, callback);
     }
-  }
-
-  /**
-   * Convert a connector query result column into
-   * table viewer column.
-   */
-  export function connectorColumnToViewerColumn(cols: IQueryResultColumn[]): DataGridModel.IDataGridColumn[] {
-    return cols.map(c => ({ ...c, id: c.name, field: c.name }));
-  }
-
-  /**
-   * Convert a connector query result row into
-   * table viewer data row.
-   */
-  export function connectorRowToViewerRow(cols: IQueryResultRow[]): (IQueryResultRow & { id: string | number })[] {
-    return cols.map((c, id) => ({ ...c, id }));
   }
 }

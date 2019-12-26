@@ -450,3 +450,10 @@ export namespace IRestorable {
     registry: CommandRegistry;
   }
 }
+
+/**
+ * A generic object literal definition.
+ */
+export interface ObjectLiteral<U> {
+  [key: string]: U;
+}

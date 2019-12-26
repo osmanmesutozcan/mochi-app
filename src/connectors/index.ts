@@ -3,7 +3,7 @@ import { ConnectorRegistry } from '@mochi/connectorregistry';
 import { PostgreSQLConnector } from './postresql';
 
 /**
- * The default postgresql connectorRegistry.
+ * The default postgresql connector.
  */
 const postgresql: ConnectorRegistry.IConnector = {
   type: {

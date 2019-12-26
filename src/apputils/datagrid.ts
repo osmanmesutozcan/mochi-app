@@ -3,10 +3,14 @@ import { Widget } from '@phosphor/widgets';
 import { Message } from '@phosphor/messaging';
 import { IDisposable } from '@phosphor/disposable';
 import { ISignal, Signal } from '@phosphor/signaling';
+import { ObjectLiteral } from '@mochi/coreutils';
+import { RowType } from '@mochi/connectorbrowser';
 
 export const Slick = (window as any).Slick;
 
 const _options = {
+  editable: true,
+  autoEdit: false,
   enableCellNavigation: true,
   enableColumnReorder: true,
   autosizeColsMode: Slick.GridAutosizeColsMode.FitColsToViewport,
@@ -19,7 +23,12 @@ export class DataGrid extends Widget {
   }
 
   protected onAfterAttach(msg: Message): void {
-    this._grid = new Slick.Grid(this.node, this._model.dataView, this._model.columns, _options);
+    this._grid = new Slick.Grid(this.node, this._model.dataView, this._model.columns, {
+      ..._options,
+      editCommandHandler: this._model.setCell.bind(this._model),
+    });
+
+    this._grid.setSelectionModel(new Slick.CellSelectionModel());
 
     this._model.onColumnsChange.connect((sender, args) => {
       this._grid.setColumns(args.columns);
@@ -42,6 +51,7 @@ export class DataGrid extends Widget {
     this._grid.autosizeColumns();
   }
 
+  // HACK: Fixes data grid glitch after first render.
   private _handleResize = _.once(() => this._grid.autosizeColumns());
 
   private _grid;
@@ -71,6 +81,24 @@ export class DataGridModel implements IDisposable {
     this._onColumnsChange.emit({ columns });
   }
 
+  setCell(item: any, column: any, command: Private.ICellEditCommand) {
+    command.execute();
+
+    this._onCellEdited.emit({
+      row: {
+        index: command.row,
+        content: this._data.getItem(command.row),
+      },
+      column: {
+        name: column.id,
+      },
+      value: {
+        new: command.serializedValue,
+        old: command.prevSerializedValue,
+      },
+    });
+  }
+
   /*
    * Get the underlying data view.
    */
@@ -95,7 +123,7 @@ export class DataGridModel implements IDisposable {
   /**
    * Signal emitted when columns definition change.
    */
-  get onColumnsChange(): ISignal<this, DataGridModel.IChangeArgs> {
+  get onColumnsChange(): ISignal<this, DataGridModel.IColumnsChangeArgs> {
     return this._onColumnsChange;
   }
 
@@ -104,6 +132,13 @@ export class DataGridModel implements IDisposable {
    */
   get onDataItemsChange(): ISignal<this, void> {
     return this._onDataItemsChange;
+  }
+
+  /**
+   * Signal emitted when cell edited.
+   */
+  get onCellEdited(): ISignal<this, DataGridModel.ICellEditedArgs> {
+    return this._onCellEdited;
   }
 
   /**
@@ -120,22 +155,67 @@ export class DataGridModel implements IDisposable {
   private _isDisposed = false;
   private readonly _data = null; // Slick.DataView
   private readonly _columns = [];
-  private readonly _onColumnsChange = new Signal<this, DataGridModel.IChangeArgs>(this);
   private readonly _onDataItemsChange = new Signal<this, void>(this);
+  private readonly _onCellEdited = new Signal<this, DataGridModel.ICellEditedArgs>(this);
+  private readonly _onColumnsChange = new Signal<this, DataGridModel.IColumnsChangeArgs>(this);
 }
 
 export namespace DataGridModel {
-  export interface IChangeArgs {
+  export interface IOptions {
+    //
+  }
+
+  export interface IColumnsChangeArgs {
+    /**
+     * New columns
+     */
     columns: IDataGridColumn[];
   }
 
-  export interface IOptions {
-    //
+  export interface ICellEditedArgs {
+    /**
+     * Row which the change is applied
+     */
+    row: {
+      index: number;
+      content: ObjectLiteral<RowType>;
+    };
+
+    /**
+     * Column which the change is applied
+     */
+    column: {
+      name: string;
+    };
+
+    /**
+     * Value change made to data.
+     */
+    value: {
+      new: string | number | boolean;
+      old: string | number | boolean;
+    };
   }
 
   export interface IDataGridColumn {
     id: string;
     name: string;
     field: string;
+
+    // Slick editor
+    editor?: any;
+
+    // TODO:
+    // readonly: boolean;
+  }
+}
+
+namespace Private {
+  export interface ICellEditCommand {
+    row: number;
+    execute: () => void;
+    undo: () => void;
+    serializedValue: string;
+    prevSerializedValue: string;
   }
 }

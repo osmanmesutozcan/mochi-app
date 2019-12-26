@@ -5,6 +5,11 @@ import 'slickgrid/lib/jquery-ui-1.11.3';
 import 'slickgrid/slick.dataview';
 import 'slickgrid/slick.grid';
 import 'slickgrid/slick.editors';
+import 'slickgrid/slick.formatters';
+
+import 'slickgrid/plugins/slick.cellrangedecorator.js'
+import 'slickgrid/plugins/slick.cellrangeselector.js'
+import 'slickgrid/plugins/slick.cellselectionmodel.js'
 
 import 'slickgrid/slick.grid.css';
 import 'slickgrid/slick-default-theme.css';
