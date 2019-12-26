@@ -15,8 +15,11 @@ export class PostgreSQLConnector extends DataSourceConnector implements IDisposa
   }
 
   async introspect(): Promise<DataIntrospection.IIntrospection> {
-    const tables = await this._client.query(Private.ALL_TABLES);
-    return { tables: tables.rows.map((v: any) => ({ name: v.table_name })) };
+    const tables = await this._client.query(Private.ALL_PUBLIC_TABLES_WITH_PK);
+    return { tables: tables.rows.map((v: any) => ({
+        name: v.table_name,
+        pk: v.key_columns.split(', ')
+    })) };
   }
 
   async login(): Promise<void> {
@@ -34,7 +37,8 @@ export class PostgreSQLConnector extends DataSourceConnector implements IDisposa
       // FIXME: Figure out what does dataTypeId mean
       columns: result.fields.map((f: any) => ({ name: f.name, type: ColumnType.TEXT })),
       rows: result.rows,
-      mutation: new MutationImpl.Envelope(),
+      // TODO: Try to reuse the introspection throughout the application.
+      mutation: new MutationImpl.Envelope(await this.introspect()),
     };
   }
 
@@ -70,4 +74,22 @@ namespace Private {
   export const ALL_TABLES = `SELECT table_name FROM information_schema.tables`;
 
   export const ALL_PUBLIC_TABLES = `SELECT * FROM information_schema.tables where table_schema='public'`;
+
+  export const ALL_PUBLIC_TABLES_WITH_PK = `
+    select kcu.table_schema,
+         kcu.table_name,
+         tco.constraint_name,
+         string_agg(kcu.column_name,', ') as key_columns
+    from information_schema.table_constraints tco
+    join information_schema.key_column_usage kcu 
+         on kcu.constraint_name = tco.constraint_name
+         and kcu.constraint_schema = tco.constraint_schema
+         and kcu.constraint_name = tco.constraint_name
+    where tco.constraint_type = 'PRIMARY KEY'
+    group by tco.constraint_name,
+           kcu.table_schema,
+           kcu.table_name
+    order by kcu.table_schema,
+             kcu.table_name;
+  `;
 }

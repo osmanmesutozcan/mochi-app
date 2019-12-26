@@ -87,7 +87,11 @@ export namespace Mutation {
    * is simply setting a cell to NULL
    */
   export interface IEditArgs extends DataGridModel.ICellEditedArgs {
-    //
+    db: {
+      table: {
+        name: string;
+      }
+    }
   }
 }
 
@@ -99,7 +103,18 @@ export namespace DataIntrospection {
     tables: ITableIntrospection[];
   }
 
-  interface ITableIntrospection {
+  /**
+   * Table description.
+   */
+  export interface ITableIntrospection {
+    /**
+     * Table name.
+     */
     name: string;
+
+    /**
+     * Primary key columns.
+     */
+    pk: string[];
   }
 }

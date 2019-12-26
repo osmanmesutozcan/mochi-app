@@ -6,11 +6,12 @@ services:
     ports:
       - '5432:5432'
     environment:
-      POSTGRES_USER: testuser
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: testpass
       POSTGRES_DB: testdb
     volumes:
       - postgres:/var/lib/postgresql/data
+      - ./data:/mydata
 
   mysql:
     image: intland/mysql:5.7.21
@@ -24,6 +25,7 @@ services:
       - MYSQL_INNODB_LOG_BUFFER_SIZE=256M
     volumes:
       - mysql:/var/lib/mysql/data
+      - ./data:/mydata
     ports:
       - '3306:3306'
 

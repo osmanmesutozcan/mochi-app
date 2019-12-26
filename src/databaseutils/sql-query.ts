@@ -1,15 +1,25 @@
+import { RowType } from '@mochi/connectorbrowser';
+
 export namespace SqlQuery {
   /**
    * An sql query builder.
    */
   class SqlQueryBuilder {
-    private _select: string | string[];
-    private _from: string;
-    private _where: string;
-    private _limit = 100;
+    private readonly _DEFAULT_LIMIT = 100;
 
-    setSelect(s: string | string[]) {
-      this._select = s;
+    private _select: string | string[];
+    private _update: string;
+    private _from: string;
+    private _where: string[] = [];
+    private _limit: number;
+
+    setSelect(s?: string | string[]) {
+      this._select = s || '*';
+      return this;
+    }
+
+    setUpdate(column: string, value: RowType) {
+      this._update = Private.normalizeColumnValue(column, value);
       return this;
     }
 
@@ -18,8 +28,8 @@ export namespace SqlQuery {
       return this;
     }
 
-    setWhere(value: string) {
-      this._where = value;
+    setWhere(column: string, value: RowType) {
+      this._where.push(Private.normalizeColumnValue(column, value));
       return this;
     }
 
@@ -38,10 +48,11 @@ export namespace SqlQuery {
         select = `(${select.join(',')})`;
       }
 
-      const where = this._where ? `WHERE ${this._where}` : '';
-      const limit = this._limit ? `LIMIT ${this._limit}` : '';
+      let update = this._update;
+      const where = this._where.length > 0 ? `WHERE ${this._where.join(' AND ')}` : '';
+      const limit = this._limit || this._select ? `LIMIT ${this._limit || this._DEFAULT_LIMIT}` : '';
 
-      return `SELECT ${select} FROM ${this._from} ${where} ${limit}`;
+      return `${this._select ? 'SELECT' : 'UPDATE'} ${this._select ? select : update} FROM ${this._from} ${where} ${limit}`;
     }
   }
 
@@ -50,5 +61,17 @@ export namespace SqlQuery {
    */
   export function newBuilder() {
     return new SqlQueryBuilder();
+  }
+}
+
+/**
+ * Module private statics.
+ */
+namespace Private {
+  /**
+   * Given a value add double quotes to value if needed.
+   */
+  export function normalizeColumnValue(column: string, value: RowType): string {
+    return `${column} = ${`${typeof value === 'string' ? `"${value}"` : value}`}`;
   }
 }

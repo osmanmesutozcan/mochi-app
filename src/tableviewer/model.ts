@@ -19,6 +19,7 @@ export class TableViewerModel {
    */
   async initialize(table: string, connectionId: string): Promise<void> {
     const query = SqlQuery.newBuilder()
+      .setSelect()
       .setFrom(table)
       .build();
 
@@ -30,7 +31,14 @@ export class TableViewerModel {
 
     this.dataGridModel.onCellEdited.connect((sender, args) => {
       if (result.mutation) {
-        result.mutation.edit(args);
+        result.mutation.edit({
+          ...args,
+          db: {
+            table: {
+              name: table,
+            }
+          }
+        });
       }
     });
   }

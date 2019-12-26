@@ -2,9 +2,9 @@ import './index.css';
 
 import { IMochiShell, MochiFrontEnd, MochiFrontEndPlugin } from '@mochi/application';
 import { ITableViewerFactory, TableViewer } from '@mochi/tableviewer';
-import { DataGridModel } from '@mochi/apputils';
 import { IConnectorManager } from '@mochi/connectormanager';
 import { TableViewerModel } from '@mochi/tableviewer/model';
+import { DataIntrospection } from '@mochi/services';
 
 namespace CommandIDs {
   //
@@ -21,9 +21,13 @@ const viewer: MochiFrontEndPlugin<ITableViewerFactory> = {
 };
 
 function activateFactory(app: MochiFrontEnd, shell: IMochiShell, manager: IConnectorManager): ITableViewerFactory {
-  const createViewer = (id: string, options: { label: string, connectionId: string }) => {
+  const createViewer = (id: string, options: {
+    label: string,
+    connectionId: string,
+    introspection: DataIntrospection.ITableIntrospection
+  }) => {
     const model = new TableViewerModel({
-      manager
+      manager,
     });
 
     const viewer = new TableViewer({ model, manager, ...options });

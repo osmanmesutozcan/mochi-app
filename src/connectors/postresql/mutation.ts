@@ -1,24 +1,29 @@
 import { RowType } from '@mochi/connectorbrowser';
 import { ObjectLiteral } from '@mochi/coreutils';
-import { Mutation } from '@mochi/services/connector';
+import { DataIntrospection, IQueryResult, Mutation } from '@mochi/services/connector';
+import { SqlQuery } from '@mochi/databaseutils';
+import { validateSourceMapOncePerProject } from 'ts-loader/dist/types/utils';
 
 export namespace MutationImpl {
   /**
    * A generic SQL Mutation envelope implementation.
+   *
+   * @TODO: Should be able handle introspection change.
    */
   export class Envelope implements Mutation.IMutationEnvelope {
     private _diff: ObjectLiteral<any> = {};
 
-    get diff(): ObjectLiteral<any> {
-      return this._diff;
+    constructor(introspection: DataIntrospection.IIntrospection) {
+      this._introspection = Private.normalizeIntrospection(introspection);
     }
 
     edit(args: Mutation.IEditArgs): void {
-      console.log('Args', args);
-      this._diff[`${args.column.name}_${args.row.index}`] = Private.buildMutationString(
-        // FIXME: This should be the primary key column details.
-        args.column.name,
-        args.value.new,
+      const intro = this._introspection[args.db.table.name];
+      this._diff[`${args.column.name}_${args.row.index}_${args.db.table.name}`] = Private.buildMutationString(
+        args.db.table.name,
+
+        intro.pk,
+        intro.pk.map(pk => args.row.content[pk]),
 
         args.column.name,
         args.value.new,
@@ -28,11 +33,34 @@ export namespace MutationImpl {
     purge(): void {
       this._diff = {};
     }
+
+    get diff(): ObjectLiteral<any> {
+      return this._diff;
+    }
+
+    private readonly _introspection: ObjectLiteral<DataIntrospection.ITableIntrospection>;
   }
 }
 
 namespace Private {
-  export function buildMutationString(pkColumn: string, pkValue: RowType, column: string, columnValue: RowType) {
-    return `UPDATE ${column} = ${columnValue} WHERE ${pkColumn} = ${pkValue}`;
+  export function buildMutationString(table: string, pkColumn: string[], pkValue: RowType[], column: string, columnValue: RowType) {
+    const builder = SqlQuery.newBuilder()
+      .setUpdate(column, columnValue)
+      .setFrom(table);
+
+    pkColumn.forEach((pk, idx) => {
+      builder.setWhere(pk, pkValue[idx]);
+    });
+
+    return builder.build();
+  }
+  
+  export function normalizeIntrospection(intro: DataIntrospection.IIntrospection): ObjectLiteral<DataIntrospection.ITableIntrospection> {
+    return intro
+      .tables
+      .reduce<ObjectLiteral<DataIntrospection.ITableIntrospection>>((acc, t) => {
+        acc[t.name] = t;
+        return acc;
+      }, {});
   }
 }
