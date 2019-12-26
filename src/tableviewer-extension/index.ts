@@ -28,6 +28,7 @@ function activateFactory(app: MochiFrontEnd, shell: IMochiShell, manager: IConne
   }) => {
     const model = new TableViewerModel({
       manager,
+      connectionId: options.connectionId,
     });
 
     const viewer = new TableViewer({ model, manager, ...options });

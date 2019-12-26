@@ -2,8 +2,6 @@ import { IConnectorManager } from '@mochi/connectormanager';
 import { DataGridModel, Slick } from '@mochi/apputils';
 import { SqlQuery } from '@mochi/databaseutils';
 import { ColumnType, IQueryResult, IQueryResultColumn, IQueryResultRow } from '@mochi/services';
-import { Simulate } from 'react-dom/test-utils';
-import mouseUp = Simulate.mouseUp;
 
 /**
  * Model for table viewer.
@@ -11,19 +9,20 @@ import mouseUp = Simulate.mouseUp;
 export class TableViewerModel {
   constructor(options: TableViewerModel.IOptions) {
     this.manager = options.manager;
+    this.connectionId = options.connectionId;
     this.dataGridModel = new DataGridModel();
   }
 
   /**
    * Async function to finalize initialization of the model.
    */
-  async initialize(table: string, connectionId: string): Promise<void> {
+  async initialize(table: string): Promise<void> {
     const query = SqlQuery.newBuilder()
       .setSelect()
       .setFrom(table)
       .build();
 
-    const connection = this.manager.getConnection(connectionId);
+    const connection = this.manager.getConnection(this.connectionId);
     const result = this._result = await connection.query(query);
 
     this.dataGridModel.setColumns(Private.connectorColumnToViewerColumn(result.columns));
@@ -44,13 +43,19 @@ export class TableViewerModel {
   }
 
   async commit(): Promise<void> {
-    console.log('Commit this', this._result.mutation.diff);
+    const connection = this.manager.getConnection(this.connectionId);
+    const mutation = Object
+      .keys(this._result.mutation.diff)
+      .map(d => this._result.mutation.diff[d])
+      .join(';') + ';';
 
-    // Cleanup the mutation diff after commit.
+    // TODO: Free the execution and ask for query confirmation in a dialog.
+    await connection.query(mutation);
     this._result.mutation.purge();
   }
 
   private _result: IQueryResult | null = null;
+  readonly connectionId: string;
   readonly manager: IConnectorManager;
   readonly dataGridModel: DataGridModel;
 }
@@ -61,6 +66,7 @@ export class TableViewerModel {
 export namespace TableViewerModel {
   export interface IOptions {
     manager: IConnectorManager;
+    connectionId: string;
   }
 }
 

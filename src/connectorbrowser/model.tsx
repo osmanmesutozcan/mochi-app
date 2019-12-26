@@ -80,11 +80,11 @@ export class DatabaseBrowserModel implements IDisposable {
     if (!Array.isArray(node.childNodes)) {
       const activated = this.options.viewerFactory.createViewer(node.id.toString(), {
         label: node.label.toString() || 'Viewer',
-        connectionId: node.id.toString(),
+        connectionId: node.nodeData.dbId,
       });
 
       // TODO: Move this into `createViewer` function
-      await activated.model.initialize(node.label.toString(), node.nodeData.dbId);
+      await activated.model.initialize(node.label.toString());
 
       return;
     }

@@ -1,8 +1,7 @@
 import { RowType } from '@mochi/connectorbrowser';
 import { ObjectLiteral } from '@mochi/coreutils';
-import { DataIntrospection, IQueryResult, Mutation } from '@mochi/services/connector';
+import { DataIntrospection, Mutation } from '@mochi/services/connector';
 import { SqlQuery } from '@mochi/databaseutils';
-import { validateSourceMapOncePerProject } from 'ts-loader/dist/types/utils';
 
 export namespace MutationImpl {
   /**

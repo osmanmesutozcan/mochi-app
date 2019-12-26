@@ -7,11 +7,11 @@ export namespace SqlQuery {
   class SqlQueryBuilder {
     private readonly _DEFAULT_LIMIT = 100;
 
-    private _select: string | string[];
-    private _update: string;
     private _from: string;
-    private _where: string[] = [];
     private _limit: number;
+    private _select: string | string[];
+    private _update: string[] = [];
+    private _where: string[] = [];
 
     setSelect(s?: string | string[]) {
       this._select = s || '*';
@@ -19,7 +19,7 @@ export namespace SqlQuery {
     }
 
     setUpdate(column: string, value: RowType) {
-      this._update = Private.normalizeColumnValue(column, value);
+      this._update.push(Private.normalizeColumnValue(column, value));
       return this;
     }
 
@@ -40,7 +40,7 @@ export namespace SqlQuery {
 
     build(): string {
       if (!this._from) {
-        throw new Error('`from` param must be set');
+        throw new Error('`from` param must be set for select and update query');
       }
 
       let select = this._select || '*';
@@ -48,11 +48,12 @@ export namespace SqlQuery {
         select = `(${select.join(',')})`;
       }
 
-      let update = this._update;
-      const where = this._where.length > 0 ? `WHERE ${this._where.join(' AND ')}` : '';
+      let update = `SET ${this._update.join(',')}`;
       const limit = this._limit || this._select ? `LIMIT ${this._limit || this._DEFAULT_LIMIT}` : '';
+      const where = this._where.length > 0 ? `WHERE ${this._where.join(' AND ')}` : '';
+      const from = this._from && this._select ? `FROM ${this._from}` : '';
 
-      return `${this._select ? 'SELECT' : 'UPDATE'} ${this._select ? select : update} FROM ${this._from} ${where} ${limit}`;
+      return `${this._select ? 'SELECT' : `UPDATE ${this._from}`} ${this._select ? select : update} ${from} ${where} ${limit}`;
     }
   }
 
@@ -69,9 +70,9 @@ export namespace SqlQuery {
  */
 namespace Private {
   /**
-   * Given a value add double quotes to value if needed.
+   * Given a value add quotes to value if needed.
    */
   export function normalizeColumnValue(column: string, value: RowType): string {
-    return `${column} = ${`${typeof value === 'string' ? `"${value}"` : value}`}`;
+    return `${column} = ${typeof value === 'string' ? `'${value}'` : value}`;
   }
 }
