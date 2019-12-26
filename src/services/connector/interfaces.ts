@@ -1,6 +1,5 @@
 import { ISignal } from '@phosphor/signaling';
 import { DataGridModel } from '@mochi/apputils';
-import { Mutation } from '@mochi/services';
 import { ObjectLiteral } from '@mochi/coreutils';
 
 /**
@@ -26,7 +25,7 @@ export interface IDataSourceConnector {
 
   watchQuery(query: string, params?: IQueryParams): void;
 
-  introspect(): Promise<IDataIntrospection>;
+  introspect(): Promise<DataIntrospection.IIntrospection>;
 }
 
 export interface IChangedArgs {
@@ -46,7 +45,7 @@ export interface IQueryResult {
 
   rows: IQueryResultRow[];
 
-  mutation: IMutationEnvelope | null;
+  mutation: Mutation.IMutationEnvelope | null;
 }
 
 export interface IQueryResultColumn {
@@ -65,26 +64,42 @@ export interface IQueryResultRow {
   //
 }
 
-/**
- * A container for building up the diff made to the query result.
- */
-export interface IMutationEnvelope {
-  edit(args: Mutation.IEditArgs): void;
+export namespace Mutation {
+  /**
+   * A container for building up the diff made to the query result.
+   */
+  export interface IMutationEnvelope {
+    edit(args: Mutation.IEditArgs): void;
 
-  purge(): void;
+    purge(): void;
+
+    /**
+     * Array of changes made to the data.
+     */
+    diff: ObjectLiteral<any>;
+  }
 
   /**
-   * Array of changes made to the data.
+   * When user edits a part of the entity.
+   *
+   * ## Note
+   * This also includes removing a cell value (in SQL that is). Removing a cell value
+   * is simply setting a cell to NULL
    */
-  diff: ObjectLiteral<any>;
+  export interface IEditArgs extends DataGridModel.ICellEditedArgs {
+    //
+  }
 }
 
-/**
- * Shape of the connected database.
- */
-export interface IDataIntrospection {
+export namespace DataIntrospection {
   /**
-   * List of available tables.
+   * Shape of the connected database.
    */
-  tables: string[];
+  export interface IIntrospection {
+    tables: ITableIntrospection[];
+  }
+
+  interface ITableIntrospection {
+    name: string;
+  }
 }

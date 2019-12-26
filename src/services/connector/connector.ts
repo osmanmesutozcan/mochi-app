@@ -1,4 +1,4 @@
-import { IDataSourceConnector, IDataIntrospection, IQueryParams, IQueryResult, IChangedArgs } from './interfaces';
+import { IDataSourceConnector, DataIntrospection, IQueryParams, IQueryResult, IChangedArgs } from './interfaces';
 import { ISignal } from '@phosphor/signaling';
 
 /**
@@ -41,7 +41,7 @@ export abstract class DataSourceConnector implements IDataSourceConnector {
   /**
    * Introspect the database to get overall database shape.
    */
-  abstract async introspect(): Promise<IDataIntrospection>;
+  abstract async introspect(): Promise<DataIntrospection.IIntrospection>;
 
   /**
    * Runs a query on database and return an observable

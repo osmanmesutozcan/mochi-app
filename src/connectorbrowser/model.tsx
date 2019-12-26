@@ -8,10 +8,7 @@ import { ITreeNode } from '@blueprintjs/core';
 import { ConnectorManager, IConnectionDefinition, IConnectorManager } from '@mochi/connectormanager';
 import { ConnectorRegistry } from '@mochi/connectorregistry';
 import { BPIcon, Intent } from '@mochi/ui-components';
-import { IQueryResultColumn, IQueryResultRow, ColumnType } from '@mochi/services';
 import { ITableViewerFactory } from '@mochi/tableviewer';
-import { SqlQuery } from '@mochi/databaseutils';
-import { DataGridModel, Slick } from "@mochi/apputils";
 
 import { TREE_NODE_CLASS, TREE_LEAF_CLASS } from './tree';
 import ITreeNodeData = Private.ITreeNodeData;
@@ -169,7 +166,7 @@ export class DatabaseBrowserModel implements IDisposable {
             dbId: args.name,
             dbVisibleName: definition.displayName,
           },
-          t,
+          t.name,
         ),
       );
     }
