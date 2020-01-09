@@ -110,6 +110,7 @@ namespace Private {
   /**
    * Convert a connector query result column into
    * table viewer column.
+   *
    */
   export function connectorColumnToViewerColumn(cols: IQueryResultColumn[]): DataGridModel.IDataGridColumn[] {
     return cols.map(c => ({ ...c, id: c.name, field: c.name }));

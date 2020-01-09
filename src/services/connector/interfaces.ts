@@ -55,6 +55,12 @@ export interface IQueryResultColumn {
 }
 
 export enum ColumnType {
+  INTEGER = 'INTEGER',
+
+  FLOAT = 'FLOAT',
+
+  DATE = 'DATE',
+
   TEXT = 'TEXT',
 
   BOOLEAN = 'BOOLEAN',

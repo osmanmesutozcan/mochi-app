@@ -3,10 +3,11 @@ import * as PG from '@mochi/pg';
 import { ISignal, Signal } from '@phosphor/signaling';
 import { IDisposable } from '@phosphor/disposable';
 
-import { DataSourceConnector, DataIntrospection, IQueryParams, IQueryResult } from '@mochi/services';
-import { IChangedArgs, ColumnType } from '@mochi/services/connector';
+import { ColumnType, DataIntrospection, DataSourceConnector, IQueryParams, IQueryResult } from '@mochi/services';
+import { IChangedArgs } from '@mochi/services/connector';
 
 import { MutationImpl } from './mutation';
+import { BuiltinTypes } from '@mochi/connectors/postresql/builtins';
 
 export class PostgreSQLConnector extends DataSourceConnector implements IDisposable {
   constructor(options: DataSourceConnector.IOptions) {
@@ -33,12 +34,19 @@ export class PostgreSQLConnector extends DataSourceConnector implements IDisposa
 
   async query(query: string, params?: IQueryParams): Promise<IQueryResult> {
     const result = await this._client.query(query);
+    console.log('RESULT', result);
+
     return {
-      // FIXME: Figure out what does dataTypeId mean
-      columns: result.fields.map((f: any) => ({ name: f.name, type: ColumnType.TEXT })),
       rows: result.rows,
+
       // TODO: Try to reuse the introspection throughout the application.
       mutation: new MutationImpl.Envelope(await this.introspect()),
+
+      // FIXME: Figure out what does dataTypeId mean
+      columns: result.fields.map((f: any) => ({
+        name: f.name,
+        type: Private.getTypeFromQueryResult(f.dataTypeID)
+      })),
     };
   }
 
@@ -71,6 +79,34 @@ export namespace PostgreSQLConnector {
 }
 
 namespace Private {
+  export function getTypeFromQueryResult(type: BuiltinTypes): ColumnType {
+    console.log(type);
+    switch (type) {
+      case BuiltinTypes.BOOL:
+        return ColumnType.BOOLEAN;
+
+      case BuiltinTypes.INT2:
+      case BuiltinTypes.INT4:
+      case BuiltinTypes.INT8:
+        return ColumnType.INTEGER;
+
+      case BuiltinTypes.FLOAT4:
+      case BuiltinTypes.FLOAT8:
+        return ColumnType.FLOAT;
+
+      case BuiltinTypes.DATE:
+      case BuiltinTypes.TIMESTAMP:
+        return ColumnType.DATE;
+
+      case BuiltinTypes.CHAR:
+      case BuiltinTypes.VARCHAR:
+      case BuiltinTypes.TEXT:
+      default: // FIXME: Default to uneditable.
+        return ColumnType.TEXT;
+
+    }
+  }
+
   export const ALL_TABLES = `SELECT table_name FROM information_schema.tables`;
 
   export const ALL_PUBLIC_TABLES = `SELECT * FROM information_schema.tables where table_schema='public'`;

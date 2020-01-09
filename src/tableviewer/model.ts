@@ -2,6 +2,7 @@ import { IConnectorManager } from '@mochi/connectormanager';
 import { DataGridModel, Slick } from '@mochi/apputils';
 import { SqlQuery } from '@mochi/databaseutils';
 import { ColumnType, IQueryResult, IQueryResultColumn, IQueryResultRow } from '@mochi/services';
+import { languages } from 'monaco-editor';
 
 /**
  * Model for table viewer.
@@ -91,6 +92,14 @@ namespace Private {
   }
 
   /**
+   * Convert a connector query result row into
+   * table viewer data row.
+   */
+  export function connectorRowToViewerRow(cols: IQueryResultRow[]): (IQueryResultRow & { id: string | number })[] {
+    return cols.map((c, id) => ({ ...c, id }));
+  }
+
+  /**
    *
    * TODO: Check the column type and pass the correct editor by type.
    */
@@ -102,17 +111,18 @@ namespace Private {
       case ColumnType.BOOLEAN:
         return Slick.Editors.CheckBox;
 
+      case ColumnType.INTEGER:
+        return Slick.Editors.Integer;
+
+      case ColumnType.FLOAT:
+        return Slick.Editors.Float;
+
+      case ColumnType.DATE:
+        return Slick.Editors.Date;
+
       default:
         return Slick.Editors.Text;
     }
-  }
-
-  /**
-   * Convert a connector query result row into
-   * table viewer data row.
-   */
-  export function connectorRowToViewerRow(cols: IQueryResultRow[]): (IQueryResultRow & { id: string | number })[] {
-    return cols.map((c, id) => ({ ...c, id }));
   }
 }
 
