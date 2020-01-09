@@ -3,6 +3,8 @@
 Mochi is a Chrome application for interacting with various databases. Currently, it is a proof of concept
 with PostgreSQL support with more integrations planned in near future.
 
+![Usage](./assets/usage-example.png)
+
 ## Prerequisites
 
 * [node + yarn](https://nodejs.org/) (Current Version)
