@@ -1,51 +1,33 @@
-# Chrome Extension TypeScript Starter
+# Mochi
 
-[![Build Status](https://travis-ci.org/chibat/chrome-extension-typescript-starter.svg?branch=master)](https://travis-ci.org/chibat/chrome-extension-typescript-starter)
-
-Chrome Extension, TypeScript and Visual Studio Code
+Mochi is a Chrome application for interacting with various databases. Currently, it is a proof of concept
+with PostgreSQL support with more integrations planned in near future.
 
 ## Prerequisites
 
-* [node + npm](https://nodejs.org/) (Current Version)
-
-## Option
-
-* [Visual Studio Code](https://code.visualstudio.com/)
-
-## Includes the following
-
-* TypeScript
-* Webpack
-* Moment.js
-* jQuery
-* Example Code
-    * Chrome Storage
-    * Options Version 2
-    * content script
-    * count up badge number
-    * background
+* [node + yarn](https://nodejs.org/) (Current Version)
 
 ## Project Structure
 
-* src/typescript: TypeScript source files
-* src/assets: static files
-* dist: Chrome Extension directory
-* dist/js: Generated JavaScript files
+Uses `Phosphorjs` for application base. Application structure is heavily
+inspired from [Jupyterlab](https://github.com/jupyterlab/jupyterlab).
+
+`src` directory includes the source code for the application. Application is split into so called extensions, where each
+extension has a specific purpose. Extensions can depend each other using phosphor extension system.
+
+Extension system might look overwhelming at first sight, but it makes architecture simpler on scale at a cost of
+minimum code repetition. Extensions should be considered as 3rd parties, which means they should only use public
+APIs exposed by each extension.
+
+UI uses phosphor widgets for layouting and React for rendering.
+
+For more reference about architecture please refer to
+[Jupyterlab Development Guide](https://jupyterlab.readthedocs.io/en/stable/developer/extension_dev.html).
 
 ## Setup
 
 ```
-npm install
-```
-
-## Import as Visual Studio Code project
-
-...
-
-## Build
-
-```
-npm run build
+yarn
 ```
 
 ## Build in watch mode
@@ -53,14 +35,8 @@ npm run build
 ### terminal
 
 ```
-npm run watch
+yarn watch
 ```
-
-### Visual Studio Code
-
-Run watch mode.
-
-type `Ctrl + Shift + B`
 
 ## Load extension to chrome
 
