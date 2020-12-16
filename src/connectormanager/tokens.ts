@@ -74,7 +74,7 @@ export interface IConnectionDefinition {
   connectorTypeName: string;
 
   /**
-   * Options to pass to when initalizing the connection.
+   * Options to pass to when initializing the connection.
    */
   options: DataSourceConnector.IOptions;
 }
