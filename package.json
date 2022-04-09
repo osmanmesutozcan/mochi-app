@@ -35,7 +35,7 @@
     "jquery-ui-dist": "^1.12.1",
     "json-loader": "^0.5.7",
     "lodash": "^4.17.19",
-    "moment": "~2.24.0",
+    "moment": "~2.29.2",
     "monaco-editor": "^0.17.1",
     "react": "~16.8.4",
     "react-dom": "^16.8.6",
